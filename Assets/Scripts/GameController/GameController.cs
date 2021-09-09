@@ -33,7 +33,7 @@ namespace GameController
                 case GameStateMachine.GameState.ActionPhase:
                     break;
                 case GameStateMachine.GameState.EndTurnPhase:
-                    if (_validator.TheGameIsWined()) GameOver();
+                    if (_validator.BoardIsValid()) GameOver();
                     else _gameStateMachine.NextPhase();
                     break;
                 default:
@@ -48,10 +48,7 @@ namespace GameController
 
         private void OnSelection(GoodTileController selectedTile)
         {
-            if (selectedTile.IsSelectable)
-            {
-                _gameBoardController.LightUpAt(selectedTile.position);
-            }
+            _gameBoardController.LightUpAt(selectedTile.position);
         }
 
         private void GameOver()

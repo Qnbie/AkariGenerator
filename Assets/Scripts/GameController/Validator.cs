@@ -11,9 +11,15 @@ namespace GameController
             _gameBoardController = gameBoardController;
         }
 
-        public bool TheGameIsWined()
+        public bool BoardIsValid()
         {
-            return false;
+            bool win = true;
+            var board = _gameBoardController.TileMatrix;
+            foreach (var tileRow in board)
+                foreach (var tile in tileRow)
+                    win = win && tile.IsValid();
+
+            return win;
         }
     }
 }

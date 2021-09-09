@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using Script.GameBoard;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace GameBoard.Tile
 {
@@ -12,21 +8,36 @@ namespace GameBoard.Tile
         public event IsSelectedDelegate OnSelect;
 
         public Vector2 position;
-        public TileRenderer MyTileRender { get; set; }
-        public bool IsSelectable { get; set; }
         public bool IsLighted { get; set; }
 
         public override bool LightOn()
         {
+            IsLighted = true;
+            MyTileRenderer.SwitchAnim();
             return true;
         }
 
         public override void LightOff()
         {
-            
+            MyTileRenderer.SwitchAnim();
+            IsLighted = false;
         }
-        
-        private void OnMouseDown() => OnSelect?.Invoke(this);
+
+        public override bool IsValid()
+        {
+            if (IsLighted ^ IsSelected)
+            {
+                return true;
+            }
+            MyTileRenderer.WrongAnim();
+            return false;
+        }
+
+        private void OnMouseDown()
+        {
+            IsSelected = !IsSelected;
+            OnSelect?.Invoke(this);
+        }
     }
 
     public delegate void IsSelectedDelegate(GoodTileController selectedTile);
