@@ -2,31 +2,36 @@
 
 namespace GameBoard.Tile
 {
-    [RequireComponent(typeof(TileRenderer))]
+    [RequireComponent(typeof(TileRenderer), typeof(Collider))]
     public class GoodTileController : TileBase
     {
         public event IsSelectedDelegate OnSelect;
 
-        public Vector2 position;
-        public bool IsLighted { get; set; }
+        private bool IsLighted() => _lightCounter > 0;
 
+        private int _lightCounter = 0;
+        
         public override bool LightOn()
         {
-            IsLighted = true;
-            MyTileRenderer.SwitchAnim();
+            _lightCounter++;
+            MyTileRenderer.TurnOn();
             return true;
         }
 
         public override bool LightOff()
         {
-            MyTileRenderer.SwitchAnim();
-            IsLighted = false;
+            _lightCounter--;
+            if (_lightCounter <= 0)
+            {
+                _lightCounter = 0;
+                MyTileRenderer.TurnOff();
+            }
             return true;
         }
 
         public override bool IsValid()
         {
-            if (IsLighted ^ IsSelected)
+            if (IsLighted() ^ IsSelected)
             {
                 return true;
             }
@@ -37,6 +42,7 @@ namespace GameBoard.Tile
         private void OnMouseDown()
         {
             IsSelected = !IsSelected;
+            Debug.Log(IsSelected + " selected");
             OnSelect?.Invoke(this);
         }
     }

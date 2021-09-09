@@ -11,8 +11,9 @@ namespace GameBoard.Tile
 
         public override bool IsValid()
         {
+            if (myNumber == 5) return true;
             int selectedNeighbours = 0;
-            foreach (var tile in neighbours) 
+            foreach (var tile in Neighbours) 
                 if (tile.IsSelected)
                     selectedNeighbours++;
             if (selectedNeighbours == myNumber)

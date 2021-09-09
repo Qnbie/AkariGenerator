@@ -40,22 +40,24 @@ namespace GameController
                     throw new ArgumentOutOfRangeException();
             }
         }
+        
+        private void OnSelection(GoodTileController selectedTile)
+        {
+            if(selectedTile.IsSelected)
+                _gameBoardController.LightOnAt(selectedTile.Position);
+            else
+                _gameBoardController.LightOffAt(selectedTile.Position);
+            _gameStateMachine.NextPhase();
+        }        
 
         private void SetUpGame()
         {
             _gameBoardController.Populate(OnSelection);
         }
 
-        private void OnSelection(GoodTileController selectedTile)
-        {
-            if(selectedTile.IsSelected)
-                _gameBoardController.LightOffAt(selectedTile.position);
-            _gameBoardController.LightOnAt(selectedTile.position);
-        }
-
         private void GameOver()
         {
-            throw new NotImplementedException();
+            Debug.Log("YouWin!!!!!!!!!!");
         }
     }
 }

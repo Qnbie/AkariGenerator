@@ -10,41 +10,43 @@ namespace GameBoard
     {
         public GoodTileController goodTilePrefab;
         public BadTileController badTilePrefab;
-        public float offset = 0.1f;
+        public float offset = 1f;
         public GameBoardStats gameBoardStats;
-        public Vector2 baseSize;
+        public Vector2 baseSize = new Vector2(10, 10);
 
         public readonly List<List<TileBase>> TileMatrix = new List<List<TileBase>>();
 
-        public void Populate(IsSelectedDelegate selectionMethod)
+        public void Populate(IsSelectedDelegate onSelection)
         {
-            float calculatedSizeX = (baseSize.x - (gameBoardStats.size.x - 1) * offset) / gameBoardStats.size.x;
-            float calculatedSizeY = (baseSize.y - (gameBoardStats.size.y - 1) * offset) / gameBoardStats.size.y;
-            for (var i = 0; i < gameBoardStats.size.x; i++)
+            float calculatedSizeX = (baseSize.x - (gameBoardStats.Size.x - 1) * offset) / gameBoardStats.Size.x;
+            float calculatedSizeY = (baseSize.y - (gameBoardStats.Size.y - 1) * offset) / gameBoardStats.Size.y;
+            for (var i = 0; i < gameBoardStats.Size.x; i++)
             {
                 TileMatrix.Add(new List<TileBase>());
-                for (var j = 0; j < gameBoardStats.size.y; j++)
+                for (var j = 0; j < gameBoardStats.Size.y; j++)
                 {
                     var position = new Vector3(
                         i * calculatedSizeX + i * offset,
-                        transform.position.y,
-                        j * calculatedSizeY + j * offset);
+                        j * calculatedSizeY + j * offset,
+                        this.transform.position.z);
                     
-                    if (gameBoardStats.Board[i][j] >= 0)
+                    if (gameBoardStats.Board[i,j] >= 0)
                     {
                         BadTileController tile = Instantiate(badTilePrefab, Vector3.zero, Quaternion.identity);
-                        tile.myNumber = gameBoardStats.Board[i][j];
+                        tile.myNumber = gameBoardStats.Board[i,j];
                         tile.transform.position = position;
-                        TileMatrix[i].Add(tile);
                         tile.name = "Tile " + i + " " + j;
+                        tile.Position = new Vector2(i, j);
+                        TileMatrix[i].Add(tile);
                     }
                     else
                     {
                         GoodTileController tile = Instantiate(goodTilePrefab, Vector3.zero, Quaternion.identity);
-                        tile.OnSelect += selectionMethod;
+                        tile.OnSelect += onSelection;
                         tile.transform.position = position;
-                        TileMatrix[i].Add(tile);
                         tile.name = "Tile " + i + " " + j;
+                        tile.Position = new Vector2(i, j);
+                        TileMatrix[i].Add(tile);
                     }
                 }
             }
@@ -54,19 +56,23 @@ namespace GameBoard
 
         private void CalculateNeighbours()
         {
-            for (var i = 0; i < gameBoardStats.size.x; i++)
-            for (var j = 0; j < gameBoardStats.size.y; j++)
+            for (var i = 0; i < gameBoardStats.Size.x; i++)
+            for (var j = 0; j < gameBoardStats.Size.y; j++)
             {
-                TileMatrix[i][j].neighbours
-                    .Add(TileMatrix[(int) ((i + 1) % gameBoardStats.size.x)][(int) (j % gameBoardStats.size.y)]);
-                TileMatrix[i][j].neighbours
-                    .Add(TileMatrix[(int) (Math.Abs(i - 1) % gameBoardStats.size.x)][
-                        (int) (j % gameBoardStats.size.y)]);
-                TileMatrix[i][j].neighbours
-                    .Add(TileMatrix[(int) (i % gameBoardStats.size.x)][
-                        (int) (Math.Abs(j - 1) % gameBoardStats.size.y)]);
-                TileMatrix[i][j].neighbours
-                    .Add(TileMatrix[(int) (i % gameBoardStats.size.x)][(int) ((j + 1) % gameBoardStats.size.y)]);
+                if(i + 1 < gameBoardStats.Size.x)
+                    TileMatrix[i][j].Neighbours
+                        .Add(TileMatrix[(int) ((i + 1) % gameBoardStats.Size.x)][(int) (j % gameBoardStats.Size.y)]);
+                
+                if (j + 1 < gameBoardStats.Size.y) 
+                    TileMatrix[i][j].Neighbours
+                        .Add(TileMatrix[(int) (i % gameBoardStats.Size.x)][(int) ((j + 1) % gameBoardStats.Size.y)]);
+                
+                if (i-1 >= 0)
+                    TileMatrix[i][j].Neighbours
+                        .Add(TileMatrix[(int) (Math.Abs(i - 1) % gameBoardStats.Size.x)][(int) (j % gameBoardStats.Size.y)]);
+                if (j-1 >= 0)
+                    TileMatrix[i][j].Neighbours
+                        .Add(TileMatrix[(int) (i % gameBoardStats.Size.x)][(int) (Math.Abs(j - 1) % gameBoardStats.Size.y)]);
             }
         }
 
@@ -74,44 +80,76 @@ namespace GameBoard
         {
             int baseX = (int) selectedTilePosition.x;
             int baseY = (int) selectedTilePosition.y;
+            bool[] flags = new bool[4];
+            int index = 0;
+            while (!(flags[0] & flags[1] & flags[2] & flags[3]))
+            {
+                if (!flags[0] && baseX + 1 + index < gameBoardStats.Size.x)
+                {
+                    if (!TileMatrix[baseX + 1 + index][baseY].LightOn()) flags[0] = true;
+                }
+                else flags[0] = true;
 
-            for (int x = baseX + 1; x <= gameBoardStats.size.x; x++)
-                if (!TileMatrix[x][baseY].LightOn())
-                    break;
+                if (!flags[1] && baseY + 1 + index < gameBoardStats.Size.y)
+                {
+                    if (!TileMatrix[baseX][baseY + 1 + index].LightOn()) flags[1] = true;
+                }
+                else flags[1] = true;
 
-            for (int x = baseX - 1; x >= 0; x--)
-                if (!TileMatrix[x][baseY].LightOn())
-                    break;
+                if (!flags[2] && baseX - 1 - index >= 0)
+                {
+                    if (!TileMatrix[baseX - 1 - index][baseY].LightOn())
+                        flags[2] = true;
+                }
+                else flags[2] = true;
 
-            for (int y = baseY + 1; y <= gameBoardStats.size.y; y++)
-                if (!TileMatrix[baseX][y].LightOn())
-                    break;
-
-            for (int y = baseY - 1; y >= 0; y--)
-                if (!TileMatrix[baseX][y].LightOn())
-                    break;
+                if (!flags[3] && baseY - 1 - index >= 0)
+                {
+                    if (!TileMatrix[baseX][baseY - 1 - index].LightOn())
+                        flags[3] = true;
+                }
+                else flags[3] = true;
+                index++;
+            }
         }
-
+        
         public void LightOffAt(Vector2 selectedTilePosition)
         {
             int baseX = (int) selectedTilePosition.x;
             int baseY = (int) selectedTilePosition.y;
+            bool[] flags = new bool[4];
+            int index = 0;
+            while (!(flags[0] & flags[1] & flags[2] & flags[3]))
+            {
+                if (!flags[0] && baseX + 1 + index < gameBoardStats.Size.x)
+                {
+                    if (!TileMatrix[baseX + 1 + index][baseY].LightOff()) flags[0] = true;
+                }
+                else flags[0] = true;
 
-            for (int x = baseX + 1; x <= gameBoardStats.size.x; x++)
-                if (!TileMatrix[x][baseY].LightOff())
-                    break;
+                if (!flags[1] && baseY + 1 + index < gameBoardStats.Size.y)
+                {
+                    if (!TileMatrix[baseX][baseY + 1 + index].LightOff()) flags[1] = true;
+                }
+                else flags[1] = true;
 
-            for (int x = baseX - 1; x >= 0; x--)
-                if (!TileMatrix[x][baseY].LightOff())
-                    break;
+                if (!flags[2] && baseX - 1 - index >= 0)
+                {
+                    if (!TileMatrix[baseX - 1 - index][baseY].LightOff())
+                        flags[2] = true;
+                }
+                else flags[2] = true;
 
-            for (int y = baseY + 1; y <= gameBoardStats.size.y; y++)
-                if (!TileMatrix[baseX][y].LightOff())
-                    break;
-
-            for (int y = baseY - 1; y >= 0; y--)
-                if (!TileMatrix[baseX][y].LightOff())
-                    break;
+                if (!flags[3] && baseY - 1 - index >= 0)
+                {
+                    if (!TileMatrix[baseX][baseY - 1 - index].LightOff())
+                        flags[3] = true;
+                }
+                else flags[3] = true;
+                index++;
+            }
         }
+        
+        
     }
 }

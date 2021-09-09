@@ -4,33 +4,33 @@ using UnityEngine;
 namespace GameBoard.Tile
 {
     [RequireComponent(
-        typeof(Renderer), 
+        typeof(MeshRenderer), 
         typeof(Animator))]
-    public class TileRenderer : Component
+    public class TileRenderer : MonoBehaviour
     {
-        private Renderer _renderer;
+        private MeshRenderer _renderer;
         private Animator _animator;
         private static readonly int Color1 = Shader.PropertyToID("_Color");
 
         public void SetUp()
         {
-            _renderer = GetComponent<Renderer>();
+            _renderer = GetComponent<MeshRenderer>();
             _animator = GetComponent<Animator>();
         }
-        
-        public void IsWall()
-        {
-            _renderer.material.SetColor(Color1, Color.black);
-        }
-        
+
         public void WrongAnim()
         {
-            _renderer.material.SetColor(Color1, Color.red);
+            Debug.Log("meh");
         }
 
-        public void SwitchAnim()
+        public void TurnOn()
         {
             _renderer.material.SetColor(Color1, Color.yellow);
+        }
+        
+        public void TurnOff()
+        {
+            _renderer.material.SetColor(Color1, Color.white);
         }
     }
 }
