@@ -8,17 +8,17 @@ namespace GameBoard
 {
     public class GameBoardController : MonoBehaviour
     {
-        public TileController tilePrefab;
+        public GoodTileController tilePrefab;
         public float offset = 0.1f;
         public GameBoardStats gameBoardStats;
 
-        public readonly List<List<TileController>> TileMatrix = new List<List<TileController>>();
+        public readonly List<List<GoodTileController>> TileMatrix = new List<List<GoodTileController>>();
 
         public void Populate(IsSelectedDelegate selectionMethod)
         {
             for (var i = 0; i < gameBoardStats.size.x; i++)
             {
-                TileMatrix.Add(new List<TileController>());
+                TileMatrix.Add(new List<GoodTileController>());
                 for (var j = 0; j < gameBoardStats.size.y; j++)
                 {
                     var tile = Instantiate(tilePrefab, Vector3.zero, Quaternion.identity);
@@ -62,7 +62,7 @@ namespace GameBoard
             for (int x = baseX + 1; x <= gameBoardStats.size.x; x++)
             {
                 if (TileMatrix[x][baseY].IsSelectable)
-                    TileMatrix[x][baseY].IsLightedUp = true;
+                    TileMatrix[x][baseY].LightOn();
                 else
                     break;
             }
@@ -70,7 +70,7 @@ namespace GameBoard
             for (int x = baseX - 1; x >= 0; x--)
             {
                 if (TileMatrix[x][baseY].IsSelectable)
-                    TileMatrix[x][baseY].IsLightedUp = true;
+                    TileMatrix[x][baseY].LightOn();
                 else
                     break;
             }
@@ -78,7 +78,7 @@ namespace GameBoard
             for (int y = baseY + 1; y <= gameBoardStats.size.y; y++)
             {
                 if (TileMatrix[baseX][y].IsSelectable)
-                    TileMatrix[baseX][y].IsLightedUp = true;
+                    TileMatrix[baseX][y].LightOn();
                 else
                     break;
             }
@@ -86,7 +86,7 @@ namespace GameBoard
             for (int y = baseY - 1; y >= 0; y--)
             {
                 if (TileMatrix[baseX][y].IsSelectable)
-                    TileMatrix[baseX][y].IsLightedUp = true;
+                    TileMatrix[baseX][y].LightOn();
                 else
                     break;
             }

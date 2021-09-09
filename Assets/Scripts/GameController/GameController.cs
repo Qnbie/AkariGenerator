@@ -46,7 +46,7 @@ namespace GameController
             _gameBoardController.Populate(OnSelection);
         }
 
-        private void OnSelection(TileController selectedTile)
+        private void OnSelection(GoodTileController selectedTile)
         {
             if (selectedTile.IsSelectable)
             {
