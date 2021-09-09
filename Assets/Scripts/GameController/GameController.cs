@@ -29,6 +29,7 @@ namespace GameController
             {
                 case GameStateMachine.GameState.GameStart:
                     SetUpGame();
+                    _gameStateMachine.NextPhase();
                     break;
                 case GameStateMachine.GameState.ActionPhase:
                     break;
@@ -47,6 +48,7 @@ namespace GameController
                 _gameBoardController.LightOnAt(selectedTile.Position);
             else
                 _gameBoardController.LightOffAt(selectedTile.Position);
+            
             _gameStateMachine.NextPhase();
         }        
 

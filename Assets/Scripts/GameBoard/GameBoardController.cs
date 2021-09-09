@@ -16,6 +16,11 @@ namespace GameBoard
 
         public readonly List<List<TileBase>> TileMatrix = new List<List<TileBase>>();
 
+        private void Awake()
+        {
+            gameBoardStats = new GameBoardStats();
+        }
+
         public void Populate(IsSelectedDelegate onSelection)
         {
             float calculatedSizeX = (baseSize.x - (gameBoardStats.Size.x - 1) * offset) / gameBoardStats.Size.x;
