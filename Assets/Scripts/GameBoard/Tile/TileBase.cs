@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace GameBoard.Tile
@@ -9,8 +10,15 @@ namespace GameBoard.Tile
         public bool IsSelected { get; set; }
         public List<TileBase> neighbours = new List<TileBase>();
         protected TileRenderer MyTileRenderer;
+
+        protected void SetUp()
+        {
+            MyTileRenderer = GetComponent<TileRenderer>();
+            MyTileRenderer.SetUp();
+        }
+
         public abstract bool LightOn();
-        public abstract void LightOff();
+        public abstract bool LightOff();
         public abstract bool IsValid();
     }
 }

@@ -4,17 +4,10 @@ namespace GameBoard.Tile
 {
     public class BadTileController : TileBase
     {
-        private int _myNumber;
-        
-        public override bool LightOn()
-        {
-            return false;
-        }
+        public int myNumber;
 
-        public override void LightOff()
-        {
-            throw new System.NotImplementedException();
-        }
+        public override bool LightOn() => false;
+        public override bool LightOff() => false;
 
         public override bool IsValid()
         {
@@ -22,10 +15,10 @@ namespace GameBoard.Tile
             foreach (var tile in neighbours) 
                 if (tile.IsSelected)
                     selectedNeighbours++;
-            if (selectedNeighbours == _myNumber)
+            if (selectedNeighbours == myNumber)
                 return true;
             MyTileRenderer.WrongAnim();
-            return selectedNeighbours == _myNumber;
+            return selectedNeighbours == myNumber;
         }
     }
 }

@@ -17,10 +17,11 @@ namespace GameBoard.Tile
             return true;
         }
 
-        public override void LightOff()
+        public override bool LightOff()
         {
             MyTileRenderer.SwitchAnim();
             IsLighted = false;
+            return true;
         }
 
         public override bool IsValid()

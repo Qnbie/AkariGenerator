@@ -8,7 +8,8 @@ namespace GameBoard
 {
     public class GameBoardController : MonoBehaviour
     {
-        public GoodTileController tilePrefab;
+        public GoodTileController goodTilePrefab;
+        public BadTileController badTilePrefab;
         public float offset = 0.1f;
         public GameBoardStats gameBoardStats;
         public Vector2 baseSize;
@@ -24,15 +25,27 @@ namespace GameBoard
                 TileMatrix.Add(new List<TileBase>());
                 for (var j = 0; j < gameBoardStats.size.y; j++)
                 {
-                    var tile = Instantiate(tilePrefab, Vector3.zero, Quaternion.identity);
                     var position = new Vector3(
                         i * calculatedSizeX + i * offset,
                         transform.position.y,
                         j * calculatedSizeY + j * offset);
-                    tile.transform.position = position;
-                    TileMatrix[i].Add(tile);
-                    tile.name = "Tile " + i + " " + j;
-                    tile.OnSelect += selectionMethod;
+                    
+                    if (gameBoardStats.Board[i][j] >= 0)
+                    {
+                        BadTileController tile = Instantiate(badTilePrefab, Vector3.zero, Quaternion.identity);
+                        tile.myNumber = gameBoardStats.Board[i][j];
+                        tile.transform.position = position;
+                        TileMatrix[i].Add(tile);
+                        tile.name = "Tile " + i + " " + j;
+                    }
+                    else
+                    {
+                        GoodTileController tile = Instantiate(goodTilePrefab, Vector3.zero, Quaternion.identity);
+                        tile.OnSelect += selectionMethod;
+                        tile.transform.position = position;
+                        TileMatrix[i].Add(tile);
+                        tile.name = "Tile " + i + " " + j;
+                    }
                 }
             }
 
@@ -57,34 +70,48 @@ namespace GameBoard
             }
         }
 
-        public void LightUpAt(Vector2 selectedTilePosition)
+        public void LightOnAt(Vector2 selectedTilePosition)
         {
             int baseX = (int) selectedTilePosition.x;
             int baseY = (int) selectedTilePosition.y;
 
             for (int x = baseX + 1; x <= gameBoardStats.size.x; x++)
-            {
                 if (!TileMatrix[x][baseY].LightOn())
                     break;
-            }
 
             for (int x = baseX - 1; x >= 0; x--)
-            {
                 if (!TileMatrix[x][baseY].LightOn())
                     break;
-            }
 
             for (int y = baseY + 1; y <= gameBoardStats.size.y; y++)
-            {
                 if (!TileMatrix[baseX][y].LightOn())
                     break;
-            }
 
             for (int y = baseY - 1; y >= 0; y--)
-            {
                 if (!TileMatrix[baseX][y].LightOn())
                     break;
-            }
+        }
+
+        public void LightOffAt(Vector2 selectedTilePosition)
+        {
+            int baseX = (int) selectedTilePosition.x;
+            int baseY = (int) selectedTilePosition.y;
+
+            for (int x = baseX + 1; x <= gameBoardStats.size.x; x++)
+                if (!TileMatrix[x][baseY].LightOff())
+                    break;
+
+            for (int x = baseX - 1; x >= 0; x--)
+                if (!TileMatrix[x][baseY].LightOff())
+                    break;
+
+            for (int y = baseY + 1; y <= gameBoardStats.size.y; y++)
+                if (!TileMatrix[baseX][y].LightOff())
+                    break;
+
+            for (int y = baseY - 1; y >= 0; y--)
+                if (!TileMatrix[baseX][y].LightOff())
+                    break;
         }
     }
 }

@@ -6,6 +6,7 @@ namespace Script.GameBoard
     [CreateAssetMenu(menuName = "ScriptableObjects/GameBoardStats")]
     public class GameBoardStats : ScriptableObject
     {
-        public Vector2 size = new Vector2(4, 4);
+        public Vector2 size;
+        public int[][] Board;
     }
 }
