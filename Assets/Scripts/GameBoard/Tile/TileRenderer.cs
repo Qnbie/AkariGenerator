@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace GameBoard.Tile
@@ -18,9 +19,9 @@ namespace GameBoard.Tile
             _animator = GetComponent<Animator>();
         }
 
-        public void WrongAnim()
+        public void WrongAnim(String message)
         {
-            Debug.Log("meh");
+            Debug.Log(name + " : " + message);
         }
 
         public void TurnOn()

@@ -8,7 +8,7 @@ namespace GameBoard.Tile
     public abstract class TileBase : MonoBehaviour
     {
         public bool IsSelected { get; protected set; }
-        public List<TileBase> Neighbours { get; private set; }
+        public List<TileBase> Neighbours;
         public Vector2 Position { get; set; }
         protected TileRenderer MyTileRenderer;
 

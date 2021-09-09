@@ -31,18 +31,16 @@ namespace GameBoard.Tile
 
         public override bool IsValid()
         {
+            if (IsLighted() & IsSelected)
+                MyTileRenderer.WrongAnim("good wrong");
             if (IsLighted() ^ IsSelected)
-            {
                 return true;
-            }
-            MyTileRenderer.WrongAnim();
             return false;
         }
 
         private void OnMouseDown()
         {
             IsSelected = !IsSelected;
-            Debug.Log(IsSelected + " selected");
             OnSelect?.Invoke(this);
         }
     }

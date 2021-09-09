@@ -70,6 +70,7 @@ namespace GameBoard
                 if (i-1 >= 0)
                     TileMatrix[i][j].Neighbours
                         .Add(TileMatrix[(int) (Math.Abs(i - 1) % gameBoardStats.Size.x)][(int) (j % gameBoardStats.Size.y)]);
+                
                 if (j-1 >= 0)
                     TileMatrix[i][j].Neighbours
                         .Add(TileMatrix[(int) (i % gameBoardStats.Size.x)][(int) (Math.Abs(j - 1) % gameBoardStats.Size.y)]);
@@ -149,7 +150,5 @@ namespace GameBoard
                 index++;
             }
         }
-        
-        
     }
 }

@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using System;
+using System.Security.Cryptography;
+using UnityEngine;
 
 namespace GameBoard.Tile
 {
@@ -18,8 +20,8 @@ namespace GameBoard.Tile
                     selectedNeighbours++;
             if (selectedNeighbours == myNumber)
                 return true;
-            MyTileRenderer.WrongAnim();
-            return selectedNeighbours == myNumber;
+            MyTileRenderer.WrongAnim("Expected " + myNumber + " Given " + selectedNeighbours);
+            return false;
         }
     }
 }
