@@ -48,7 +48,10 @@ namespace GameController
 
         private void OnSelection(TileController selectedTile)
         {
-            throw new NotImplementedException();
+            if (selectedTile.IsSelectable)
+            {
+                _gameBoardController.LightUpAt(selectedTile.position);
+            }
         }
 
         private void GameOver()
