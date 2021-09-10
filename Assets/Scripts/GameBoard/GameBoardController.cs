@@ -38,7 +38,7 @@ namespace GameBoard
                     if (gameBoardStats.Board[i,j] >= 0)
                     {
                         BadTileController tile = Instantiate(badTilePrefab, Vector3.zero, Quaternion.identity);
-                        tile.myNumber = gameBoardStats.Board[i,j];
+                        tile.MyNumber = gameBoardStats.Board[i,j];
                         tile.transform.position = position;
                         tile.name = "Tile " + i + " " + j;
                         tile.Position = new Vector2(i, j);

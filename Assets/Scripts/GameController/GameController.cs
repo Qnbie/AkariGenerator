@@ -44,7 +44,7 @@ namespace GameController
         
         private void OnSelection(GoodTileController selectedTile)
         {
-            if(selectedTile.IsSelected)
+            if(selectedTile.isSelected)
                 _gameBoardController.LightOnAt(selectedTile.Position);
             else
                 _gameBoardController.LightOffAt(selectedTile.Position);

@@ -7,9 +7,9 @@ namespace GameBoard.Tile
     {
         public event IsSelectedDelegate OnSelect;
 
-        private bool IsLighted() => _lightCounter > 0;
+        public bool IsLighted => _lightCounter > 0;
 
-        private int _lightCounter = 0;
+        [SerializeField]private int _lightCounter = 0;
         
         public override bool LightOn()
         {
@@ -31,16 +31,24 @@ namespace GameBoard.Tile
 
         public override bool IsValid()
         {
-            if (IsLighted() & IsSelected)
-                MyTileRenderer.WrongAnim("good wrong");
-            if (IsLighted() ^ IsSelected)
+            if (IsLighted && isSelected)
+            {
+                Debug.Log(name + " is wrong");
+                MyTileRenderer.NotAllowed();
+            }
+            if (IsLighted ^ isSelected)
+            {
+                MyTileRenderer.Allowed();
                 return true;
+            }
             return false;
         }
 
         private void OnMouseDown()
         {
-            IsSelected = !IsSelected;
+            isSelected = !isSelected;
+            if(isSelected) MyTileRenderer.AddSelection();
+            else MyTileRenderer.RemoveSelection();
             OnSelect?.Invoke(this);
         }
     }

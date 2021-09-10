@@ -6,21 +6,35 @@ namespace GameBoard.Tile
 {
     public class BadTileController : TileBase
     {
-        public int myNumber;
+        private int _myNumber;
+
+        public int MyNumber
+        {
+            set
+            {
+                if(value < 5) 
+                    MyTileRenderer.SetNumber(value);
+                _myNumber = value;
+            }
+        }
 
         public override bool LightOn() => false;
         public override bool LightOff() => false;
 
         public override bool IsValid()
         {
-            if (myNumber == 5) return true;
+            if (_myNumber >= 5) return true;
             int selectedNeighbours = 0;
             foreach (var tile in Neighbours) 
-                if (tile.IsSelected)
+                if (tile.isSelected)
                     selectedNeighbours++;
-            if (selectedNeighbours == myNumber)
+            if (selectedNeighbours == _myNumber)
+            {
+                MyTileRenderer.Allowed();
                 return true;
-            MyTileRenderer.WrongAnim("Expected " + myNumber + " Given " + selectedNeighbours);
+            }
+            if(selectedNeighbours > _myNumber)
+                MyTileRenderer.NotAllowed();
             return false;
         }
     }
