@@ -9,15 +9,22 @@ namespace Script.GameBoard
         [NonSerialized]
         public readonly Vector2 Size = new Vector2(7, 7);
         
-        public readonly int[,] Board = new int[,]
+        public readonly TileStates[,] Board = new TileStates[,]
         {
-            {-1,-1,-1,-1, 0,-1,-1},
-            {-1,-1,-1,-1,-1,-1,-1},
-            { 3,-1,-1, 5,-1,-1,-1},
-            {-1,-1, 5,-1, 4,-1,-1},
-            {-1,-1,-1, 4,-1,-1, 5},
-            {-1,-1,-1,-1,-1,-1,-1},
-            {-1,-1, 5,-1,-1,-1,-1}
+            {TileStates.Empty,TileStates.Empty,TileStates.Empty,TileStates.Empty, TileStates.Zero,TileStates.Empty,TileStates.Empty},
+            {TileStates.Empty,TileStates.Empty,TileStates.Empty,TileStates.Empty,TileStates.Empty,TileStates.Empty,TileStates.Empty},
+            { TileStates.Three,TileStates.Empty,TileStates.Empty, TileStates.Wall,TileStates.Empty,TileStates.Empty,TileStates.Empty},
+            {TileStates.Empty,TileStates.Empty, TileStates.Wall,TileStates.Empty, TileStates.Four,TileStates.Empty,TileStates.Empty},
+            {TileStates.Empty,TileStates.Empty,TileStates.Empty, TileStates.Four,TileStates.Empty,TileStates.Empty, TileStates.Wall},
+            {TileStates.Empty,TileStates.Empty,TileStates.Empty,TileStates.Empty,TileStates.Empty,TileStates.Empty,TileStates.Empty},
+            {TileStates.Empty,TileStates.Empty, TileStates.Wall,TileStates.Empty,TileStates.Empty,TileStates.Empty,TileStates.Empty}
         };
+        
     }
+    public enum TileStates
+        {
+            Zero = 0, One = 1, Two = 2, Three = 3, Four = 4,
+            Empty, Wall,
+            Implacable
+        }
 }
