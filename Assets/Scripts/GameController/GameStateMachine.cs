@@ -1,16 +1,10 @@
 ﻿using System;
+using Enums;
 
 namespace GameController
 {
     public class GameStateMachine
     {
-        public enum GameState
-        {
-            GameStart,
-            ActionPhase,
-            EndTurnPhase
-        }
-        
         public GameState CurrentGameState { get; private set; }
         public bool NewPhase { get; set; }
         

@@ -1,4 +1,5 @@
 ﻿using System;
+using Enums;
 using GameBoard;
 using GameBoard.Tile;
 using UnityEngine;
@@ -27,13 +28,13 @@ namespace GameController
             _gameStateMachine.NewPhase = false;
             switch (_gameStateMachine.CurrentGameState)
             {
-                case GameStateMachine.GameState.GameStart:
+                case GameState.GameStart:
                     SetUpGame();
                     _gameStateMachine.NextPhase();
                     break;
-                case GameStateMachine.GameState.ActionPhase:
+                case GameState.ActionPhase:
                     break;
-                case GameStateMachine.GameState.EndTurnPhase:
+                case GameState.EndTurnPhase:
                     if (_validator.BoardIsValid()) GameOver();
                     else _gameStateMachine.NextPhase();
                     break;

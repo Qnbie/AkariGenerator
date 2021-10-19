@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Enums;
 using GameBoard.Tile;
 using Script.GameBoard;
 using UnityEngine;
@@ -86,35 +87,37 @@ namespace GameBoard
         {
             int baseX = (int) selectedTilePosition.x;
             int baseY = (int) selectedTilePosition.y;
-            bool[] flags = new bool[4];
+            bool[] isStop = new bool[4];
             int index = 0;
-            while (!(flags[0] & flags[1] & flags[2] & flags[3]))
+            while (!(isStop[0] & isStop[1] & isStop[2] & isStop[3]))
             {
-                if (!flags[0] && baseX + 1 + index < gameBoardStats.Size.x)
+                if (!isStop[0] && baseX + 1 + index < gameBoardStats.Size.x)
                 {
-                    if (!TileMatrix[baseX + 1 + index][baseY].LightOn()) flags[0] = true;
+                    if (!TileMatrix[baseX + 1 + index][baseY].LightOn())
+                        isStop[0] = true;
                 }
-                else flags[0] = true;
+                else isStop[0] = true;
 
-                if (!flags[1] && baseY + 1 + index < gameBoardStats.Size.y)
+                if (!isStop[1] && baseY + 1 + index < gameBoardStats.Size.y)
                 {
-                    if (!TileMatrix[baseX][baseY + 1 + index].LightOn()) flags[1] = true;
+                    if (!TileMatrix[baseX][baseY + 1 + index].LightOn()) 
+                        isStop[1] = true;
                 }
-                else flags[1] = true;
+                else isStop[1] = true;
 
-                if (!flags[2] && baseX - 1 - index >= 0)
+                if (!isStop[2] && baseX - 1 - index >= 0)
                 {
                     if (!TileMatrix[baseX - 1 - index][baseY].LightOn())
-                        flags[2] = true;
+                        isStop[2] = true;
                 }
-                else flags[2] = true;
+                else isStop[2] = true;
 
-                if (!flags[3] && baseY - 1 - index >= 0)
+                if (!isStop[3] && baseY - 1 - index >= 0)
                 {
                     if (!TileMatrix[baseX][baseY - 1 - index].LightOn())
-                        flags[3] = true;
+                        isStop[3] = true;
                 }
-                else flags[3] = true;
+                else isStop[3] = true;
                 index++;
             }
         }

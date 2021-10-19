@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Enums;
 using UnityEngine;
 
 namespace Script.GameBoard
@@ -21,10 +22,4 @@ namespace Script.GameBoard
         };
         
     }
-    public enum TileStates
-        {
-            Zero = 0, One = 1, Two = 2, Three = 3, Four = 4,
-            Empty, Wall,
-            Implacable
-        }
 }
