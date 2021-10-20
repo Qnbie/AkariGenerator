@@ -1,11 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using Enums;
-using GameBoard.Tile;
+﻿using System.Collections.Generic;
 using UnityEngine;
+using Utils.Enums;
 using Utils.StaticClasses;
 
-namespace Algorithms
+namespace Source.Algorithms
 {
     public class Validator
     {

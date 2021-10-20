@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
-using Enums;
 using UnityEngine;
+using Utils.Enums;
 
 namespace Utils.StaticClasses
 {

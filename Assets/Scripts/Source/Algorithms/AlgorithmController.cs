@@ -1,11 +1,10 @@
 ﻿using System.Collections.Generic;
-using Enums;
-using NUnit.Framework;
 using UnityEngine;
 using Utils.DataStructures;
+using Utils.Enums;
 using Utils.StaticClasses;
 
-namespace Algorithms
+namespace Source.Algorithms
 {
     public class AlgorithmController
     {

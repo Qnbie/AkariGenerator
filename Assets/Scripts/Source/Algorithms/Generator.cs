@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
-using Enums;
 using UnityEngine;
+using Utils.Enums;
 using Utils.StaticClasses;
 
-namespace Algorithms
+namespace Source.Algorithms
 {
     public class Generator
     {

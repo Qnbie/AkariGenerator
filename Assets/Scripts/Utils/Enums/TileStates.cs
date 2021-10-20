@@ -1,4 +1,4 @@
-﻿namespace Enums
+﻿namespace Utils.Enums
 {
     public enum TileStates
     {

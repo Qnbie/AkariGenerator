@@ -1,13 +1,12 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using Enums;
+﻿using System.Collections.Generic;
 using Firebase;
 using Firebase.Database;
 using Firebase.Extensions;
 using UnityEngine;
 using Utils.DataStructures;
+using Utils.Enums;
 
-namespace Algorithms
+namespace Source.Algorithms
 {
     public class FirebaseController
     {

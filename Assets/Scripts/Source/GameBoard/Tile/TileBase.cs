@@ -1,8 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
-namespace GameBoard.Tile
+namespace Source.GameBoard.Tile
 {
     [RequireComponent(typeof(TileRenderer))]
     public abstract class TileBase : MonoBehaviour

@@ -1,11 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using Enums;
-using GameBoard.Tile;
-using Script.GameBoard;
+using Source.GameBoard.Tile;
 using UnityEngine;
+using Utils.Enums;
 
-namespace GameBoard
+namespace Source.GameBoard
 {
     public class GameBoardController : MonoBehaviour
     {

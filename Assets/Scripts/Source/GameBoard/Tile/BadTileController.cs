@@ -1,8 +1,4 @@
-﻿using System;
-using System.Security.Cryptography;
-using UnityEngine;
-
-namespace GameBoard.Tile
+﻿namespace Source.GameBoard.Tile
 {
     public class BadTileController : TileBase
     {

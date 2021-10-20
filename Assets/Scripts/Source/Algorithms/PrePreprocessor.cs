@@ -1,9 +1,7 @@
-﻿using System.Threading;
-using Enums;
-using Script.GameBoard;
-using UnityEngine;
+﻿using Source.GameBoard;
+using Utils.Enums;
 
-namespace Algorithms
+namespace Source.Algorithms
 {
     public class PrePreprocessor
     {

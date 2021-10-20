@@ -1,11 +1,10 @@
 ﻿using System;
-using Enums;
-using GameBoard;
-using GameBoard.Tile;
+using Source.GameBoard;
+using Source.GameBoard.Tile;
 using UnityEngine;
-using Object = UnityEngine.Object;
+using Utils.Enums;
 
-namespace GameController
+namespace Source.GameController
 {
     [RequireComponent(typeof(GameBoardController))]
     public class GameController : MonoBehaviour

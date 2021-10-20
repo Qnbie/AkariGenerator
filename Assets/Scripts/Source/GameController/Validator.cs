@@ -1,7 +1,7 @@
-﻿using GameBoard;
+﻿using Source.GameBoard;
 using UnityEngine;
 
-namespace GameController
+namespace Source.GameController
 {
     public class Validator
     {

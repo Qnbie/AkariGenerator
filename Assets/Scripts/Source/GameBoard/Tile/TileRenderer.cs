@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using UnityEngine;
+﻿using UnityEngine;
 
-namespace GameBoard.Tile
+namespace Source.GameBoard.Tile
 {
     [RequireComponent(
         typeof(MeshRenderer), 

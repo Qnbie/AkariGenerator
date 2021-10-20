@@ -1,9 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using Enums;
+﻿using System.Collections.Generic;
+using Utils.Enums;
 using Utils.StaticClasses;
 
-namespace Algorithms
+namespace Source.Algorithms
 {
     public class LevelCalculator
     {

@@ -1,9 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using Enums;
 using UnityEngine;
+using Utils.Enums;
 
-namespace Script.GameBoard
+namespace Source.GameBoard
 {
     public class GameBoardStats
     {
