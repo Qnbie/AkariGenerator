@@ -2,6 +2,7 @@
   "project_info": {
     "project_number": "146938572097",
     "project_id": "akarigenerator",
+    "firebase_url": "Database URL not set in the Firebase config.",
     "storage_bucket": "akarigenerator.appspot.com"
   },
   "client": [
