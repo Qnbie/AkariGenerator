@@ -33,7 +33,7 @@ namespace Utils.StaticClasses
         {
             RawPuzzle result = new RawPuzzle();
             result.Size = new Vector2Int(puzzle.SizeX(),puzzle.SizeY());
-            result.DifficultyLevel = puzzle.PuzzleDifficulty;
+            result.DifficultyLevel = puzzle.DifficultyLevel;
             for (int x = 0; x < puzzle.SizeX(); x++)
             {
                 for (int y = 0; y < puzzle.SizeY(); y++)
@@ -47,7 +47,7 @@ namespace Utils.StaticClasses
 
         public static Puzzle ConvertRawPuzzleToPuzzle(RawPuzzle rawPuzzle)
         {
-            Puzzle result = new Puzzle(PuzzleUtil.GetEmptyPuzzleMatrix(rawPuzzle.Size));
+            Puzzle result = new Puzzle(PuzzleUtil.GetEmptyPuzzleMatrix(rawPuzzle.Size), rawPuzzle.DifficultyLevel);
             foreach (Element element in rawPuzzle.Elements)
             {
                 result.PuzzleMatrix[element.Position.x][element.Position.y] = element.ElementState;

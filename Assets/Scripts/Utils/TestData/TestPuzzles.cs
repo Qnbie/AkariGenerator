@@ -13,13 +13,13 @@ namespace Utils.TestData
             {
                 new Element(new Vector2Int(0,3),TileStates.Wall),
                 new Element(new Vector2Int(0,4),TileStates.Wall),
-                new Element(new Vector2Int(2,0),TileStates.Wall),
-                new Element(new Vector2Int(3,0),TileStates.Wall),
+                new Element(new Vector2Int(2,0),TileStates.Two),
+                new Element(new Vector2Int(3,0),TileStates.Zero),
                 new Element(new Vector2Int(3,3),TileStates.Wall),
-                new Element(new Vector2Int(3,6),TileStates.Wall),
+                new Element(new Vector2Int(3,6),TileStates.One),
                 new Element(new Vector2Int(4,6),TileStates.Wall),
-                new Element(new Vector2Int(6,2),TileStates.Wall),
-                new Element(new Vector2Int(6,3),TileStates.Wall)
+                new Element(new Vector2Int(6,2),TileStates.One),
+                new Element(new Vector2Int(6,3),TileStates.One)
             },
             Difficulty.Medium,
             "");
@@ -33,7 +33,7 @@ namespace Utils.TestData
             new List<TileStates>() {TileStates.Empty,TileStates.Empty,TileStates.Empty,TileStates.Empty,TileStates.Empty,TileStates.Empty,TileStates.Wall},
             new List<TileStates>() {TileStates.Empty,TileStates.Empty,TileStates.Empty,TileStates.Empty,TileStates.Empty,TileStates.Empty,TileStates.Empty},
             new List<TileStates>() {TileStates.Empty,TileStates.Empty,TileStates.One,TileStates.One,TileStates.Empty,TileStates.Empty,TileStates.Empty}
-        });
+        }, Difficulty.Medium);
 
         public static List<Vector2Int> GoodSolution = new List<Vector2Int>()
         {

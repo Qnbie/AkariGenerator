@@ -20,10 +20,13 @@ namespace Tests.PlayModeTest
             Assert.False(PuzzleUtil.IsInTheBoard(3,3,3,3));
             Assert.False(PuzzleUtil.IsInTheBoard(-1,2,3,3));
             Debug.Log("False test cases are passed");
-
+            
             Assert.True(PuzzleUtil.IsInTheBoard(0,0,TestPuzzles.GoodPuzzle.SizeX(), TestPuzzles.GoodPuzzle.SizeY()));
+            Debug.Log(1);
             Assert.True(PuzzleUtil.IsInTheBoard(1,1,TestPuzzles.GoodPuzzle.SizeX(), TestPuzzles.GoodPuzzle.SizeY()));
+            Debug.Log(2);
             Assert.True(PuzzleUtil.IsInTheBoard(TestPuzzles.GoodPuzzle.SizeX()-1,TestPuzzles.GoodPuzzle.SizeY() - 1,TestPuzzles.GoodPuzzle.SizeX(), TestPuzzles.GoodPuzzle.SizeY()));
+            Debug.Log(3);
             Debug.Log("True test with test puzzle cases are passed");
 
             Assert.False(PuzzleUtil.IsInTheBoard(TestPuzzles.GoodPuzzle.SizeX(),3,TestPuzzles.GoodPuzzle.SizeX(), TestPuzzles.GoodPuzzle.SizeY()));
@@ -32,12 +35,28 @@ namespace Tests.PlayModeTest
         }
 
         [Test]
-        public void ConvertRawPuzzleToPuzzle()
+        public void ConvertRawPuzzleToPuzzleTest()
         {
             var expectedPuzzle = TestPuzzles.GoodPuzzle;
             var actualPuzzle = PuzzleUtil.ConvertRawPuzzleToPuzzle(TestPuzzles.GoodRawPuzzle);
+
+            Debug.Log(expectedPuzzle.ToString());
+            Debug.Log(actualPuzzle.ToString());
             
-            Assert.AreEqual(expectedPuzzle,actualPuzzle);
+            Assert.True(expectedPuzzle.Equals(actualPuzzle));
+            Debug.Log("Test case is passed");
+        }
+        
+        [Test]
+        public void ConvertPuzzleToRawPuzzleTest()
+        {
+            var expectedPuzzle = TestPuzzles.GoodRawPuzzle;
+            var actualPuzzle = PuzzleUtil.ConvertPuzzleToRawPuzzle(TestPuzzles.GoodPuzzle);
+            
+            Debug.Log(expectedPuzzle.ToString());
+            Debug.Log(actualPuzzle.ToString());
+            
+            Assert.True(expectedPuzzle.Equals(actualPuzzle));
             Debug.Log("Test case is passed");
         }
     }

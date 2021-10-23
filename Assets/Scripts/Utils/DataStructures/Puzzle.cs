@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Text;
 using UnityEngine;
 using Utils.Enums;
 using Utils.StaticClasses;
@@ -8,20 +9,27 @@ namespace Utils.DataStructures
 {
     public class Puzzle : IEquatable<Puzzle>
     {
-        public Difficulty PuzzleDifficulty;
+        public Difficulty DifficultyLevel;
         public List<List<TileStates>> PuzzleMatrix;
         
         public Puzzle(){}
         
-        public Puzzle(List<List<TileStates>> getEmptyPuzzle)
+        public Puzzle(List<List<TileStates>> puzzleMatrix)
         {
-            PuzzleMatrix = new List<List<TileStates>>();
+            PuzzleMatrix = puzzleMatrix;
+            DifficultyLevel = Difficulty.Medium;
+        }
+        
+        public Puzzle(List<List<TileStates>> puzzleMatrix, Difficulty difficulty)
+        {
+            PuzzleMatrix = puzzleMatrix;
+            DifficultyLevel = difficulty;
         }
 
         public Puzzle(RawPuzzle rawPuzzle)
         {
             var puzzleTmp = PuzzleUtil.ConvertRawPuzzleToPuzzle(rawPuzzle);
-            this.PuzzleDifficulty = puzzleTmp.PuzzleDifficulty;
+            this.DifficultyLevel = puzzleTmp.DifficultyLevel;
             this.PuzzleMatrix = puzzleTmp.PuzzleMatrix;
         }
 
@@ -46,6 +54,24 @@ namespace Utils.DataStructures
             }
             
             return true;
+        }
+
+        public override string ToString()
+        {
+            var stringBuilder = new StringBuilder();
+            stringBuilder.AppendLine($"Difficulty: {DifficultyLevel}");
+            stringBuilder.AppendLine("PuzzleMatrix");
+            foreach (var puzzleRow in PuzzleMatrix)
+            {
+                string strTmp = "";
+                foreach (var tile in puzzleRow)
+                {
+                    strTmp += $"{tile}, ";
+                }
+
+                stringBuilder.AppendLine(strTmp);
+            }
+            return stringBuilder.ToString();
         }
     }
 }
