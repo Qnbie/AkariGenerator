@@ -10,9 +10,13 @@ namespace Algorithms
     {
         public bool PuzzleIsSolved(Puzzle puzzle, List<Vector2Int> solution)
         {
+            Debug.Log(puzzle);
             puzzle = AddLamps(puzzle, solution);
-            if (CheckRules(puzzle, solution)) return false;
+            Debug.Log($"With Lamp :\n {puzzle}");
+            if (!CheckRules(puzzle, solution)) return false;
+            Debug.Log("Rules are checked");
             var litPuzzle = TurnOnLamps(puzzle, solution);
+            Debug.Log($"Lamp Turn On :\n {litPuzzle}");
             foreach (List<TileStates> row in puzzle.PuzzleMatrix)
             {
                 foreach (TileStates tileState in row)
@@ -21,6 +25,7 @@ namespace Algorithms
                         return false;
                 }
             }
+            Debug.Log("Solution is ok!");
             return true;
         }
 
@@ -45,7 +50,8 @@ namespace Algorithms
                             return false;
                 }
             }
-
+            Debug.Log("Walls are satisfied");
+            
             for (int i = 0; i < solutions.Count; i++)
             {
                 for (int j = i + 1; j < solutions.Count; j++)
@@ -64,6 +70,8 @@ namespace Algorithms
                     }
                 }
             }
+            Debug.Log("Lamps are correct");
+            
             return true;
         }
 
@@ -111,12 +119,12 @@ namespace Algorithms
                         }
                         else isStop[0] = true;
                     if (!isStop[1])
-                        if( lampPos.x - 1 - index > 0)
+                        if( lampPos.x - 1 - index >= 0)
                         {
                             if (puzzle.PuzzleMatrix[lampPos.x - 1 - index][lampPos.y] == TileStates.Wall)
                                 isStop[1] = true;
                             else
-                                puzzle.PuzzleMatrix[lampPos.x + 1 + index][lampPos.y] = TileStates.Lit;
+                                puzzle.PuzzleMatrix[lampPos.x - 1 - index][lampPos.y] = TileStates.Lit;
                         }
                         else isStop[1] = true;
                     if (!isStop[2])
@@ -129,7 +137,7 @@ namespace Algorithms
                         }
                         else isStop[2] = true;
                     if (!isStop[3])
-                        if( lampPos.y - 1 - index > 0)
+                        if( lampPos.y - 1 - index >= 0)
                         {
                             if (puzzle.PuzzleMatrix[lampPos.x][lampPos.y - 1 - index] == TileStates.Wall)
                                 isStop[3] = true;
@@ -137,6 +145,8 @@ namespace Algorithms
                                 puzzle.PuzzleMatrix[lampPos.x][lampPos.y - 1 - index] = TileStates.Lit;
                         }
                         else isStop[3] = true;
+
+                    index++;
                 }
             }
 

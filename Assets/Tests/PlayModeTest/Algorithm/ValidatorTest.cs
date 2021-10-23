@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Threading;
 using Algorithms;
 using NUnit.Framework;
 using UnityEngine;
@@ -39,7 +40,7 @@ namespace Tests
             Assert.False(_validator.WallIsSatisfied(1,1,puzzle));
         }
 
-        [Test]
+        [Test, Timeout(10000)]
         public void PuzzleIsSolvedTest()
         {
             
