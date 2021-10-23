@@ -55,5 +55,22 @@ namespace Utils.StaticClasses
             return result;
         }
         
+        public static Puzzle SetNeighbour(int posX, int posY, TileStates value, Puzzle puzzle)
+        {
+            if (posX + 1 < puzzle.SizeX() && 
+                puzzle.PuzzleMatrix[posX + 1][posY] == TileStates.Empty) 
+                puzzle.PuzzleMatrix[posX + 1][posY] = value;
+            if (posY + 1 < puzzle.SizeY() && 
+                puzzle.PuzzleMatrix[posX][posY + 1] == TileStates.Empty)
+                puzzle.PuzzleMatrix[posX][posY + 1] = value;
+            if (posX - 1 >= 0 && 
+                puzzle.PuzzleMatrix[posX - 1][posY] == TileStates.Empty)
+                puzzle.PuzzleMatrix[posX - 1][posY] = value;
+            if (posY - 1 >= 0 &&
+                puzzle.PuzzleMatrix[posX][posY - 1] == TileStates.Empty)
+                puzzle.PuzzleMatrix[posX][posY - 1] = value;
+            return puzzle;
+        }
+        
     }
 }

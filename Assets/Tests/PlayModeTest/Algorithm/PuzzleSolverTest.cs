@@ -1,5 +1,8 @@
 ﻿using Algorithms;
 using NUnit.Framework;
+using NUnit.Framework.Internal;
+using UnityEngine;
+using Utils.TestData;
 
 namespace Tests
 {
@@ -23,7 +26,10 @@ namespace Tests
         [Test]
         public void FindSolutionsTest()
         {
-            // Todo 
+            var solutions = _puzzleSolver.FindSolutions(TestPuzzles.GoodPuzzle);
+            
+            Assert.True(solutions.Contains(TestPuzzles.GoodSolution));
+            Debug.Log("Test is passed");
         }
     }
 }

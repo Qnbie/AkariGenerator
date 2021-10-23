@@ -15,7 +15,7 @@ namespace Algorithms
             _validator = validator;
         }
 
-        public int FindSolutions(Puzzle puzzle)
+        public List<List<Vector2Int>> FindSolutions(Puzzle puzzle)
         {
             List<Vector2Int> solutionCandidates = new List<Vector2Int>();
             for (int x = 0; x < puzzle.SizeX(); x++)
@@ -29,8 +29,7 @@ namespace Algorithms
                 }
             }
             
-            var solutions = BacktrackFunction(puzzle, solutionCandidates, new List<Vector2Int>() ,new List<List<Vector2Int>>());
-            return NumberOfDifferentSolution(solutions);
+            return BacktrackFunction(puzzle, solutionCandidates, new List<Vector2Int>() ,new List<List<Vector2Int>>());
         }
 
         private List<List<Vector2Int>> BacktrackFunction(

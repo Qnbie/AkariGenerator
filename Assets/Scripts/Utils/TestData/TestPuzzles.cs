@@ -34,6 +34,17 @@ namespace Utils.TestData
             new List<TileStates>() {TileStates.Empty,TileStates.Empty,TileStates.Empty,TileStates.Empty,TileStates.Empty,TileStates.Empty,TileStates.Empty},
             new List<TileStates>() {TileStates.Empty,TileStates.Empty,TileStates.One,TileStates.One,TileStates.Empty,TileStates.Empty,TileStates.Empty}
         }, Difficulty.Medium);
+        
+        public static Puzzle PreProcessedPuzzle = new Puzzle(new List<List<TileStates>>()
+        {
+            new List<TileStates>() {TileStates.Empty,TileStates.Empty,TileStates.Empty,TileStates.Wall,TileStates.Wall,TileStates.Empty,TileStates.Empty},
+            new List<TileStates>() {TileStates.Lamp,TileStates.Empty,TileStates.Empty,TileStates.Empty,TileStates.Empty,TileStates.Empty,TileStates.Empty},
+            new List<TileStates>() {TileStates.Two,TileStates.Lamp,TileStates.Empty,TileStates.Empty,TileStates.Empty,TileStates.Empty,TileStates.Empty},
+            new List<TileStates>() {TileStates.Zero,TileStates.Implacable,TileStates.Empty,TileStates.Wall,TileStates.Empty,TileStates.Empty,TileStates.One},
+            new List<TileStates>() {TileStates.Implacable,TileStates.Empty,TileStates.Empty,TileStates.Empty,TileStates.Empty,TileStates.Empty,TileStates.Wall},
+            new List<TileStates>() {TileStates.Empty,TileStates.Empty,TileStates.Empty,TileStates.Empty,TileStates.Empty,TileStates.Empty,TileStates.Empty},
+            new List<TileStates>() {TileStates.Empty,TileStates.Empty,TileStates.One,TileStates.One,TileStates.Empty,TileStates.Empty,TileStates.Empty}
+        }, Difficulty.Medium);
 
         public static List<Vector2Int> GoodSolution = new List<Vector2Int>()
         {

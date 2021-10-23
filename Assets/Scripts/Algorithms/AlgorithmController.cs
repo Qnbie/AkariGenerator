@@ -37,7 +37,7 @@ namespace Algorithms
             for (int i = 0; i < 5; i++)
             {
                 puzzle = _generator.GeneratePuzzle(MapperUtil.DifficultyToSize[difficulty], difficulty);
-                int solutionsCnt = _puzzleSolver.FindSolutions(puzzle);
+                int solutionsCnt = _puzzleSolver.NumberOfDifferentSolution(_puzzleSolver.FindSolutions(puzzle));
                 Difficulty levelOfDifficulty = _levelCalculator.CalculateDifficultly(puzzle, solutionsCnt);
                 if (levelOfDifficulty == difficulty)
                 {
