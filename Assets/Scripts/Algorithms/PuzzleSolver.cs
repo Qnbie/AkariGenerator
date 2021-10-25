@@ -19,28 +19,30 @@ namespace Algorithms
 
         public List<Solution> FindSolutions(Puzzle puzzle)
         {
-            puzzle = _preProcessor.Process(puzzle);
-            puzzle.TurnOnLamps();
-            Debug.Log(puzzle);
+            Puzzle litPuzzle = _preProcessor.Process(puzzle);
+            Debug.Log(litPuzzle);
             List<Vector2Int> solutionCandidates = new List<Vector2Int>();
-            for (int x = 0; x < puzzle.SizeX(); x++)
+            for (int x = 0; x < litPuzzle.SizeX(); x++)
             {
-                for (int y = 0; y < puzzle.SizeY(); y++)
+                for (int y = 0; y < litPuzzle.SizeY(); y++)
                 {
-                    if (puzzle.PuzzleMatrix[x][y] == TileStates.Empty)
+                    if (litPuzzle.PuzzleMatrix[x][y] == TileStates.Empty)
                     {
                         solutionCandidates.Add(new Vector2Int(x,y));
                     } 
-                    else if (puzzle.PuzzleMatrix[x][y] == TileStates.Implacable)
+                    else if (litPuzzle.PuzzleMatrix[x][y] == TileStates.Implacable)
                     {
-                        puzzle.PuzzleMatrix[x][y] = TileStates.Empty;
+                        litPuzzle.PuzzleMatrix[x][y] = TileStates.Empty;
                     }
                 }
             }
-            puzzle.TurnOfLamps();
             Debug.Log("Solution candidates are ready");
             
-            return BacktrackFunction(puzzle, solutionCandidates, new Solution(puzzle.GetLampPositions()) ,new List<Solution>());
+            return BacktrackFunction(
+                puzzle, 
+                solutionCandidates,
+                new Solution(puzzle.GetElementPositions(TileStates.Lamp)),
+                new List<Solution>());
         }
 
         private List<Solution> BacktrackFunction(
@@ -76,7 +78,7 @@ namespace Algorithms
 
         private bool WallsAreUnsatisfiable(Puzzle puzzle, Solution solution)
         {
-            puzzle.AddLamps(solution.Positions).TurnOnLamps();
+            Puzzle litPuzzle = PuzzleUtil.TurnOnLamps(puzzle, solution);
             for (int x = 0; x < puzzle.SizeX(); x++)
             {
                 for (int y = 0; y < puzzle.SizeY(); y++)

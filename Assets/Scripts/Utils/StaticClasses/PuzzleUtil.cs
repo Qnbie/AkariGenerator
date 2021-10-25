@@ -72,5 +72,57 @@ namespace Utils.StaticClasses
             return puzzle;
         }
         
+        public static Puzzle TurnOnLamps(Puzzle puzzle, Solution lampPositions)
+        {
+            foreach (Vector2Int lampPos in lampPositions.Positions)
+            {
+                bool[] isStop = new bool[4];
+                int index = 0;
+                while (!(isStop[0] & isStop[1] & isStop[2] & isStop[3]))
+                {
+                    if (!isStop[0])
+                        if( lampPos.x + 1 + index < puzzle.SizeX())
+                        {
+                            if ((int)puzzle.PuzzleMatrix[lampPos.x + 1 + index][lampPos.y] < 6)
+                                isStop[0] = true;
+                            else if (puzzle.PuzzleMatrix[lampPos.x + 1 + index][lampPos.y] == TileStates.Empty)
+                                puzzle.PuzzleMatrix[lampPos.x + 1 + index][lampPos.y] = TileStates.Lit;
+                        }
+                        else isStop[0] = true;
+                    if (!isStop[1])
+                        if( lampPos.x - 1 - index >= 0)
+                        {
+                            if ((int)puzzle.PuzzleMatrix[lampPos.x - 1 - index][lampPos.y] < 6)
+                                isStop[1] = true;
+                            else if (puzzle.PuzzleMatrix[lampPos.x - 1 - index][lampPos.y] == TileStates.Empty)
+                                puzzle.PuzzleMatrix[lampPos.x - 1 - index][lampPos.y] = TileStates.Lit;
+                        }
+                        else isStop[1] = true;
+                    if (!isStop[2])
+                        if( lampPos.y + 1 + index < puzzle.SizeX())
+                        {
+                            if ((int)puzzle.PuzzleMatrix[lampPos.x][lampPos.y + 1 + index] < 6)
+                                isStop[2] = true;
+                            else if (puzzle.PuzzleMatrix[lampPos.x][lampPos.y + 1 + index] == TileStates.Empty)
+                                puzzle.PuzzleMatrix[lampPos.x][lampPos.y + 1 + index] = TileStates.Lit;
+                        }
+                        else isStop[2] = true;
+                    if (!isStop[3])
+                        if( lampPos.y - 1 - index >= 0)
+                        {
+                            if ((int)puzzle.PuzzleMatrix[lampPos.x][lampPos.y - 1 - index] < 6)
+                                isStop[3] = true;
+                            else if (puzzle.PuzzleMatrix[lampPos.x][lampPos.y - 1 - index] == TileStates.Empty)
+                                puzzle.PuzzleMatrix[lampPos.x][lampPos.y - 1 - index] = TileStates.Lit;
+                        }
+                        else isStop[3] = true;
+
+                    index++;
+                }
+            }
+
+            Debug.Log($"Lamps are on \n {puzzle}");
+            return puzzle;
+        }
     }
 }

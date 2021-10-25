@@ -74,7 +74,7 @@ namespace Algorithms
                 }
             }
             _lamps.Clear();
-            UpdateCandidates(puzzle.TurnOnLamps());
+            UpdateCandidates(PuzzleUtil.TurnOnLamps(puzzle,_solution));
             return puzzle;
         }
 

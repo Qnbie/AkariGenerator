@@ -10,10 +10,10 @@ namespace Algorithms
     {
         public bool PuzzleIsSolved(Puzzle puzzle, Solution solution)
         {
-            puzzle.AddLamps(solution.Positions);
+            puzzle.AddElements(solution.Positions, TileStates.Lamp);
             if (!CheckRules(puzzle))
                 return false;
-            var litPuzzle = puzzle.TurnOnLamps();
+            var litPuzzle = PuzzleUtil.TurnOnLamps(puzzle,solution);
             if (PuzzleIsFull(litPuzzle))
             {
                 Debug.Log($"Puzzle is solved");
@@ -53,7 +53,7 @@ namespace Algorithms
             }
             Debug.Log("Walls are satisfied");
             
-            return LampsCheck(puzzle, new Solution(puzzle.GetLampPositions()));
+            return LampsCheck(puzzle, new Solution(puzzle.GetElementPositions(TileStates.Lamp)));
         }
 
         public bool LampsCheck(Puzzle puzzle, Solution solution)

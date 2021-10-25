@@ -24,7 +24,9 @@ namespace Algorithms
             }
 
             Debug.Log($"Puzzle is preprocessed\n {puzzle}");
-            return puzzle;
+            return PuzzleUtil.TurnOnLamps(
+                puzzle, 
+                new Solution(puzzle.GetElementPositions(TileStates.Lamp)));
         }
 
         private void NForNSpace(int posX, int posY, Puzzle puzzle)
