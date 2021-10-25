@@ -31,7 +31,7 @@ namespace Tests
             puzzle.PuzzleMatrix[0][1] = TileStates.Lamp;
             puzzle.PuzzleMatrix[1][2] = TileStates.Lamp;
             puzzle.PuzzleMatrix[2][1] = TileStates.Lamp;
-
+            
             Assert.True(_validator.WallIsSatisfied(1,1,puzzle));
             
             puzzle.PuzzleMatrix[1][0] = TileStates.Empty;
@@ -44,7 +44,7 @@ namespace Tests
         public void PuzzleIsSolvedTest()
         {
             
-            Assert.True(_validator.PuzzleIsSolved(TestPuzzles.GoodPuzzle,TestPuzzles.GoodSolution));
+            Assert.True(_validator.PuzzleIsSolved(TestPuzzleEasy.GoodPuzzle,TestPuzzleEasy.GoodSolution));
         }
     }
 }

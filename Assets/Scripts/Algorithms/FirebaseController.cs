@@ -38,8 +38,10 @@ namespace Algorithms
         public List<RawPuzzle> GetPuzzle(Difficulty difficulty)
         {
             FirebaseDatabase.DefaultInstance
-                .GetReference("puzzles").EqualTo((double)difficulty, "Difficulty")
-                .GetValueAsync().ContinueWithOnMainThread(task => {
+                .GetReference("puzzles")
+                .EqualTo((double)difficulty, "Difficulty")
+                .GetValueAsync()
+                .ContinueWithOnMainThread(task => {
                     if (task.IsFaulted) {
                         // Handle the error...
                     }

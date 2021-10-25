@@ -26,9 +26,10 @@ namespace Tests
         [Test]
         public void FindSolutionsTest()
         {
-            var solutions = _puzzleSolver.FindSolutions(TestPuzzles.GoodPuzzle);
-            
-            Assert.True(solutions.Contains(TestPuzzles.GoodSolution));
+            var solutions = _puzzleSolver.FindSolutions(TestPuzzleEasy.GoodPuzzle);
+            Debug.Log("Solutions are ready");
+
+            Assert.True(solutions.Contains(TestPuzzleEasy.GoodSolution));
             Debug.Log("Test is passed");
         }
     }

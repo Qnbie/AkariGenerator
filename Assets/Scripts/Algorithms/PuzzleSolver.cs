@@ -9,14 +9,19 @@ namespace Algorithms
     public class PuzzleSolver
     {
         private Validator _validator;
-
+        private PreProcessor _preProcessor;
+        
         public PuzzleSolver(Validator validator)
         {
             _validator = validator;
+            _preProcessor = new PreProcessor();
         }
 
-        public List<List<Vector2Int>> FindSolutions(Puzzle puzzle)
+        public List<Solution> FindSolutions(Puzzle puzzle)
         {
+            puzzle = _preProcessor.Process(puzzle);
+            puzzle.TurnOnLamps();
+            Debug.Log(puzzle);
             List<Vector2Int> solutionCandidates = new List<Vector2Int>();
             for (int x = 0; x < puzzle.SizeX(); x++)
             {
@@ -25,46 +30,61 @@ namespace Algorithms
                     if (puzzle.PuzzleMatrix[x][y] == TileStates.Empty)
                     {
                         solutionCandidates.Add(new Vector2Int(x,y));
+                    } 
+                    else if (puzzle.PuzzleMatrix[x][y] == TileStates.Implacable)
+                    {
+                        puzzle.PuzzleMatrix[x][y] = TileStates.Empty;
                     }
                 }
             }
+            puzzle.TurnOfLamps();
+            Debug.Log("Solution candidates are ready");
             
-            return BacktrackFunction(puzzle, solutionCandidates, new List<Vector2Int>() ,new List<List<Vector2Int>>());
+            return BacktrackFunction(puzzle, solutionCandidates, new Solution(puzzle.GetLampPositions()) ,new List<Solution>());
         }
 
-        private List<List<Vector2Int>> BacktrackFunction(
+        private List<Solution> BacktrackFunction(
             Puzzle puzzle,
             List<Vector2Int> candidates,
-            List<Vector2Int> solution, 
-            List<List<Vector2Int>> finalSolutions)
+            Solution solution, 
+            List<Solution> finalSolutions)
         {
             if (_validator.PuzzleIsSolved(puzzle, solution))
             {
+                Debug.Log("Solution add");
+                Debug.Log(solution);
                 finalSolutions.Add(solution);
                 return finalSolutions;
             }
-            if (candidates.Count == 0 || WallsAreUnsatisfiable(puzzle, solution)) return finalSolutions;
+
+            if (candidates.Count == 0 || WallsAreUnsatisfiable(puzzle, solution))
+            {
+                if (candidates.Count == 0)
+                    Debug.Log("Candidates are empty");
+                else
+                    Debug.Log("Wall problem");
+                return finalSolutions;
+            }
             Vector2Int nextCandidate = candidates[0];
-            solution.Add(nextCandidate);
-            BacktrackFunction(puzzle, candidates, solution, finalSolutions);
             candidates.Remove(nextCandidate);
-            solution.Remove(nextCandidate);
-            BacktrackFunction(puzzle, candidates, solution, finalSolutions);
+            solution.Positions.Add(nextCandidate);
+            finalSolutions = BacktrackFunction(puzzle, candidates, solution, finalSolutions);
+            solution.Positions.Remove(nextCandidate);
+            finalSolutions = BacktrackFunction(puzzle, candidates, solution, finalSolutions);
             return finalSolutions;
         }
 
-        private bool WallsAreUnsatisfiable(Puzzle puzzle, List<Vector2Int> solution)
+        private bool WallsAreUnsatisfiable(Puzzle puzzle, Solution solution)
         {
+            puzzle.AddLamps(solution.Positions).TurnOnLamps();
             for (int x = 0; x < puzzle.SizeX(); x++)
             {
                 for (int y = 0; y < puzzle.SizeY(); y++)
                 {
-                    if ((int)puzzle.PuzzleMatrix[x][y] < 5)
-                    {
-                        if (!_validator.WallIsSatisfied(x, y, puzzle))
-                            if (NoMoreSpace(x, y, puzzle))
-                                return true;
-                    }
+                    if ((int) puzzle.PuzzleMatrix[x][y] >= 5) continue;
+                    if (_validator.WallIsSatisfied(x, y, puzzle)) continue;
+                    if (NoMoreSpace(x, y, puzzle))
+                        return true;
                 }
             }
             return false;
@@ -80,7 +100,7 @@ namespace Algorithms
             return emptyCnt == 0;
         }
 
-        public int NumberOfDifferentSolution(List<List<Vector2Int>> solutions)
+        public int NumberOfDifferentSolution(List<Solution> solutions)
         {
             // TODO implement complex solution counter methode
             return solutions.Count;

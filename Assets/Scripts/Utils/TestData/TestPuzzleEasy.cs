@@ -5,7 +5,7 @@ using Utils.Enums;
 
 namespace Utils.TestData
 {
-    public static class TestPuzzles
+    public static class TestPuzzleEasy
     {
         public static RawPuzzle GoodRawPuzzle = new RawPuzzle(
             new Vector2Int(7,7),
@@ -46,16 +46,16 @@ namespace Utils.TestData
             new List<TileStates>() {TileStates.Empty,TileStates.Empty,TileStates.One,TileStates.One,TileStates.Empty,TileStates.Empty,TileStates.Empty}
         }, Difficulty.Medium);
 
-        public static List<Vector2Int> GoodSolution = new List<Vector2Int>()
-        {
-            new Vector2Int(0,6),
-            new Vector2Int(1,0),
-            new Vector2Int(2,1),
-            new Vector2Int(3,5),
-            new Vector2Int(4,3),
-            new Vector2Int(5,2),
-            new Vector2Int(6,0),
-            new Vector2Int(6,4),
-        };
+        public static Solution GoodSolution = new Solution(
+        new List<Vector2Int>(){
+            new Vector2Int(0, 6),
+            new Vector2Int(1, 0),
+            new Vector2Int(2, 1),
+            new Vector2Int(3, 5),
+            new Vector2Int(4, 3),
+            new Vector2Int(5, 2),
+            new Vector2Int(6, 0),
+            new Vector2Int(6, 4),
+        });
     }
 }

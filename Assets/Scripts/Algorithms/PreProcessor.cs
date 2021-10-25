@@ -23,6 +23,7 @@ namespace Algorithms
                 }
             }
 
+            Debug.Log($"Puzzle is preprocessed\n {puzzle}");
             return puzzle;
         }
 
@@ -41,8 +42,8 @@ namespace Algorithms
             if (posY - 1 >= 0)
                 if (puzzle.PuzzleMatrix[posX][posY - 1] == TileStates.Empty)
                     spaceCnt++;
-            Debug.Log($"Check spaceCnt: {spaceCnt} Place: {(int) puzzle.PuzzleMatrix[posX][posY]}");
-            if (spaceCnt == (int) puzzle.PuzzleMatrix[posX][posY]) 
+            
+            if (spaceCnt == (int) puzzle.PuzzleMatrix[posX][posY])
                 PuzzleUtil.SetNeighbour(posX,posY,TileStates.Lamp,puzzle);
         }
 

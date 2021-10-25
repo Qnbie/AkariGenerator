@@ -19,11 +19,8 @@ namespace Tests
         [Test]
         public void ProcessTest()
         {
-            var actualPuzzle = _preProcessor.Process(TestPuzzles.GoodPuzzle);
-            var expectedPuzzle = TestPuzzles.PreProcessedPuzzle;
-            
-            Debug.Log(actualPuzzle);
-            Debug.Log(expectedPuzzle);
+            var actualPuzzle = _preProcessor.Process(TestPuzzleEasy.GoodPuzzle);
+            var expectedPuzzle = TestPuzzleEasy.PreProcessedPuzzle;
             
             Assert.True(expectedPuzzle.Equals(actualPuzzle));
         }
