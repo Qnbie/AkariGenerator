@@ -15,10 +15,10 @@ namespace Algorithms
                 for (int y = 0; y < puzzle.SizeY(); y++)
                 {
                     if (puzzle.PuzzleMatrix[x][y] == TileStates.Zero) 
-                        PuzzleUtil.SetNeighbour(x, y, TileStates.Implacable, puzzle);
+                        puzzle = PuzzleUtil.SetNeighbour(x, y, TileStates.Implacable, puzzle);
                     else if ((int) puzzle.PuzzleMatrix[x][y] < 5)
                     {
-                        NForNSpace(x, y, puzzle);
+                        puzzle = NForNSpace(x, y, puzzle);
                     }
                 }
             }
@@ -29,7 +29,7 @@ namespace Algorithms
                 new Solution(puzzle.GetElementPositions(TileStates.Lamp)));
         }
 
-        private void NForNSpace(int posX, int posY, Puzzle puzzle)
+        private Puzzle NForNSpace(int posX, int posY, Puzzle puzzle)
         {
             int spaceCnt = 0;
             if (posX + 1 < puzzle.SizeX())
@@ -46,7 +46,8 @@ namespace Algorithms
                     spaceCnt++;
             
             if (spaceCnt == (int) puzzle.PuzzleMatrix[posX][posY])
-                PuzzleUtil.SetNeighbour(posX,posY,TileStates.Lamp,puzzle);
+                puzzle = PuzzleUtil.SetNeighbour(posX,posY,TileStates.Lamp,puzzle);
+            return puzzle;
         }
 
     }
