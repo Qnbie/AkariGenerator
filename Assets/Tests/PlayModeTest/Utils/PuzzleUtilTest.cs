@@ -37,27 +37,29 @@ namespace Tests.PlayModeTest
         [Test]
         public void ConvertRawPuzzleToPuzzleTest()
         {
-            var expectedPuzzle = TestPuzzleEasy.Puzzle;
             var actualPuzzle = PuzzleUtil.ConvertRawPuzzleToPuzzle(TestPuzzleEasy.RawPuzzle);
-
-            Debug.Log(expectedPuzzle.ToString());
-            Debug.Log(actualPuzzle.ToString());
-            
-            Assert.True(expectedPuzzle.Equals(actualPuzzle));
-            Debug.Log("Test case is passed");
+            Assert.True(TestPuzzleEasy.Puzzle.Equals(actualPuzzle));
+            Debug.Log("Easy Puzzle is passed");
+            actualPuzzle = PuzzleUtil.ConvertRawPuzzleToPuzzle(TestPuzzleNormal.RawPuzzle);
+            Assert.True(TestPuzzleNormal.Puzzle.Equals(actualPuzzle));
+            Debug.Log("Normal Puzzle is passed");
+            actualPuzzle = PuzzleUtil.ConvertRawPuzzleToPuzzle(TestPuzzleHard.RawPuzzle);
+            Assert.True(TestPuzzleHard.Puzzle.Equals(actualPuzzle));
+            Debug.Log("Hard Puzzle is passed");
         }
         
         [Test]
         public void ConvertPuzzleToRawPuzzleTest()
         {
-            var expectedPuzzle = TestPuzzleEasy.RawPuzzle;
             var actualPuzzle = PuzzleUtil.ConvertPuzzleToRawPuzzle(TestPuzzleEasy.Puzzle);
-            
-            Debug.Log(expectedPuzzle.ToString());
-            Debug.Log(actualPuzzle.ToString());
-            
-            Assert.True(expectedPuzzle.Equals(actualPuzzle));
-            Debug.Log("Test case is passed");
+            Assert.True(TestPuzzleEasy.RawPuzzle.Equals(actualPuzzle));
+            Debug.Log("Easy Puzzle is passed");
+            actualPuzzle = PuzzleUtil.ConvertPuzzleToRawPuzzle(TestPuzzleNormal.Puzzle);
+            Assert.True(TestPuzzleNormal.RawPuzzle.Equals(actualPuzzle));
+            Debug.Log("Normal Puzzle is passed");
+            actualPuzzle = PuzzleUtil.ConvertPuzzleToRawPuzzle(TestPuzzleHard.Puzzle);
+            Assert.True(TestPuzzleHard.RawPuzzle.Equals(actualPuzzle));
+            Debug.Log("Hard Puzzle is passed");
         }
     }
 }
