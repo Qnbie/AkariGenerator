@@ -120,7 +120,7 @@ namespace Utils.TestData
                 TileStates.Empty,TileStates.One,TileStates.Empty,TileStates.Empty,TileStates.Empty,TileStates.Empty,TileStates.Empty},
             new List<TileStates>() {
                 TileStates.Zero,TileStates.Empty,TileStates.Empty,TileStates.Empty,TileStates.Empty,TileStates.Wall,TileStates.Empty,
-                TileStates.One,TileStates.Empty,TileStates.Empty,TileStates.Empty,TileStates.Empty,TileStates.One,TileStates.Zero}
+                TileStates.One,TileStates.Empty,TileStates.Empty,TileStates.Empty,TileStates.Empty,TileStates.One,TileStates.Wall}
         }, Difficulty.Medium);
         
         public static readonly Puzzle PreProcessedPuzzle = new Puzzle(new List<List<TileStates>>()

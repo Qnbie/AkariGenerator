@@ -3,6 +3,7 @@ using GameBoard;
 using GameBoard.Tile;
 using UnityEngine;
 using Utils.Enums;
+using Utils.TestData;
 
 namespace GameController
 {
@@ -17,6 +18,7 @@ namespace GameController
         private void Awake()
         {
             _gameBoardController = GetComponent<GameBoardController>();
+            _gameBoardController.puzzle = TestPuzzleHard.Puzzle;
             _gameStateMachine = new GameStateMachine();
             _validator = new Validator(_gameBoardController);
         }

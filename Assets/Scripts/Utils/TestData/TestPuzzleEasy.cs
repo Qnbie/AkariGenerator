@@ -35,7 +35,7 @@ namespace Utils.TestData
             new List<TileStates>() {TileStates.Empty,TileStates.Empty,TileStates.Wall,TileStates.Empty,TileStates.Three,TileStates.Empty,TileStates.Empty},
             new List<TileStates>() {TileStates.Empty,TileStates.Empty,TileStates.Empty,TileStates.Four,TileStates.Empty,TileStates.Wall,TileStates.Empty},
             new List<TileStates>() {TileStates.Empty,TileStates.One,TileStates.Wall,TileStates.Empty,TileStates.Empty,TileStates.Wall,TileStates.Empty},
-            new List<TileStates>() {TileStates.Empty,TileStates.Empty,TileStates.One,TileStates.One,TileStates.Empty,TileStates.Empty,TileStates.Empty}
+            new List<TileStates>() {TileStates.Empty,TileStates.Empty,TileStates.Empty,TileStates.Empty,TileStates.Empty,TileStates.Empty,TileStates.Empty}
         }, Difficulty.Easy);
         
         public static readonly Puzzle PreProcessedPuzzle = new Puzzle(new List<List<TileStates>>()
@@ -46,7 +46,7 @@ namespace Utils.TestData
             new List<TileStates>() {TileStates.Empty,TileStates.Empty,TileStates.Wall,TileStates.Lamp,TileStates.Three,TileStates.Empty,TileStates.Empty},
             new List<TileStates>() {TileStates.Empty,TileStates.Empty,TileStates.Lamp,TileStates.Four,TileStates.Lamp,TileStates.Wall,TileStates.Empty},
             new List<TileStates>() {TileStates.Empty,TileStates.One,TileStates.Wall,TileStates.Lamp,TileStates.Empty,TileStates.Wall,TileStates.Empty},
-            new List<TileStates>() {TileStates.Empty,TileStates.Empty,TileStates.One,TileStates.One,TileStates.Empty,TileStates.Empty,TileStates.Empty}
+            new List<TileStates>() {TileStates.Empty,TileStates.Empty,TileStates.Empty,TileStates.Empty,TileStates.Empty,TileStates.Empty,TileStates.Empty}
         }, Difficulty.Easy);
 
         public static readonly Solution Solution = new Solution(
