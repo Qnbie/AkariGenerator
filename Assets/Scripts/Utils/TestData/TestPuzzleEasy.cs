@@ -7,55 +7,61 @@ namespace Utils.TestData
 {
     public static class TestPuzzleEasy
     {
-        public static RawPuzzle GoodRawPuzzle = new RawPuzzle(
+        public static readonly RawPuzzle RawPuzzle = new RawPuzzle(
             new Vector2Int(7,7),
             new List<Element>()
             {
-                new Element(new Vector2Int(0,3),TileStates.Wall),
-                new Element(new Vector2Int(0,4),TileStates.Wall),
-                new Element(new Vector2Int(2,0),TileStates.Two),
-                new Element(new Vector2Int(3,0),TileStates.Zero),
-                new Element(new Vector2Int(3,3),TileStates.Wall),
-                new Element(new Vector2Int(3,6),TileStates.One),
-                new Element(new Vector2Int(4,6),TileStates.Wall),
-                new Element(new Vector2Int(6,2),TileStates.One),
-                new Element(new Vector2Int(6,3),TileStates.One)
+                new Element(new Vector2Int(1,1),TileStates.Wall),
+                new Element(new Vector2Int(1,4),TileStates.Two),
+                new Element(new Vector2Int(1,5),TileStates.Zero),
+                new Element(new Vector2Int(2,1),TileStates.One),
+                new Element(new Vector2Int(2,3),TileStates.Four),
+                new Element(new Vector2Int(3,2),TileStates.Wall),
+                new Element(new Vector2Int(3,4),TileStates.Three),
+                new Element(new Vector2Int(4,3),TileStates.Four),
+                new Element(new Vector2Int(4,5),TileStates.Wall),
+                new Element(new Vector2Int(5,1),TileStates.One),
+                new Element(new Vector2Int(5,2),TileStates.Wall),
+                new Element(new Vector2Int(5,5),TileStates.Wall),
             },
-            Difficulty.Medium,
+            Difficulty.Easy,
             "");
 
-        public static Puzzle GoodPuzzle = new Puzzle(new List<List<TileStates>>()
+        public static readonly Puzzle Puzzle = new Puzzle(new List<List<TileStates>>()
         {
-            new List<TileStates>() {TileStates.Empty,TileStates.Empty,TileStates.Empty,TileStates.Wall,TileStates.Wall,TileStates.Empty,TileStates.Empty},
             new List<TileStates>() {TileStates.Empty,TileStates.Empty,TileStates.Empty,TileStates.Empty,TileStates.Empty,TileStates.Empty,TileStates.Empty},
-            new List<TileStates>() {TileStates.Two,TileStates.Empty,TileStates.Empty,TileStates.Empty,TileStates.Empty,TileStates.Empty,TileStates.Empty},
-            new List<TileStates>() {TileStates.Zero,TileStates.Empty,TileStates.Empty,TileStates.Wall,TileStates.Empty,TileStates.Empty,TileStates.One},
-            new List<TileStates>() {TileStates.Empty,TileStates.Empty,TileStates.Empty,TileStates.Empty,TileStates.Empty,TileStates.Empty,TileStates.Wall},
-            new List<TileStates>() {TileStates.Empty,TileStates.Empty,TileStates.Empty,TileStates.Empty,TileStates.Empty,TileStates.Empty,TileStates.Empty},
+            new List<TileStates>() {TileStates.Empty,TileStates.Wall,TileStates.Empty,TileStates.Empty,TileStates.Two,TileStates.Zero,TileStates.Empty},
+            new List<TileStates>() {TileStates.Empty,TileStates.One,TileStates.Empty,TileStates.Four,TileStates.Empty,TileStates.Empty,TileStates.Empty},
+            new List<TileStates>() {TileStates.Empty,TileStates.Empty,TileStates.Wall,TileStates.Empty,TileStates.Three,TileStates.Empty,TileStates.Empty},
+            new List<TileStates>() {TileStates.Empty,TileStates.Empty,TileStates.Empty,TileStates.Four,TileStates.Empty,TileStates.Wall,TileStates.Empty},
+            new List<TileStates>() {TileStates.Empty,TileStates.One,TileStates.Wall,TileStates.Empty,TileStates.Empty,TileStates.Wall,TileStates.Empty},
             new List<TileStates>() {TileStates.Empty,TileStates.Empty,TileStates.One,TileStates.One,TileStates.Empty,TileStates.Empty,TileStates.Empty}
-        }, Difficulty.Medium);
+        }, Difficulty.Easy);
         
-        public static Puzzle PreProcessedPuzzle = new Puzzle(new List<List<TileStates>>()
+        public static readonly Puzzle PreProcessedPuzzle = new Puzzle(new List<List<TileStates>>()
         {
-            new List<TileStates>() {TileStates.Empty,TileStates.Empty,TileStates.Empty,TileStates.Wall,TileStates.Wall,TileStates.Empty,TileStates.Empty},
-            new List<TileStates>() {TileStates.Lamp,TileStates.Empty,TileStates.Empty,TileStates.Empty,TileStates.Empty,TileStates.Empty,TileStates.Empty},
-            new List<TileStates>() {TileStates.Two,TileStates.Lamp,TileStates.Empty,TileStates.Empty,TileStates.Empty,TileStates.Empty,TileStates.Empty},
-            new List<TileStates>() {TileStates.Zero,TileStates.Implacable,TileStates.Empty,TileStates.Wall,TileStates.Empty,TileStates.Empty,TileStates.One},
-            new List<TileStates>() {TileStates.Implacable,TileStates.Empty,TileStates.Empty,TileStates.Empty,TileStates.Empty,TileStates.Empty,TileStates.Wall},
-            new List<TileStates>() {TileStates.Empty,TileStates.Empty,TileStates.Empty,TileStates.Empty,TileStates.Empty,TileStates.Empty,TileStates.Empty},
+            new List<TileStates>() {TileStates.Empty,TileStates.Empty,TileStates.Empty,TileStates.Empty,TileStates.Empty,TileStates.Implacable,TileStates.Empty},
+            new List<TileStates>() {TileStates.Empty,TileStates.Wall,TileStates.Empty,TileStates.Lamp,TileStates.Two,TileStates.Zero,TileStates.Implacable},
+            new List<TileStates>() {TileStates.Empty,TileStates.One,TileStates.Lamp,TileStates.Four,TileStates.Lamp,TileStates.Implacable,TileStates.Empty},
+            new List<TileStates>() {TileStates.Empty,TileStates.Empty,TileStates.Wall,TileStates.Lamp,TileStates.Three,TileStates.Empty,TileStates.Empty},
+            new List<TileStates>() {TileStates.Empty,TileStates.Empty,TileStates.Lamp,TileStates.Four,TileStates.Lamp,TileStates.Wall,TileStates.Empty},
+            new List<TileStates>() {TileStates.Empty,TileStates.One,TileStates.Wall,TileStates.Lamp,TileStates.Empty,TileStates.Wall,TileStates.Empty},
             new List<TileStates>() {TileStates.Empty,TileStates.Empty,TileStates.One,TileStates.One,TileStates.Empty,TileStates.Empty,TileStates.Empty}
-        }, Difficulty.Medium);
+        }, Difficulty.Easy);
 
-        public static Solution GoodSolution = new Solution(
+        public static readonly Solution Solution = new Solution(
         new List<Vector2Int>(){
-            new Vector2Int(0, 6),
-            new Vector2Int(1, 0),
-            new Vector2Int(2, 1),
-            new Vector2Int(3, 5),
-            new Vector2Int(4, 3),
-            new Vector2Int(5, 2),
-            new Vector2Int(6, 0),
-            new Vector2Int(6, 4),
+            new Vector2Int(0, 1),
+            new Vector2Int(1, 3),
+            new Vector2Int(2, 2),
+            new Vector2Int(2, 4),
+            new Vector2Int(3, 0),
+            new Vector2Int(3, 3),
+            new Vector2Int(3, 6),
+            new Vector2Int(4, 2),
+            new Vector2Int(4, 4),
+            new Vector2Int(5, 3),
+            new Vector2Int(6, 1),
         });
     }
 }

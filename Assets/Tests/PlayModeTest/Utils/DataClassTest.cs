@@ -10,8 +10,8 @@ namespace Tests.PlayModeTest
         [Test]
         public void RawPuzzleTest()
         {
-            var puzzleA = TestPuzzleEasy.GoodRawPuzzle;
-            var puzzleB = TestPuzzleEasy.GoodRawPuzzle;
+            var puzzleA = TestPuzzleEasy.RawPuzzle;
+            var puzzleB = TestPuzzleEasy.RawPuzzle;
             
             Assert.True(puzzleA.Equals(puzzleB));
             Debug.Log("Test case is passed");
@@ -20,8 +20,8 @@ namespace Tests.PlayModeTest
         [Test]
         public void PuzzleTest()
         {
-            var puzzleA = TestPuzzleEasy.GoodPuzzle;
-            var puzzleB = TestPuzzleEasy.GoodPuzzle;
+            var puzzleA = TestPuzzleEasy.Puzzle;
+            var puzzleB = TestPuzzleEasy.Puzzle;
 
             Assert.True(puzzleA.Equals(puzzleB));
             Debug.Log("Test case is passed");

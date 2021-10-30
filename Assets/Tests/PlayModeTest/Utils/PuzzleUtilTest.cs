@@ -21,24 +21,24 @@ namespace Tests.PlayModeTest
             Assert.False(PuzzleUtil.IsInTheBoard(-1,2,3,3));
             Debug.Log("False test cases are passed");
             
-            Assert.True(PuzzleUtil.IsInTheBoard(0,0,TestPuzzleEasy.GoodPuzzle.SizeX(), TestPuzzleEasy.GoodPuzzle.SizeY()));
+            Assert.True(PuzzleUtil.IsInTheBoard(0,0,TestPuzzleEasy.Puzzle.SizeX(), TestPuzzleEasy.Puzzle.SizeY()));
             Debug.Log(1);
-            Assert.True(PuzzleUtil.IsInTheBoard(1,1,TestPuzzleEasy.GoodPuzzle.SizeX(), TestPuzzleEasy.GoodPuzzle.SizeY()));
+            Assert.True(PuzzleUtil.IsInTheBoard(1,1,TestPuzzleEasy.Puzzle.SizeX(), TestPuzzleEasy.Puzzle.SizeY()));
             Debug.Log(2);
-            Assert.True(PuzzleUtil.IsInTheBoard(TestPuzzleEasy.GoodPuzzle.SizeX()-1,TestPuzzleEasy.GoodPuzzle.SizeY() - 1,TestPuzzleEasy.GoodPuzzle.SizeX(), TestPuzzleEasy.GoodPuzzle.SizeY()));
+            Assert.True(PuzzleUtil.IsInTheBoard(TestPuzzleEasy.Puzzle.SizeX()-1,TestPuzzleEasy.Puzzle.SizeY() - 1,TestPuzzleEasy.Puzzle.SizeX(), TestPuzzleEasy.Puzzle.SizeY()));
             Debug.Log(3);
             Debug.Log("True test with test puzzle cases are passed");
 
-            Assert.False(PuzzleUtil.IsInTheBoard(TestPuzzleEasy.GoodPuzzle.SizeX(),3,TestPuzzleEasy.GoodPuzzle.SizeX(), TestPuzzleEasy.GoodPuzzle.SizeY()));
-            Assert.False(PuzzleUtil.IsInTheBoard(-1,2,TestPuzzleEasy.GoodPuzzle.SizeX(), TestPuzzleEasy.GoodPuzzle.SizeY()));
+            Assert.False(PuzzleUtil.IsInTheBoard(TestPuzzleEasy.Puzzle.SizeX(),3,TestPuzzleEasy.Puzzle.SizeX(), TestPuzzleEasy.Puzzle.SizeY()));
+            Assert.False(PuzzleUtil.IsInTheBoard(-1,2,TestPuzzleEasy.Puzzle.SizeX(), TestPuzzleEasy.Puzzle.SizeY()));
             Debug.Log("False test with test puzzle cases are passed");
         }
 
         [Test]
         public void ConvertRawPuzzleToPuzzleTest()
         {
-            var expectedPuzzle = TestPuzzleEasy.GoodPuzzle;
-            var actualPuzzle = PuzzleUtil.ConvertRawPuzzleToPuzzle(TestPuzzleEasy.GoodRawPuzzle);
+            var expectedPuzzle = TestPuzzleEasy.Puzzle;
+            var actualPuzzle = PuzzleUtil.ConvertRawPuzzleToPuzzle(TestPuzzleEasy.RawPuzzle);
 
             Debug.Log(expectedPuzzle.ToString());
             Debug.Log(actualPuzzle.ToString());
@@ -50,8 +50,8 @@ namespace Tests.PlayModeTest
         [Test]
         public void ConvertPuzzleToRawPuzzleTest()
         {
-            var expectedPuzzle = TestPuzzleEasy.GoodRawPuzzle;
-            var actualPuzzle = PuzzleUtil.ConvertPuzzleToRawPuzzle(TestPuzzleEasy.GoodPuzzle);
+            var expectedPuzzle = TestPuzzleEasy.RawPuzzle;
+            var actualPuzzle = PuzzleUtil.ConvertPuzzleToRawPuzzle(TestPuzzleEasy.Puzzle);
             
             Debug.Log(expectedPuzzle.ToString());
             Debug.Log(actualPuzzle.ToString());

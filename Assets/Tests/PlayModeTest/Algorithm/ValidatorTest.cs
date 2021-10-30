@@ -44,7 +44,7 @@ namespace Tests
         public void PuzzleIsSolvedTest()
         {
             
-            Assert.True(_validator.PuzzleIsSolved(TestPuzzleEasy.GoodPuzzle,TestPuzzleEasy.GoodSolution));
+            Assert.True(_validator.PuzzleIsSolved(TestPuzzleEasy.Puzzle,TestPuzzleEasy.Solution));
         }
     }
 }
