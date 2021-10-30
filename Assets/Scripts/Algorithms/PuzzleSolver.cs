@@ -54,7 +54,6 @@ namespace Algorithms
             if (_validator.PuzzleIsSolved(puzzle, solution))
             {
                 Debug.Log("Solution add");
-                Debug.Log(solution);
                 finalSolutions.Add(solution);
                 return finalSolutions;
             }
@@ -63,8 +62,6 @@ namespace Algorithms
             {
                 if (candidates.Count == 0)
                     Debug.Log("Candidates are empty");
-                else
-                    Debug.Log("Wall problem");
                 return finalSolutions;
             }
             Vector2Int nextCandidate = candidates[0];
@@ -86,7 +83,10 @@ namespace Algorithms
                     if ((int) puzzle.PuzzleMatrix[x][y] >= 5) continue;
                     if (_validator.WallIsSatisfied(x, y, puzzle)) continue;
                     if (NoMoreSpace(x, y, puzzle))
+                    {
+                        Debug.Log($"Wall problem in {x} {y} fo {puzzle}");
                         return true;
+                    }
                 }
             }
             return false;
