@@ -85,7 +85,8 @@ namespace Utils.StaticClasses
                         {
                             if ((int)puzzle.PuzzleMatrix[lampPos.x + 1 + index][lampPos.y] < 6)
                                 isStop[0] = true;
-                            else if (puzzle.PuzzleMatrix[lampPos.x + 1 + index][lampPos.y] == TileStates.Empty)
+                            else if (puzzle.PuzzleMatrix[lampPos.x + 1 + index][lampPos.y] == TileStates.Empty ||
+                                     puzzle.PuzzleMatrix[lampPos.x + 1 + index][lampPos.y] == TileStates.Implacable)
                                 puzzle.PuzzleMatrix[lampPos.x + 1 + index][lampPos.y] = TileStates.Lit;
                         }
                         else isStop[0] = true;
@@ -94,7 +95,8 @@ namespace Utils.StaticClasses
                         {
                             if ((int)puzzle.PuzzleMatrix[lampPos.x - 1 - index][lampPos.y] < 6)
                                 isStop[1] = true;
-                            else if (puzzle.PuzzleMatrix[lampPos.x - 1 - index][lampPos.y] == TileStates.Empty)
+                            else if (puzzle.PuzzleMatrix[lampPos.x - 1 - index][lampPos.y] == TileStates.Empty ||
+                                     puzzle.PuzzleMatrix[lampPos.x - 1 - index][lampPos.y] == TileStates.Implacable)
                                 puzzle.PuzzleMatrix[lampPos.x - 1 - index][lampPos.y] = TileStates.Lit;
                         }
                         else isStop[1] = true;
@@ -103,7 +105,8 @@ namespace Utils.StaticClasses
                         {
                             if ((int)puzzle.PuzzleMatrix[lampPos.x][lampPos.y + 1 + index] < 6)
                                 isStop[2] = true;
-                            else if (puzzle.PuzzleMatrix[lampPos.x][lampPos.y + 1 + index] == TileStates.Empty)
+                            else if (puzzle.PuzzleMatrix[lampPos.x][lampPos.y + 1 + index] == TileStates.Empty ||
+                                     puzzle.PuzzleMatrix[lampPos.x][lampPos.y + 1 + index] == TileStates.Implacable)
                                 puzzle.PuzzleMatrix[lampPos.x][lampPos.y + 1 + index] = TileStates.Lit;
                         }
                         else isStop[2] = true;
@@ -112,7 +115,8 @@ namespace Utils.StaticClasses
                         {
                             if ((int)puzzle.PuzzleMatrix[lampPos.x][lampPos.y - 1 - index] < 6)
                                 isStop[3] = true;
-                            else if (puzzle.PuzzleMatrix[lampPos.x][lampPos.y - 1 - index] == TileStates.Empty)
+                            else if (puzzle.PuzzleMatrix[lampPos.x][lampPos.y - 1 - index] == TileStates.Empty ||
+                                     puzzle.PuzzleMatrix[lampPos.x][lampPos.y - 1 - index] == TileStates.Implacable)
                                 puzzle.PuzzleMatrix[lampPos.x][lampPos.y - 1 - index] = TileStates.Lit;
                         }
                         else isStop[3] = true;

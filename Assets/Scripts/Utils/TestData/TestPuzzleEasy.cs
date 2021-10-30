@@ -26,7 +26,7 @@ namespace Utils.TestData
             },
             Difficulty.Easy,
             "");
-
+        
         public static readonly Puzzle Puzzle = new Puzzle(new List<List<TileStates>>()
         {
             new List<TileStates>() {TileStates.Empty,TileStates.Empty,TileStates.Empty,TileStates.Empty,TileStates.Empty,TileStates.Empty,TileStates.Empty},
@@ -37,16 +37,17 @@ namespace Utils.TestData
             new List<TileStates>() {TileStates.Empty,TileStates.One,TileStates.Wall,TileStates.Empty,TileStates.Empty,TileStates.Wall,TileStates.Empty},
             new List<TileStates>() {TileStates.Empty,TileStates.Empty,TileStates.Empty,TileStates.Empty,TileStates.Empty,TileStates.Empty,TileStates.Empty}
         }, Difficulty.Easy);
+
         
         public static readonly Puzzle PreProcessedPuzzle = new Puzzle(new List<List<TileStates>>()
         {
-            new List<TileStates>() {TileStates.Empty,TileStates.Empty,TileStates.Empty,TileStates.Empty,TileStates.Empty,TileStates.Implacable,TileStates.Empty},
-            new List<TileStates>() {TileStates.Empty,TileStates.Wall,TileStates.Empty,TileStates.Lamp,TileStates.Two,TileStates.Zero,TileStates.Implacable},
-            new List<TileStates>() {TileStates.Empty,TileStates.One,TileStates.Lamp,TileStates.Four,TileStates.Lamp,TileStates.Implacable,TileStates.Empty},
+            new List<TileStates>() {TileStates.Empty,TileStates.Empty,TileStates.Lit,TileStates.Lit,TileStates.Empty,TileStates.Implacable,TileStates.Empty},
+            new List<TileStates>() {TileStates.Empty,TileStates.Wall,TileStates.Lit,TileStates.Lamp,TileStates.Two,TileStates.Zero,TileStates.Implacable},
+            new List<TileStates>() {TileStates.Empty,TileStates.One,TileStates.Lamp,TileStates.Four,TileStates.Lamp,TileStates.Lit,TileStates.Lit},
             new List<TileStates>() {TileStates.Empty,TileStates.Empty,TileStates.Wall,TileStates.Lamp,TileStates.Three,TileStates.Empty,TileStates.Empty},
-            new List<TileStates>() {TileStates.Empty,TileStates.Empty,TileStates.Lamp,TileStates.Four,TileStates.Lamp,TileStates.Wall,TileStates.Empty},
-            new List<TileStates>() {TileStates.Empty,TileStates.One,TileStates.Wall,TileStates.Lamp,TileStates.Empty,TileStates.Wall,TileStates.Empty},
-            new List<TileStates>() {TileStates.Empty,TileStates.Empty,TileStates.Empty,TileStates.Empty,TileStates.Empty,TileStates.Empty,TileStates.Empty}
+            new List<TileStates>() {TileStates.Lit,TileStates.Lit,TileStates.Lamp,TileStates.Four,TileStates.Lamp,TileStates.Wall,TileStates.Empty},
+            new List<TileStates>() {TileStates.Empty,TileStates.One,TileStates.Wall,TileStates.Lamp,TileStates.Lit,TileStates.Wall,TileStates.Empty},
+            new List<TileStates>() {TileStates.Empty,TileStates.Empty,TileStates.Empty,TileStates.Lit,TileStates.Lit,TileStates.Empty,TileStates.Empty}
         }, Difficulty.Easy);
 
         public static readonly Solution Solution = new Solution(

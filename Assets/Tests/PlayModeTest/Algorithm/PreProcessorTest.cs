@@ -26,6 +26,8 @@ namespace Tests
             Assert.True(TestPuzzleNormal.PreProcessedPuzzle.Equals(actualPuzzle));
             Debug.Log("Normal PreProcessed puzzle passed");
             actualPuzzle = _preProcessor.Process(TestPuzzleHard.Puzzle);
+            Debug.Log($"Actual \n {actualPuzzle}");
+            Debug.Log($"Expected \n {TestPuzzleHard.PreProcessedPuzzle}");
             Assert.True(TestPuzzleHard.PreProcessedPuzzle.Equals(actualPuzzle));
             Debug.Log("Hard PreProcessed puzzle passed");
         }
