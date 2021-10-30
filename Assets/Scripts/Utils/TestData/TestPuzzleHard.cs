@@ -121,7 +121,7 @@ namespace Utils.TestData
             new List<TileStates>() {
                 TileStates.Zero,TileStates.Empty,TileStates.Empty,TileStates.Empty,TileStates.Empty,TileStates.Wall,TileStates.Empty,
                 TileStates.One,TileStates.Empty,TileStates.Empty,TileStates.Empty,TileStates.Empty,TileStates.One,TileStates.Wall}
-        }, Difficulty.Medium);
+        }, Difficulty.Hard);
         
         public static readonly Puzzle PreProcessedPuzzle = new Puzzle(new List<List<TileStates>>()
         {
@@ -167,7 +167,7 @@ namespace Utils.TestData
             new List<TileStates>() {
                 TileStates.Zero,TileStates.Implacable,TileStates.Empty,TileStates.Empty,TileStates.Empty,TileStates.Wall,TileStates.Empty,
                 TileStates.One,TileStates.Empty,TileStates.Empty,TileStates.Empty,TileStates.Empty,TileStates.One,TileStates.Zero}
-        }, Difficulty.Medium);
+        }, Difficulty.Hard);
         
         public static readonly Solution Solution = new Solution(
             new List<Vector2Int>(){
@@ -182,7 +182,7 @@ namespace Utils.TestData
                 new Vector2Int(3, 1),
                 new Vector2Int(3, 6),
                 new Vector2Int(3, 13),
-                new Vector2Int(4, 6),
+                new Vector2Int(4, 8),
                 new Vector2Int(5, 1),
                 new Vector2Int(5, 4),
                 new Vector2Int(5, 10),
@@ -193,7 +193,7 @@ namespace Utils.TestData
                 new Vector2Int(8, 0),
                 new Vector2Int(8, 3),
                 new Vector2Int(8, 7),
-                new Vector2Int(8, 13),
+                new Vector2Int(8, 12),
                 new Vector2Int(9, 11),
                 new Vector2Int(10, 2),
                 new Vector2Int(10, 8),

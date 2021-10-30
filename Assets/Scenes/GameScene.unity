@@ -342,8 +342,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   goodTilePrefab: {fileID: 5322192010398964421, guid: 5cb11d6b0a4d2bf4faa6fbab984a59f9, type: 3}
   badTilePrefab: {fileID: 1660607278208203799, guid: 3100c52aba9ddbd4caefce1f4477ffe6, type: 3}
-  offset: 0.1
-  gameBoardStats: {fileID: 11400000, guid: 749cefc7417ad02439b060b1ff9654de, type: 2}
+  offset: 5
   baseSize: {x: 10, y: 10}
 --- !u!4 &1656613988
 Transform:

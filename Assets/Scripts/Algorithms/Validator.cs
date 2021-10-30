@@ -15,10 +15,7 @@ namespace Algorithms
                 return false;
             var litPuzzle = PuzzleUtil.TurnOnLamps(puzzle,solution);
             if (PuzzleIsFull(litPuzzle))
-            {
-                Debug.Log($"Puzzle is solved");
                 return true;
-            }
             Debug.Log($"Puzzle is not solved");
             return false;
         }
@@ -36,7 +33,6 @@ namespace Algorithms
                     }
                 }
             }
-            Debug.Log("Puzzle is Fully solved");
             return true;
         }
         
@@ -66,48 +62,44 @@ namespace Algorithms
                     {
                         if (solution[i].y < solution[j].y)
                         {
-                            if (CheckForWallY(solution[i].x, solution[i].y, solution[j].y, puzzle))
+                            if (!LampsAreCorrectY(solution[i].x, solution[i].y, solution[j].y, puzzle))
                                 return false;
                         }
-                        else if (CheckForWallY(solution[i].x, solution[j].y, solution[i].y, puzzle))
+                        else if (!LampsAreCorrectY(solution[i].x, solution[j].y, solution[i].y, puzzle))
                             return false;
                     }
                     else if (solution[i].y == solution[j].y)
                     {
                         if (solution[i].x < solution[j].x)
                         {
-                            if (CheckForWallX(solution[i].y, solution[i].x, solution[j].x, puzzle))
+                            if (!LampsAreCorrectX(solution[i].y, solution[i].x, solution[j].x, puzzle))
                                 return false;
                         }
-                        else if (CheckForWallX(solution[i].y, solution[j].x, solution[i].x, puzzle))
+                        else if (!LampsAreCorrectX(solution[i].y, solution[j].x, solution[i].x, puzzle))
                             return false;
                     }
                 }
             }
 
             Debug.Log("Lamp positions are correct");
-            return false;
+            return true;
         }
         
-        private bool CheckForWallY(int x, int minY, int maxY, Puzzle puzzle)
+        private bool LampsAreCorrectY(int x, int minY, int maxY, Puzzle puzzle)
         {
             for (int y = minY; y < maxY; y++)
                 if ((int)puzzle.PuzzleMatrix[x][y] < 6)
-                {
-                    Debug.Log($"Lamps at ({x},{minY}) and ({x},{maxY}) are failed");
                     return true;
-                }
+            Debug.Log($"Lamps at ({x},{minY}) and ({x},{maxY}) are failed");
             return false;
         }
 
-        private bool CheckForWallX(int y, int minX, int maxX, Puzzle puzzle)
+        private bool LampsAreCorrectX(int y, int minX, int maxX, Puzzle puzzle)
         {
             for (int x = minX; x < maxX; x++)
                 if ((int)puzzle.PuzzleMatrix[x][y] < 6)
-                {
-                    Debug.Log($"Lamps at ({minX},{y}) and ({maxX},{y}) are failed");
                     return true;
-                }
+            Debug.Log($"Lamps at ({minX},{y}) and ({maxX},{y}) are failed");
             return false;
         }
         
@@ -118,8 +110,11 @@ namespace Algorithms
             if (PuzzleUtil.PlaceIsEqual(puzzle, posX - 1, posY, TileStates.Lamp)) lampCnt++;
             if (PuzzleUtil.PlaceIsEqual(puzzle, posX, posY + 1, TileStates.Lamp)) lampCnt++;
             if (PuzzleUtil.PlaceIsEqual(puzzle, posX, posY - 1, TileStates.Lamp)) lampCnt++;
+            if (lampCnt == (int) puzzle.PuzzleMatrix[posX][posY])
+                return true;
+            
             Debug.Log($"Wall is not satisfied at ({posX},{posY})");
-            return lampCnt == (int) puzzle.PuzzleMatrix[posX][posY];
+            return false;
         }
     }
 }

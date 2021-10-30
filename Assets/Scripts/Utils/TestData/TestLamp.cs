@@ -76,7 +76,7 @@ namespace Utils.TestData
 
         public static readonly Puzzle BadXPuzzles = new Puzzle(new List<List<TileStates>>()
         {
-            new List<TileStates>() {TileStates.Empty, TileStates.Empty, TileStates.Wall, TileStates.Empty, TileStates.Empty}
+            new List<TileStates>() {TileStates.Empty, TileStates.Empty, TileStates.Empty, TileStates.Empty, TileStates.Empty}
         });
         
         public static readonly List<Solution> XSolutions = new List<Solution>()

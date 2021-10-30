@@ -58,6 +58,8 @@ namespace Tests.PlayModeTest
             Assert.True(TestPuzzleNormal.RawPuzzle.Equals(actualPuzzle));
             Debug.Log("Normal Puzzle is passed");
             actualPuzzle = PuzzleUtil.ConvertPuzzleToRawPuzzle(TestPuzzleHard.Puzzle);
+            Debug.Log($"Expected puzzle: {TestPuzzleHard.RawPuzzle}");
+            Debug.Log($"Actual puzzle: {actualPuzzle}");
             Assert.True(TestPuzzleHard.RawPuzzle.Equals(actualPuzzle));
             Debug.Log("Hard Puzzle is passed");
         }
