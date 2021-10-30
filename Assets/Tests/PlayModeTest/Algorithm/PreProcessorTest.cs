@@ -20,9 +20,14 @@ namespace Tests
         public void ProcessTest()
         {
             var actualPuzzle = _preProcessor.Process(TestPuzzleEasy.Puzzle);
-            var expectedPuzzle = TestPuzzleEasy.PreProcessedPuzzle;
-            
-            Assert.True(expectedPuzzle.Equals(actualPuzzle));
+            Assert.True(TestPuzzleEasy.PreProcessedPuzzle.Equals(actualPuzzle));
+            Debug.Log("Easy PreProcessed puzzle passed");
+            actualPuzzle = _preProcessor.Process(TestPuzzleNormal.Puzzle);
+            Assert.True(TestPuzzleNormal.PreProcessedPuzzle.Equals(actualPuzzle));
+            Debug.Log("Normal PreProcessed puzzle passed");
+            actualPuzzle = _preProcessor.Process(TestPuzzleHard.Puzzle);
+            Assert.True(TestPuzzleHard.PreProcessedPuzzle.Equals(actualPuzzle));
+            Debug.Log("Hard PreProcessed puzzle passed");
         }
     }
 }
