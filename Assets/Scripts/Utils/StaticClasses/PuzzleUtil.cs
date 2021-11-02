@@ -74,7 +74,8 @@ namespace Utils.StaticClasses
         
         public static Puzzle TurnOnLamps(Puzzle puzzle, Solution lampPositions)
         {
-            foreach (Vector2Int lampPos in lampPositions.Positions)
+            puzzle.AddElements(lampPositions.Positions,TileStates.Lamp);
+            foreach (Vector2Int lampPos in puzzle.GetElementPositions(TileStates.Lamp))
             {
                 bool[] isStop = new bool[4];
                 int index = 0;
@@ -101,7 +102,7 @@ namespace Utils.StaticClasses
                         }
                         else isStop[1] = true;
                     if (!isStop[2])
-                        if( lampPos.y + 1 + index < puzzle.SizeX())
+                        if( lampPos.y + 1 + index < puzzle.SizeY())
                         {
                             if ((int)puzzle.PuzzleMatrix[lampPos.x][lampPos.y + 1 + index] < 6)
                                 isStop[2] = true;
@@ -124,8 +125,6 @@ namespace Utils.StaticClasses
                     index++;
                 }
             }
-
-            Debug.Log($"Lamps are on \n {puzzle}");
             return puzzle;
         }
     }

@@ -24,17 +24,18 @@ namespace Algorithms
             Vector2Int size, 
             Difficulty difficulty)
         {
+            _walls = new List<Vector2Int>();
+            _lamps = new List<Vector2Int>();
+            _solution = new Solution();
             Puzzle puzzle = new Puzzle(size);
             UpdateCandidates(puzzle);
             do
             {
                 for (int i = 0; i < 5; i++)
-                    PickCandidates();
-            } while (!_validator.PuzzleIsSolved(
-                        Corrector(puzzle), 
-                        new Solution(_lamps)));
-            
-            return ApplyNumbersOnWalls(puzzle);;
+                    PickCandidates(puzzle);
+            } while (!_validator.PuzzleIsSolved(Corrector(puzzle), _solution));
+
+            return puzzle;
         }
 
         private void UpdateCandidates(Puzzle puzzle)
@@ -46,35 +47,29 @@ namespace Algorithms
                         _candidates.Add(new Vector2Int(x, y));
         }
 
-        private void PickCandidates()
+        private void PickCandidates(Puzzle puzzle)
         {
-            Vector2Int target = _candidates[Random.Range(0, _candidates.Count)];
+            Vector2Int target = _candidates[Random.Range(0, _candidates.Count-1)];
             if (Random.Range(0.0f, 1.0f) > 0.5f)
                 _lamps.Add(target);
             else
-                _walls.Add(target);
+                puzzle.PuzzleMatrix[target.x][target.y] = TileStates.Wall;
+            _candidates.Remove(target);
         }
 
         private Puzzle Corrector(Puzzle puzzle)
         {
-            foreach (Vector2Int wall in _walls)
+            int index = 0;
+            while (index != _lamps.Count)
             {
-                _candidates.Remove(wall);
-                puzzle.PuzzleMatrix[wall.x][wall.y] = TileStates.Wall;
-            }
-            _walls.Clear();
-
-            foreach (var lamp in _lamps)
-            {
-                _solution.Positions.Add(lamp);
+                _solution.Positions.Add(_lamps[index]);
                 if (!_validator.LampsCheck(puzzle, _solution))
                 {
-                    _solution.Positions.Remove(lamp);
-                    _candidates.Add(lamp);
+                    _solution.Positions.Remove(_lamps[index]);
+                    _candidates.Add(_lamps[index]);
                 }
             }
             _lamps.Clear();
-            UpdateCandidates(PuzzleUtil.TurnOnLamps(puzzle,_solution));
             return puzzle;
         }
 

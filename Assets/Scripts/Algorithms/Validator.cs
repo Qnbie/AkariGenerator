@@ -16,7 +16,6 @@ namespace Algorithms
             var litPuzzle = PuzzleUtil.TurnOnLamps(puzzle,solution);
             if (PuzzleIsFull(litPuzzle))
                 return true;
-            Debug.Log($"Puzzle is not solved");
             return false;
         }
 
@@ -26,11 +25,8 @@ namespace Algorithms
             {
                 foreach (TileStates tileState in row)
                 {
-                    if (tileState == TileStates.Empty)
-                    {
-                        Debug.Log("Puzzle is NOT Fully solved");
+                    if (tileState == TileStates.Empty || tileState == TileStates.Implacable)
                         return false;
-                    }
                 }
             }
             return true;
@@ -38,18 +34,19 @@ namespace Algorithms
         
         private bool CheckRules(Puzzle puzzle)
         {
+            if (!LampsCheck(puzzle, new Solution(puzzle.GetElementPositions(TileStates.Lamp))))
+                return false;
             for (int x = 0; x < puzzle.SizeX(); x++)
             {
                 for (int y = 0; y < puzzle.SizeY(); y++)
                 {
-                    if(puzzle.PuzzleMatrix[x][y] < (TileStates)5)
+                    if((int)puzzle.PuzzleMatrix[x][y] < 5)
                         if (!WallIsSatisfied(x, y, puzzle))
                             return false;
                 }
             }
-            Debug.Log("Walls are satisfied");
             
-            return LampsCheck(puzzle, new Solution(puzzle.GetElementPositions(TileStates.Lamp)));
+            return true;
         }
 
         public bool LampsCheck(Puzzle puzzle, Solution solution)
@@ -81,7 +78,6 @@ namespace Algorithms
                 }
             }
 
-            Debug.Log("Lamp positions are correct");
             return true;
         }
         
@@ -90,7 +86,6 @@ namespace Algorithms
             for (int y = minY; y < maxY; y++)
                 if ((int)puzzle.PuzzleMatrix[x][y] < 6)
                     return true;
-            Debug.Log($"Lamps at ({x},{minY}) and ({x},{maxY}) are failed");
             return false;
         }
 
@@ -99,7 +94,6 @@ namespace Algorithms
             for (int x = minX; x < maxX; x++)
                 if ((int)puzzle.PuzzleMatrix[x][y] < 6)
                     return true;
-            Debug.Log($"Lamps at ({minX},{y}) and ({maxX},{y}) are failed");
             return false;
         }
         
@@ -112,8 +106,6 @@ namespace Algorithms
             if (PuzzleUtil.PlaceIsEqual(puzzle, posX, posY - 1, TileStates.Lamp)) lampCnt++;
             if (lampCnt == (int) puzzle.PuzzleMatrix[posX][posY])
                 return true;
-            
-            Debug.Log($"Wall is not satisfied at ({posX},{posY})");
             return false;
         }
     }

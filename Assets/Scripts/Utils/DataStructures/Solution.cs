@@ -16,6 +16,12 @@ namespace Utils.DataStructures
             Positions = new List<Vector2Int>();
         }
         
+        public Solution(Solution solution)
+        {
+            Positions = new List<Vector2Int>();
+            Positions.AddRange(solution.Positions);
+        }
+        
         public Solution(List<Vector2Int> positions)
         {
             Positions = positions;

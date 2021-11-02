@@ -56,16 +56,16 @@ namespace Utils.TestData
         
         public static readonly Puzzle PreProcessedPuzzle = new Puzzle(new List<List<TileStates>>()
         {
-            new List<TileStates>() {TileStates.Lit,TileStates.Lit,TileStates.Lit,TileStates.Lamp      ,TileStates.Lit     ,TileStates.Wall,TileStates.Lit,TileStates.Lamp,TileStates.Lit,TileStates.Lit},
-            new List<TileStates>() {TileStates.Lit,TileStates.Lit,TileStates.Lamp ,TileStates.Three     ,TileStates.Lamp      ,TileStates.Wall,TileStates.Lamp,TileStates.Four,TileStates.Lamp,TileStates.Lit},
-            new List<TileStates>() {TileStates.Empty,TileStates.Wall ,TileStates.Lit,TileStates.Wall      ,TileStates.Lit     ,TileStates.Empty,TileStates.Wall,TileStates.Lamp,TileStates.Lit,TileStates.Lit},
-            new List<TileStates>() {TileStates.Empty,TileStates.Implacable,TileStates.Wall ,TileStates.Lit     ,TileStates.Lit     ,TileStates.Lit,TileStates.Lamp,TileStates.Three,TileStates.Wall,TileStates.Empty},
-            new List<TileStates>() {TileStates.Wall ,TileStates.Zero ,TileStates.Lit,TileStates.Lit     ,TileStates.Lit     ,TileStates.Lit,TileStates.Lit,TileStates.Lamp,TileStates.Lit,TileStates.Lit},
-            new List<TileStates>() {TileStates.Empty,TileStates.Implacable,TileStates.Empty,TileStates.Empty     ,TileStates.Lit     ,TileStates.Empty,TileStates.Lit,TileStates.Lit,TileStates.Wall,TileStates.Wall},
-            new List<TileStates>() {TileStates.Empty,TileStates.Wall ,TileStates.Wall ,TileStates.Empty     ,TileStates.Lit     ,TileStates.Empty,TileStates.Lit,TileStates.Two,TileStates.Empty,TileStates.Empty},
-            new List<TileStates>() {TileStates.Empty,TileStates.Empty,TileStates.Empty,TileStates.One       ,TileStates.Lit,TileStates.Empty,TileStates.Two,TileStates.Empty,TileStates.Two,TileStates.Empty},
-            new List<TileStates>() {TileStates.Empty,TileStates.Empty,TileStates.Two  ,TileStates.Implacable,TileStates.Zero      ,TileStates.Implacable,TileStates.Zero,TileStates.Implacable,TileStates.Empty,TileStates.Empty},
-            new List<TileStates>() {TileStates.Empty,TileStates.Empty,TileStates.Empty,TileStates.Empty     ,TileStates.Wall,TileStates.Empty,TileStates.Implacable,TileStates.Empty,TileStates.Empty,TileStates.Empty}
+            new List<TileStates>() {TileStates.Lit,TileStates.Lit,TileStates.Lit,TileStates.Lamp,TileStates.Lit,TileStates.Wall,TileStates.Lit,TileStates.Lamp,TileStates.Lit,TileStates.Lit},
+            new List<TileStates>() {TileStates.Lit,TileStates.Lit,TileStates.Lamp ,TileStates.Three,TileStates.Lamp,TileStates.Wall,TileStates.Lamp,TileStates.Four,TileStates.Lamp,TileStates.Lit},
+            new List<TileStates>() {TileStates.Empty,TileStates.Wall ,TileStates.Lit,TileStates.Wall,TileStates.Lit,TileStates.Empty,TileStates.Wall,TileStates.Lamp,TileStates.Lit,TileStates.Lit},
+            new List<TileStates>() {TileStates.Empty,TileStates.Implacable,TileStates.Wall ,TileStates.Lit,TileStates.Lit,TileStates.Lit,TileStates.Lamp,TileStates.Three,TileStates.Wall,TileStates.Empty},
+            new List<TileStates>() {TileStates.Wall,TileStates.Zero ,TileStates.Lit,TileStates.Lit,TileStates.Lit,TileStates.Lit,TileStates.Lit,TileStates.Lamp,TileStates.Lit,TileStates.Lit},
+            new List<TileStates>() {TileStates.Empty,TileStates.Implacable,TileStates.Empty,TileStates.Empty,TileStates.Lit,TileStates.Empty,TileStates.Lit,TileStates.Lit,TileStates.Wall,TileStates.Wall},
+            new List<TileStates>() {TileStates.Empty,TileStates.Wall ,TileStates.Wall,TileStates.Empty,TileStates.Lit,TileStates.Empty,TileStates.Lit,TileStates.Two,TileStates.Empty,TileStates.Empty},
+            new List<TileStates>() {TileStates.Empty,TileStates.Empty,TileStates.Empty,TileStates.One,TileStates.Lit,TileStates.Empty,TileStates.Two,TileStates.Empty,TileStates.Two,TileStates.Empty},
+            new List<TileStates>() {TileStates.Empty,TileStates.Empty,TileStates.Two,TileStates.Implacable,TileStates.Zero,TileStates.Implacable,TileStates.Zero,TileStates.Implacable,TileStates.Empty,TileStates.Empty},
+            new List<TileStates>() {TileStates.Empty,TileStates.Empty,TileStates.Empty,TileStates.Empty,TileStates.Wall,TileStates.Empty,TileStates.Implacable,TileStates.Empty,TileStates.Empty,TileStates.Empty}
         }, Difficulty.Medium);
         
         public static readonly Solution Solution = new Solution(

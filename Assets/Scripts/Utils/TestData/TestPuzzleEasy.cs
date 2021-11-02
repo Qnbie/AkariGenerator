@@ -41,10 +41,10 @@ namespace Utils.TestData
         
         public static readonly Puzzle PreProcessedPuzzle = new Puzzle(new List<List<TileStates>>()
         {
-            new List<TileStates>() {TileStates.Empty,TileStates.Empty,TileStates.Lit,TileStates.Lit,TileStates.Empty,TileStates.Implacable,TileStates.Empty},
+            new List<TileStates>() {TileStates.Empty,TileStates.Empty,TileStates.Lit,TileStates.Lit,TileStates.Implacable,TileStates.Implacable,TileStates.Empty},
             new List<TileStates>() {TileStates.Empty,TileStates.Wall,TileStates.Lit,TileStates.Lamp,TileStates.Two,TileStates.Zero,TileStates.Implacable},
-            new List<TileStates>() {TileStates.Empty,TileStates.One,TileStates.Lamp,TileStates.Four,TileStates.Lamp,TileStates.Lit,TileStates.Lit},
-            new List<TileStates>() {TileStates.Empty,TileStates.Empty,TileStates.Wall,TileStates.Lamp,TileStates.Three,TileStates.Empty,TileStates.Empty},
+            new List<TileStates>() {TileStates.Implacable,TileStates.One,TileStates.Lamp,TileStates.Four,TileStates.Lamp,TileStates.Lit,TileStates.Lit},
+            new List<TileStates>() {TileStates.Empty,TileStates.Implacable,TileStates.Wall,TileStates.Lamp,TileStates.Three,TileStates.Implacable,TileStates.Empty},
             new List<TileStates>() {TileStates.Lit,TileStates.Lit,TileStates.Lamp,TileStates.Four,TileStates.Lamp,TileStates.Wall,TileStates.Empty},
             new List<TileStates>() {TileStates.Empty,TileStates.One,TileStates.Wall,TileStates.Lamp,TileStates.Lit,TileStates.Wall,TileStates.Empty},
             new List<TileStates>() {TileStates.Empty,TileStates.Empty,TileStates.Empty,TileStates.Lit,TileStates.Lit,TileStates.Empty,TileStates.Empty}

@@ -13,6 +13,21 @@ namespace Utils.DataStructures
         public List<List<TileStates>> PuzzleMatrix;
         
         public Puzzle(){}
+
+        public Puzzle(Puzzle otherPuzzle)
+        {
+            this.DifficultyLevel = otherPuzzle.DifficultyLevel;
+            this.PuzzleMatrix = new List<List<TileStates>>();
+            for (int x = 0; x < otherPuzzle.SizeX(); x++)
+            {
+                this.PuzzleMatrix.Add(new List<TileStates>());
+                for (int y = 0; y < otherPuzzle.SizeY(); y++)
+                {
+                    this.PuzzleMatrix[x].Add(TileStates.Empty);
+                    this.PuzzleMatrix[x][y] = otherPuzzle.PuzzleMatrix[x][y];
+                }
+            }
+        }
         
         public Puzzle(List<List<TileStates>> puzzleMatrix)
         {
@@ -60,7 +75,7 @@ namespace Utils.DataStructures
         {
             List<Vector2Int> elementPositions = new List<Vector2Int>();
             for (int x = 0; x < SizeX(); x++)
-            for (int y = 0; y < SizeY(); y++)
+                for (int y = 0; y < SizeY(); y++)
                     if (PuzzleMatrix[x][y] == tileStates)
                         elementPositions.Add(new Vector2Int(x,y)); 
             return elementPositions;
@@ -88,6 +103,14 @@ namespace Utils.DataStructures
                 stringBuilder.AppendLine(strTmp);
             }
             return stringBuilder.ToString();
+        }
+
+        public Puzzle Clone()
+        {
+            Puzzle other = (Puzzle) this.MemberwiseClone();
+            other.DifficultyLevel = DifficultyLevel;
+            other.PuzzleMatrix = new List<List<TileStates>>(PuzzleMatrix);
+            return other;
         }
     }
 }

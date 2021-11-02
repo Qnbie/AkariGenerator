@@ -130,22 +130,22 @@ namespace Utils.TestData
                 TileStates.Implacable,TileStates.Wall,TileStates.Implacable,TileStates.Empty,TileStates.Lit,TileStates.Empty,TileStates.Wall},
             new List<TileStates>() {
                 TileStates.Implacable,TileStates.Implacable,TileStates.Empty,TileStates.Empty,TileStates.Empty,TileStates.Wall,TileStates.Implacable,
-                TileStates.Empty,TileStates.Implacable,TileStates.Zero,TileStates.Implacable,TileStates.Lit,TileStates.Empty,TileStates.Wall},
+                TileStates.Empty,TileStates.Lit,TileStates.Zero,TileStates.Implacable,TileStates.Lit,TileStates.Empty,TileStates.Wall},
             new List<TileStates>() {
-                TileStates.Empty,TileStates.Empty,TileStates.Empty,TileStates.Empty,TileStates.Empty,TileStates.Wall,TileStates.Empty,
-                TileStates.Empty,TileStates.Empty,TileStates.Implacable,TileStates.One,TileStates.Lamp,TileStates.Lit,TileStates.Lit},
+                TileStates.Empty,TileStates.Empty,TileStates.Empty,TileStates.Empty,TileStates.Empty,TileStates.Wall,TileStates.Lit,
+                TileStates.Lit,TileStates.Lamp,TileStates.Lit,TileStates.One,TileStates.Lamp,TileStates.Lit,TileStates.Lit},
             new List<TileStates>() {
                 TileStates.Empty,TileStates.Empty,TileStates.One,TileStates.Wall,TileStates.Empty,TileStates.Empty,TileStates.Empty,
                 TileStates.One,TileStates.Two,TileStates.Implacable,TileStates.Zero,TileStates.Lit,TileStates.Empty,TileStates.Empty},
             new List<TileStates>() {
-                TileStates.Empty,TileStates.Wall,TileStates.Empty,TileStates.Empty,TileStates.Empty,TileStates.Empty,TileStates.Empty,
-                TileStates.Empty,TileStates.Empty,TileStates.Empty,TileStates.Implacable,TileStates.Lit,TileStates.Implacable,TileStates.Empty},
+                TileStates.Empty,TileStates.Wall,TileStates.Lit,TileStates.Lit,TileStates.Lit,TileStates.Lit,TileStates.Lit,
+                TileStates.Lit,TileStates.Lamp,TileStates.Lit,TileStates.Lit,TileStates.Lit,TileStates.Lit,TileStates.Lit},
             new List<TileStates>() {
                 TileStates.One,TileStates.Empty,TileStates.Empty,TileStates.One,TileStates.Empty,TileStates.Empty,TileStates.Empty,
-                TileStates.Wall,TileStates.Empty,TileStates.Empty,TileStates.Empty,TileStates.One,TileStates.Zero,TileStates.Implacable},
+                TileStates.Wall,TileStates.Lit,TileStates.Empty,TileStates.Empty,TileStates.One,TileStates.Zero,TileStates.Implacable},
             new List<TileStates>() {
                 TileStates.Empty,TileStates.Empty,TileStates.Empty,TileStates.One,TileStates.Empty,TileStates.One,TileStates.Empty,
-                TileStates.Empty,TileStates.Implacable,TileStates.Empty,TileStates.Empty,TileStates.Empty,TileStates.Implacable,TileStates.One},
+                TileStates.Empty,TileStates.Lit,TileStates.Empty,TileStates.Empty,TileStates.Empty,TileStates.Implacable,TileStates.One},
             new List<TileStates>() {
                 TileStates.Wall,TileStates.Empty,TileStates.Empty,TileStates.Empty,TileStates.Empty,TileStates.Empty,TileStates.Empty,
                 TileStates.Implacable,TileStates.Zero,TileStates.Implacable,TileStates.Wall,TileStates.Lit,TileStates.Lit,TileStates.Lamp},
