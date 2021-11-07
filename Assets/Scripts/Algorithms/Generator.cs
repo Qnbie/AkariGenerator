@@ -34,8 +34,8 @@ namespace Algorithms
                 for (int i = 0; i < 5; i++)
                     PickCandidates(puzzle);
             } while (!_validator.PuzzleIsSolved(Corrector(puzzle), _solution));
-
-            return puzzle;
+            
+            return ApplyNumbersOnWalls(puzzle);
         }
 
         private void UpdateCandidates(Puzzle puzzle)
@@ -59,15 +59,15 @@ namespace Algorithms
 
         private Puzzle Corrector(Puzzle puzzle)
         {
-            int index = 0;
-            while (index != _lamps.Count)
+            while (0 != _lamps.Count)
             {
-                _solution.Positions.Add(_lamps[index]);
+                _solution.Positions.Add(_lamps[0]);
                 if (!_validator.LampsCheck(puzzle, _solution))
                 {
-                    _solution.Positions.Remove(_lamps[index]);
-                    _candidates.Add(_lamps[index]);
+                    _solution.Positions.Remove(_lamps[0]);
+                    _candidates.Add(_lamps[0]);
                 }
+                _lamps.RemoveAt(0);
             }
             _lamps.Clear();
             return puzzle;
