@@ -9,9 +9,9 @@ namespace Utils.StaticClasses
         public static readonly Dictionary<Difficulty, Vector2Int> DifficultyToSize =
             new Dictionary<Difficulty, Vector2Int>()
             {
-                {Difficulty.Easy, new Vector2Int(5,5)},
+                {Difficulty.Easy, new Vector2Int(7,7)},
                 {Difficulty.Medium, new Vector2Int(10,10)},
-                {Difficulty.Hard, new Vector2Int(15,15)}
+                {Difficulty.Hard, new Vector2Int(14,14)}
             };
 
         public static Difficulty DifficultyFromLevel(int level)
@@ -28,5 +28,7 @@ namespace Utils.StaticClasses
 
             return Difficulty.Easy;
         }
+        
+        
     }
 }

@@ -32,8 +32,11 @@ namespace Algorithms
             do
             {
                 for (int i = 0; i < 5; i++)
-                    PickCandidates(puzzle);
-            } while (!_validator.PuzzleIsSolved(Corrector(puzzle), _solution));
+                {
+                    if (_candidates.Count != 0)
+                        PickCandidates(puzzle);
+                }
+            } while (!_validator.PuzzleIsSolved(Corrector(puzzle), _solution) || _candidates.Count != 0);
             
             return ApplyNumbersOnWalls(puzzle);
         }
@@ -51,10 +54,14 @@ namespace Algorithms
         {
             Vector2Int target = _candidates[Random.Range(0, _candidates.Count-1)];
             if (Random.Range(0.0f, 1.0f) > 0.5f)
-                _lamps.Add(target);
-            else
-                puzzle.PuzzleMatrix[target.x][target.y] = TileStates.Wall;
+            {
+                if (Random.Range(0.0f, 1.0f) > 0.5f)
+                    _lamps.Add(target);
+                else
+                    puzzle.PuzzleMatrix[target.x][target.y] = TileStates.Wall;
+            } 
             _candidates.Remove(target);
+            
         }
 
         private Puzzle Corrector(Puzzle puzzle)
