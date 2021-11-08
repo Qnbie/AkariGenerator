@@ -24,28 +24,46 @@ namespace Algorithms
             _preProcessor = new PreProcessor(validator);
         }
 
-        public List<Solution> FindSolutions(Puzzle puzzle)
+        public List<Solution> FindAllSolutionWithEmptyWalls(Puzzle puzzle)
+        {
+            _puzzle = puzzle;
+            _finalSolutions = new List<Solution>();
+            BacktrackFunction(
+                _puzzle.GetElementPositions(TileStates.Empty),
+                new Solution(),
+                singleSolution: false,
+                numberedWall: false);
+            return _finalSolutions;
+        }
+        
+        public List<Solution> FindSingleSolutionWithNumberedWalls(Puzzle puzzle)
         {
             _puzzle = puzzle;
             _finalSolutions = new List<Solution>();
             _walls = new List<Vector2Int>();
             for (int x = 0; x < _puzzle.SizeX(); x++)
-                for (int y = 0; y < _puzzle.SizeY(); y++)
-                    if ((int)_puzzle.PuzzleMatrix[x][y] < 5)
-                        _walls.Add(new Vector2Int(x,y));
-            var puzzleTmp = _preProcessor.Process(new Puzzle(_puzzle));
-
+            for (int y = 0; y < _puzzle.SizeY(); y++)
+                if ((int)_puzzle.PuzzleMatrix[x][y] < 5)
+                    _walls.Add(new Vector2Int(x,y));
+            var preProcessedPuzzle = _preProcessor.Process(new Puzzle(_puzzle));
             BacktrackFunction( 
-                puzzleTmp.GetElementPositions(TileStates.Empty),
-                new Solution(puzzleTmp.GetElementPositions(TileStates.Lamp)));
+                preProcessedPuzzle.GetElementPositions(TileStates.Empty),
+                new Solution(preProcessedPuzzle.GetElementPositions(TileStates.Lamp)),
+                singleSolution: true, 
+                numberedWall: true);
             return _finalSolutions;
         }
 
         private void BacktrackFunction(
             List<Vector2Int> candidates,
-            Solution solution)
+            Solution solution, 
+            bool singleSolution,
+            bool numberedWall)
         {
-            
+            if (singleSolution && _finalSolutions.Count > 0)
+            {
+                return;
+            }
             if (_validator.PuzzleIsSolved(new Puzzle(_puzzle), solution))
             {
                 var solutionTmp = new Solution(solution.Positions);
@@ -58,7 +76,7 @@ namespace Algorithms
                 return;
             }
 
-            if (WallsAreUnsatisfiable(new Puzzle(_puzzle), new Solution(solution)))
+            if (numberedWall && WallsAreUnsatisfiable(new Puzzle(_puzzle), new Solution(solution)))
             {
                 return;
             }
@@ -66,9 +84,15 @@ namespace Algorithms
             Vector2Int nextCandidate = candidates[0];
             candidates.Remove(nextCandidate);
             solution.Positions.Add(nextCandidate);
-            BacktrackFunction(new List<Vector2Int>(candidates), new Solution(solution));
+            BacktrackFunction(
+                new List<Vector2Int>(candidates),
+                new Solution(solution),
+                singleSolution, numberedWall);
             solution.Positions.Remove(nextCandidate);
-            BacktrackFunction(candidates, solution);
+            BacktrackFunction(
+                new List<Vector2Int>(candidates), 
+                new Solution(solution),
+                singleSolution, numberedWall);
         }
         
         private string CandidateLog(List<Vector2Int> candidates)
@@ -100,31 +124,6 @@ namespace Algorithms
             if (PuzzleUtil.PlaceIsEqual(puzzle, posX, posY + 1, TileStates.Empty)) emptyCnt++;
             if (PuzzleUtil.PlaceIsEqual(puzzle, posX, posY - 1, TileStates.Empty)) emptyCnt++;
             return emptyCnt > 0;
-        }
-
-        public int NumberOfDifferentSolution(List<Solution> solutions)
-        {
-            int numberOfDifferentSolution = 0;
-            for (int i = 0; i < solutions.Count-1; i++)
-            {
-                for (int j = i+1; j < solutions.Count; j++)
-                {
-                    if (Similiarity(solutions[i], solutions[j]) < StaticData.DifTarget)
-                        numberOfDifferentSolution++;
-                }
-            }
-            return numberOfDifferentSolution;
-        }
-
-        private int Similiarity(Solution solutionA, Solution solutionB)
-        {
-            int num = Math.Abs(solutionA.Count - solutionB.Count);
-            foreach (var solution in solutionA.Positions)
-            {
-                if (!solutionB.Positions.Contains(solution))
-                    num++;
-            }
-            return num;
         }
     }
 }

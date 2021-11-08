@@ -15,14 +15,14 @@ namespace Algorithms
         private Dictionary<Vector2Int, int> _wallDictionary;
         private PuzzleSolver _puzzleSolver;
 
-        public WallNumberApplier(Validator validator, PuzzleSolver puzzleSolver)
+        public WallNumberApplier(PuzzleSolver puzzleSolver)
         {
             _puzzleSolver = puzzleSolver;
             _solutionDictionary = new Dictionary<Vector2Int, int>();
             _wallDictionary = new Dictionary<Vector2Int, int>();
         }
 
-        public void ApplyNumbersOnWalls(List<Solution> solutions, Puzzle puzzle, Difficulty difficulty)
+        public Puzzle ApplyNumbersOnWalls(List<Solution> solutions, Puzzle puzzle, Difficulty difficulty)
         {
             SetUpSolutionDictionary(solutions);
             SetUpWallDictionary(puzzle);
@@ -47,7 +47,9 @@ namespace Algorithms
                     puzzle.PuzzleMatrix[wallElement.Key.x][wallElement.Key.y] = (TileStates) wallElement.Value;
                 }
                 _wallDictionary.Remove(_wallDictionary.Keys.Last());
-            } while (_puzzleSolver.FindSolutions(puzzle).Count == 0);
+            } while (_puzzleSolver.FindSingleSolutionWithNumberedWalls(puzzle).Count == 0);
+
+            return puzzle;
         }
 
         private void StartAddition(Puzzle puzzle)
