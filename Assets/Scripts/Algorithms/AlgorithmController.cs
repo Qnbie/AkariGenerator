@@ -16,7 +16,7 @@ namespace Algorithms
         public AlgorithmController()
         {
             _validator = new Validator();
-            _generator = new Generator(_validator);
+            _generator = new Generator();
             _puzzleSolver = new PuzzleSolver(_validator);
             _wallNumberApplier = new WallNumberApplier(_puzzleSolver);
         }
@@ -25,7 +25,7 @@ namespace Algorithms
         {
             Puzzle puzzle = _generator.GeneratePuzzle(size);
             List<Solution> solutions = _puzzleSolver.FindAllSolutionWithEmptyWalls(puzzle);
-            return _wallNumberApplier.ApplyNumbersOnWalls(solutions,puzzle,difficulty);
+            return _wallNumberApplier.ApplyNumbersOnWalls(puzzle,solutions,difficulty);
         }
     }
 }

@@ -6,6 +6,7 @@ using UnityEngine;
 using Utils.DataStructures;
 using Utils.Enums;
 using Utils.StaticClasses;
+using Random = UnityEngine.Random;
 
 namespace Algorithms
 {
@@ -31,10 +32,13 @@ namespace Algorithms
             _puzzle = puzzle;
             _finalSolutions = new List<Solution>();
             _implacable = new List<Vector2Int>();
-            BacktrackFunction(
-                new Solution(),
-                singleSolution: false,
-                numberedWall: false);
+            for (int i = 0; i < 5; i++)
+            {
+                BacktrackFunction(
+                    new Solution(),
+                    solutionFound: false,
+                    numberedWall: false);
+            }
             return _finalSolutions;
         }
         
@@ -52,26 +56,27 @@ namespace Algorithms
             _implacable = preProcessedPuzzle.GetElementPositions(TileStates.Implacable);
             BacktrackFunction(
                 new Solution(preProcessedPuzzle.GetElementPositions(TileStates.Lamp)),
-                singleSolution: true, 
+                solutionFound: false, 
                 numberedWall: true);
             return _finalSolutions;
         }
 
-        private void BacktrackFunction(
+        private bool BacktrackFunction(
             Solution solution, 
-            bool singleSolution,
+            bool solutionFound,
             bool numberedWall)
         {
             Debug.Log("run start");
-            if (singleSolution && _finalSolutions.Count > 0)
+            if (solutionFound)
             {
-                return;
+                return true;
             }
             if (_validator.PuzzleIsSolved(new Puzzle(_puzzle), new Solution(solution)))
             {
                 Debug.Log($"Add ok Solution \n {solution}");
                 _finalSolutions.Add(new Solution(solution));
-                return;
+                solutionFound = true;
+                return true;
             }
 
             List<Vector2Int> candidates = CalculateCandidates(solution);
@@ -83,27 +88,30 @@ namespace Algorithms
             
             if (candidates.Count == 0)
             {
-                return;
+                return false;
             }
 
             if (numberedWall && WallsAreUnsatisfiable(new Puzzle(_puzzle), new Solution(solution)))
             {
-                return;
+                return false;
             }
             
-            Vector2Int nextCandidate = candidates[0];
-            _implacable.Add(candidates[0]);
+            Vector2Int nextCandidate = candidates[Random.Range(0, candidates.Count-1)];
+            _implacable.Add(nextCandidate);
             solution.Positions.Add(nextCandidate);
-            BacktrackFunction(
+            solutionFound = BacktrackFunction(
                 solution,
-                singleSolution, numberedWall);
+                solutionFound,
+                numberedWall);
             
             solution.Positions.Remove(nextCandidate);
-            BacktrackFunction(
+            solutionFound = BacktrackFunction(
                 solution,
-                singleSolution, numberedWall);
-            _implacable.Remove(candidates[0]);
+                solutionFound,
+                numberedWall);
+            _implacable.Remove(nextCandidate);
             Debug.Log("run end");
+            return solutionFound;
         }
 
         private List<Vector2Int> CalculateCandidates(Solution solution)

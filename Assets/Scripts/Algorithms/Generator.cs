@@ -9,15 +9,13 @@ namespace Algorithms
 {
     public class Generator
     {
-        private Validator _validator;
         private List<Vector2Int> _walls;
         private List<Vector2Int> _lamps;
         private List<Vector2Int> _candidates;
         private Solution _solution;
 
-        public Generator(Validator validator)
+        public Generator()
         {
-            _validator = validator;
         }
 
         public Puzzle GeneratePuzzle(
@@ -32,7 +30,7 @@ namespace Algorithms
                 {
                     PickCandidates(puzzle);
                 }
-            } while (_candidates.Count > (1/4 * baseCandidateNumber));
+            } while (_candidates.Count > (3/4 * baseCandidateNumber));
             
             return puzzle;
         }

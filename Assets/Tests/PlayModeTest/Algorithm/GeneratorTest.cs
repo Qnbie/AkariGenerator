@@ -12,7 +12,7 @@ namespace Tests.PlayModeTest.Algorithm
         [SetUp]
         public void SetUpTest()
         {
-            _generator = new Generator(new Validator());
+            _generator = new Generator();
         }
 
         [Test]

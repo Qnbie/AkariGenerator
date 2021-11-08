@@ -22,7 +22,7 @@ namespace Algorithms
             _wallDictionary = new Dictionary<Vector2Int, int>();
         }
 
-        public Puzzle ApplyNumbersOnWalls(List<Solution> solutions, Puzzle puzzle, Difficulty difficulty)
+        public Puzzle ApplyNumbersOnWalls(Puzzle puzzle, List<Solution> solutions, Difficulty difficulty)
         {
             SetUpSolutionDictionary(solutions);
             SetUpWallDictionary(puzzle);
@@ -31,7 +31,6 @@ namespace Algorithms
                 (from solution in _solutionDictionary
                 orderby solution.Value
                 select solution.Key).Take((int) (solutionCount * MapperUtil.DifToWallNum(difficulty))).ToArray();
-            int index = 0;
 
             foreach (var solution in topSolutions)
             {
@@ -47,7 +46,8 @@ namespace Algorithms
                     puzzle.PuzzleMatrix[wallElement.Key.x][wallElement.Key.y] = (TileStates) wallElement.Value;
                 }
                 _wallDictionary.Remove(_wallDictionary.Keys.Last());
-            } while (_puzzleSolver.FindSingleSolutionWithNumberedWalls(puzzle).Count == 0);
+            } while (_puzzleSolver.FindSingleSolutionWithNumberedWalls(puzzle).Count == 0 &&
+                     _wallDictionary.Count != 0);
 
             return puzzle;
         }

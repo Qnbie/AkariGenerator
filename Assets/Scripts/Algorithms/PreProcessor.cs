@@ -32,8 +32,12 @@ namespace Algorithms
             
             // Other wall check
             Boolean optimized = false;
-            while(!optimized)
+            int optStep = 0;
+            while (!optimized && 5 < optStep)
+            {
                 optimized = OtherWallCheck(puzzle,numberedWalls);
+                optStep++;
+            }
             
             puzzle.TurnOnLamps(new Solution(puzzle.GetElementPositions(TileStates.Lamp)));
             return puzzle;
