@@ -2,15 +2,18 @@
 using System.Collections.Generic;
 using Algorithms;
 using UnityEngine;
+using UnityEngine.Assertions;
+using Utils.DataStructures;
 using Utils.Enums;
+using Utils.TestData;
 
 public class debugger : MonoBehaviour
 {
     // Start is called before the first frame update
     void Start()
     {
-        var ac = new AlgorithmController();
-        var puzzle = ac.GetPuzzle(Difficulty.Easy);
+        AlgorithmController algorithmController = new AlgorithmController();
+        var puzzle = algorithmController.GetPuzzle(new Vector2Int(5, 5), Difficulty.Easy);
         Debug.Log(puzzle);
     }
 

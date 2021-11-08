@@ -24,38 +24,41 @@ namespace Algorithms
             for (int x = 0; x < puzzle.SizeX(); x++)
                 for (int y = 0; y < puzzle.SizeY(); y++)
                     if (puzzle.PuzzleMatrix[x][y] == TileStates.Zero) 
-                        puzzle = PuzzleUtil.SetNeighbour(x, y, TileStates.Implacable, puzzle);
+                        puzzle.SetNeighbour(x, y, TileStates.Implacable);
                     else if((puzzle.PuzzleMatrix[x][y] == TileStates.Four))
-                        puzzle = PuzzleUtil.SetNeighbour(x,y,TileStates.Lamp,puzzle);
+                        puzzle.SetNeighbour(x,y,TileStates.Lamp);
                     else if((int)puzzle.PuzzleMatrix[x][y] < 5)
                         numberedWalls.Add(new Vector2Int(x,y));
             
             // Other wall check
             Boolean optimized = false;
-            while(!optimized)
+            int optStep = 0;
+            while (!optimized && 5 > optStep)
+            {
                 optimized = OtherWallCheck(puzzle,numberedWalls);
+                optStep++;
+            }
             
-            return PuzzleUtil.TurnOnLamps(
-                puzzle, 
-                new Solution(puzzle.GetElementPositions(TileStates.Lamp)));
+            puzzle.TurnOnLamps(new Solution(puzzle.GetElementPositions(TileStates.Lamp)));
+            return puzzle;
         }
 
         public bool OtherWallCheck(Puzzle puzzle, List<Vector2Int> numberedWalls)
         {
-            bool tmp = true;
+            bool otherWallsAreCorrect = true;
             foreach (var wall in numberedWalls)
                 if ((int) puzzle.PuzzleMatrix[wall.x][wall.y] < 4)
                     if (_validator.WallIsSatisfied(wall.x, wall.y, puzzle))
                     {
-                        PuzzleUtil.SetNeighbour(wall.x, wall.y, TileStates.Implacable, puzzle);
-                        tmp = false;
+                        puzzle.SetNeighbour(wall.x, wall.y, TileStates.Implacable);
+                        otherWallsAreCorrect = false;
                     }
                     else
                     {
-                        tmp = SatisfyWallIfItCan(wall.x, wall.y, puzzle);
+                        otherWallsAreCorrect = SatisfyWallIfItCan(wall.x, wall.y, puzzle);
                     }
 
-            return tmp;
+            return otherWallsAreCorrect;
         }
         
         private bool SatisfyWallIfItCan(int posX, int posY, Puzzle puzzle)
@@ -90,7 +93,7 @@ namespace Algorithms
 
             if (emptyCnt == (int) puzzle.PuzzleMatrix[posX][posY] - lampCnt)
             {
-                PuzzleUtil.SetNeighbour(posX,posY,TileStates.Lamp,puzzle);
+                puzzle.SetNeighbour(posX,posY,TileStates.Lamp);
                 return false;
             }
             return true;

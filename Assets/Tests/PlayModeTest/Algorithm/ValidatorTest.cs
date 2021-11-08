@@ -1,14 +1,10 @@
-﻿using System.Collections.Generic;
-using System.Threading;
-using Algorithms;
+﻿using Algorithms;
 using NUnit.Framework;
 using UnityEngine;
 using Utils.DataStructures;
-using Utils.Enums;
-using Utils.StaticClasses;
 using Utils.TestData;
 
-namespace Tests
+namespace Tests.PlayModeTest.Algorithm
 {
     [TestFixture]
     public class ValidatorTest

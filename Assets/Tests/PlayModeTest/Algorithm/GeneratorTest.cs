@@ -1,31 +1,39 @@
 ﻿using Algorithms;
 using NUnit.Framework;
 using UnityEngine;
-using Utils.Enums;
 
-namespace Tests
+namespace Tests.PlayModeTest.Algorithm
 {
     [TestFixture]
     public class GeneratorTest
     {
         private Generator _generator;
-        private PuzzleSolver _solver;
         
         [SetUp]
         public void SetUpTest()
         {
-            var validator = new Validator();
-            _solver = new PuzzleSolver(validator);
-            _generator = new Generator(validator);
+            _generator = new Generator();
         }
 
         [Test]
-        public void GeneratePuzzleTest()
+        public void GenerateLittlePuzzleTest()
         {
-            var generatedPuzzle = _generator.GeneratePuzzle(new Vector2Int(5, 5), Difficulty.Easy);
-            Debug.Log(generatedPuzzle);
-            //Assert.True(_solver.FindSolutions(generatedPuzzle).Count > 0);
-
+            var generatedPuzzle = _generator.GeneratePuzzle(new Vector2Int(5, 5));
+            Debug.Log($"Puzzle Generator is working \n {generatedPuzzle}");
+        }
+        
+        [Test]
+        public void GenerateNormalPuzzleTest()
+        {
+            var generatedPuzzle = _generator.GeneratePuzzle(new Vector2Int(10, 10));
+            Debug.Log($"Puzzle Generator is working \n {generatedPuzzle}");
+        }
+        
+        [Test]
+        public void GenerateBigPuzzleTest()
+        {
+            var generatedPuzzle = _generator.GeneratePuzzle(new Vector2Int(14, 14));
+            Debug.Log($"Puzzle Generator is working \n {generatedPuzzle}");
         }
     }
 }

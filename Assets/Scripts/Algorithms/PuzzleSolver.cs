@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using UnityEngine;
 using Utils.DataStructures;
 using Utils.Enums;
 using Utils.StaticClasses;
+using Random = UnityEngine.Random;
 
 namespace Algorithms
 {
@@ -16,6 +18,7 @@ namespace Algorithms
         private Puzzle _puzzle;
         private List<Solution> _finalSolutions;
         private List<Vector2Int> _walls;
+        private List<Vector2Int> _implacable;
 
         
         public PuzzleSolver(Validator validator)
@@ -24,53 +27,102 @@ namespace Algorithms
             _preProcessor = new PreProcessor(validator);
         }
 
-        public List<Solution> FindSolutions(Puzzle puzzle)
+        public List<Solution> FindAllSolutionWithEmptyWalls(Puzzle puzzle)
+        {
+            _puzzle = puzzle;
+            _finalSolutions = new List<Solution>();
+            _implacable = new List<Vector2Int>();
+            for (int i = 0; i < 5; i++)
+            {
+                BacktrackFunction(
+                    new Solution(),
+                    solutionFound: false,
+                    numberedWall: false);
+            }
+            return _finalSolutions;
+        }
+        
+        public List<Solution> FindSingleSolutionWithNumberedWalls(Puzzle puzzle)
         {
             _puzzle = puzzle;
             _finalSolutions = new List<Solution>();
             _walls = new List<Vector2Int>();
+            _implacable = new List<Vector2Int>();
             for (int x = 0; x < _puzzle.SizeX(); x++)
-                for (int y = 0; y < _puzzle.SizeY(); y++)
-                    if ((int)_puzzle.PuzzleMatrix[x][y] < 5)
-                        _walls.Add(new Vector2Int(x,y));
-            var puzzleTmp = _preProcessor.Process(new Puzzle(_puzzle));
-
-            BacktrackFunction( 
-                puzzleTmp.GetElementPositions(TileStates.Empty),
-                new Solution(puzzleTmp.GetElementPositions(TileStates.Lamp)));
+            for (int y = 0; y < _puzzle.SizeY(); y++)
+                if ((int)_puzzle.PuzzleMatrix[x][y] < 5)
+                    _walls.Add(new Vector2Int(x,y));
+            var preProcessedPuzzle = _preProcessor.Process(new Puzzle(_puzzle));
+            _implacable = preProcessedPuzzle.GetElementPositions(TileStates.Implacable);
+            BacktrackFunction(
+                new Solution(preProcessedPuzzle.GetElementPositions(TileStates.Lamp)),
+                solutionFound: false, 
+                numberedWall: true);
             return _finalSolutions;
         }
 
-        private void BacktrackFunction(
-            List<Vector2Int> candidates,
-            Solution solution)
+        private bool BacktrackFunction(
+            Solution solution, 
+            bool solutionFound,
+            bool numberedWall)
         {
-            
-            if (_validator.PuzzleIsSolved(new Puzzle(_puzzle), solution))
+            Debug.Log("run start");
+            if (solutionFound)
             {
-                var solutionTmp = new Solution(solution.Positions);
-                _finalSolutions.Add(new Solution(solutionTmp));
-                return;
+                return true;
+            }
+            if (_validator.PuzzleIsSolved(new Puzzle(_puzzle), new Solution(solution)))
+            {
+                Debug.Log($"Add ok Solution \n {solution}");
+                _finalSolutions.Add(new Solution(solution));
+                solutionFound = true;
+                return true;
             }
 
+            List<Vector2Int> candidates = CalculateCandidates(solution);
+
+            Debug.Log($"Solutions \n {solution}");
+            Debug.Log($"Candidates \n {CandidateLog(candidates)}");
+            Debug.Log($"Implacables \n {CandidateLog(_implacable)}");
+            
+            
             if (candidates.Count == 0)
             {
-                return;
+                return false;
             }
 
-            if (WallsAreUnsatisfiable(new Puzzle(_puzzle), new Solution(solution)))
+            if (numberedWall && WallsAreUnsatisfiable(new Puzzle(_puzzle), new Solution(solution)))
             {
-                return;
+                return false;
             }
             
-            Vector2Int nextCandidate = candidates[0];
-            candidates.Remove(nextCandidate);
+            Vector2Int nextCandidate = candidates[Random.Range(0, candidates.Count-1)];
+            _implacable.Add(nextCandidate);
             solution.Positions.Add(nextCandidate);
-            BacktrackFunction(new List<Vector2Int>(candidates), new Solution(solution));
+            solutionFound = BacktrackFunction(
+                solution,
+                solutionFound,
+                numberedWall);
+            
             solution.Positions.Remove(nextCandidate);
-            BacktrackFunction(candidates, solution);
+            solutionFound = BacktrackFunction(
+                solution,
+                solutionFound,
+                numberedWall);
+            _implacable.Remove(nextCandidate);
+            Debug.Log("run end");
+            return solutionFound;
         }
-        
+
+        private List<Vector2Int> CalculateCandidates(Solution solution)
+        {
+            var candidates = new List<Vector2Int>();
+            _puzzle.TurnOnLamps(solution);
+            candidates = _puzzle.GetElementPositions(TileStates.Empty).Except(_implacable).ToList();
+            _puzzle.TurnOfLamps();
+            return candidates;
+        }
+
         private string CandidateLog(List<Vector2Int> candidates)
         {
             StringBuilder stringBuilder = new StringBuilder();
@@ -82,49 +134,26 @@ namespace Algorithms
         
         private bool WallsAreUnsatisfiable(Puzzle puzzle, Solution solution)
         {
-            Puzzle litPuzzle = PuzzleUtil.TurnOnLamps(puzzle, solution);
+            puzzle.TurnOnLamps(solution);
             foreach (var wall in _walls)
             {
-                if (_validator.WallIsSatisfied(wall.x, wall.y, litPuzzle)) continue;
-                if (CanBeSatisfied(wall.x, wall.y, litPuzzle)) continue;
+                if (_validator.WallIsSatisfied(wall.x, wall.y, puzzle)) continue;
+                if (CanBeSatisfied(wall.x, wall.y, puzzle)) continue;
+                puzzle.TurnOfLamps();
                 return true;
             }
+            puzzle.TurnOfLamps();
             return false;
         }
 
         private bool CanBeSatisfied(int posX, int posY, Puzzle puzzle)
         {
             int emptyCnt = 0;
-            if (PuzzleUtil.PlaceIsEqual(puzzle, posX + 1, posY, TileStates.Empty)) emptyCnt++;
-            if (PuzzleUtil.PlaceIsEqual(puzzle, posX - 1, posY, TileStates.Empty)) emptyCnt++;
-            if (PuzzleUtil.PlaceIsEqual(puzzle, posX, posY + 1, TileStates.Empty)) emptyCnt++;
-            if (PuzzleUtil.PlaceIsEqual(puzzle, posX, posY - 1, TileStates.Empty)) emptyCnt++;
+            if (puzzle.PlaceIsEqual(posX + 1, posY, TileStates.Empty)) emptyCnt++;
+            if (puzzle.PlaceIsEqual(posX - 1, posY, TileStates.Empty)) emptyCnt++;
+            if (puzzle.PlaceIsEqual(posX, posY + 1, TileStates.Empty)) emptyCnt++;
+            if (puzzle.PlaceIsEqual(posX, posY - 1, TileStates.Empty)) emptyCnt++;
             return emptyCnt > 0;
-        }
-
-        public int NumberOfDifferentSolution(List<Solution> solutions)
-        {
-            int numberOfDifferentSolution = 0;
-            for (int i = 0; i < solutions.Count-1; i++)
-            {
-                for (int j = i+1; j < solutions.Count; j++)
-                {
-                    if (Similiarity(solutions[i], solutions[j]) < StaticData.DifTarget)
-                        numberOfDifferentSolution++;
-                }
-            }
-            return numberOfDifferentSolution;
-        }
-
-        private int Similiarity(Solution solutionA, Solution solutionB)
-        {
-            int num = Math.Abs(solutionA.Count - solutionB.Count);
-            foreach (var solution in solutionA.Positions)
-            {
-                if (!solutionB.Positions.Contains(solution))
-                    num++;
-            }
-            return num;
         }
     }
 }

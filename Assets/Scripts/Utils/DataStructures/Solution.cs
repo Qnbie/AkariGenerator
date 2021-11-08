@@ -11,7 +11,7 @@ namespace Utils.DataStructures
 
         public int Count => Positions.Count;
 
-        public Solution()
+         public Solution()
         {
             Positions = new List<Vector2Int>();
         }

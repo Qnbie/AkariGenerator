@@ -64,5 +64,16 @@ namespace Utils.TestData
             new Vector2Int(5, 3),
             new Vector2Int(6, 1),
         });
+
+        public static readonly Puzzle PlainPuzzle = new Puzzle(new List<List<TileStates>>()
+        {
+            new List<TileStates>() {TileStates.Empty,TileStates.Empty,TileStates.Empty,TileStates.Empty,TileStates.Empty,TileStates.Empty,TileStates.Empty},
+            new List<TileStates>() {TileStates.Empty,TileStates.Wall,TileStates.Empty,TileStates.Empty,TileStates.Wall,TileStates.Wall,TileStates.Empty},
+            new List<TileStates>() {TileStates.Empty,TileStates.Wall,TileStates.Empty,TileStates.Wall,TileStates.Empty,TileStates.Empty,TileStates.Empty},
+            new List<TileStates>() {TileStates.Empty,TileStates.Empty,TileStates.Wall,TileStates.Empty,TileStates.Three,TileStates.Empty,TileStates.Empty},
+            new List<TileStates>() {TileStates.Empty,TileStates.Empty,TileStates.Empty,TileStates.Wall,TileStates.Empty,TileStates.Wall,TileStates.Empty},
+            new List<TileStates>() {TileStates.Empty,TileStates.Wall,TileStates.Wall,TileStates.Empty,TileStates.Empty,TileStates.Wall,TileStates.Empty},
+            new List<TileStates>() {TileStates.Empty,TileStates.Empty,TileStates.Empty,TileStates.Empty,TileStates.Empty,TileStates.Empty,TileStates.Empty}
+        }, Difficulty.Easy);
     }
 }
