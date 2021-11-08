@@ -4,17 +4,17 @@ using UnityEngine;
 using Utils.DataStructures;
 using Utils.Enums;
 
-namespace Tests.PlayModeTest.Algorithm 
+namespace Tests.PlayModeTest.Algorithm.PuzzleSolver 
 {
     [TestFixture]
-    public class PuzzleSolverTest
+    public class PuzzleSolverBasicTest
     {
-        private PuzzleSolver _puzzleSolver;
+        private Algorithms.PuzzleSolver _puzzleSolver;
 
         [SetUp]
         public void StepUpTest()
         {
-            _puzzleSolver = new PuzzleSolver(new Validator());
+            _puzzleSolver = new Algorithms.PuzzleSolver(new Validator());
         }
 
         [Test] public void EmptyPuzzle()

@@ -8,14 +8,11 @@ namespace Tests.PlayModeTest.Algorithm
     public class GeneratorTest
     {
         private Generator _generator;
-        private PuzzleSolver _solver;
         
         [SetUp]
         public void SetUpTest()
         {
-            var validator = new Validator();
-            _solver = new PuzzleSolver(validator);
-            _generator = new Generator(validator);
+            _generator = new Generator(new Validator());
         }
 
         [Test]
