@@ -7,7 +7,7 @@ using Utils.StaticClasses;
 
 namespace Utils.DataStructures
 {
-    public class Puzzle : IEquatable<Puzzle>
+    public partial class Puzzle : IEquatable<Puzzle>
     {
         public Difficulty DifficultyLevel;
         public List<List<TileStates>> PuzzleMatrix;

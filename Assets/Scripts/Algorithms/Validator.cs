@@ -13,10 +13,10 @@ namespace Algorithms
             puzzle.AddElements(solution.Positions, TileStates.Lamp);
             if (!CheckRules(puzzle))
                 return false;
-            var litPuzzle = PuzzleUtil.TurnOnLamps(puzzle,solution);
-            if (PuzzleIsFull(litPuzzle))
-                return true;
-            return false;
+            puzzle.TurnOnLamps(solution);
+            var puzzleIsFull = PuzzleIsFull(puzzle);
+            puzzle.TurnOfLamps();
+            return puzzleIsFull;
         }
 
         private bool PuzzleIsFull(Puzzle puzzle)
@@ -100,10 +100,10 @@ namespace Algorithms
         public bool WallIsSatisfied(int posX, int posY, Puzzle puzzle)
         {
             int lampCnt = 0;
-            if (PuzzleUtil.PlaceIsEqual(puzzle, posX + 1, posY, TileStates.Lamp)) lampCnt++;
-            if (PuzzleUtil.PlaceIsEqual(puzzle, posX - 1, posY, TileStates.Lamp)) lampCnt++;
-            if (PuzzleUtil.PlaceIsEqual(puzzle, posX, posY + 1, TileStates.Lamp)) lampCnt++;
-            if (PuzzleUtil.PlaceIsEqual(puzzle, posX, posY - 1, TileStates.Lamp)) lampCnt++;
+            if (puzzle.PlaceIsEqual(posX + 1, posY, TileStates.Lamp)) lampCnt++;
+            if (puzzle.PlaceIsEqual(posX - 1, posY, TileStates.Lamp)) lampCnt++;
+            if (puzzle.PlaceIsEqual(posX, posY + 1, TileStates.Lamp)) lampCnt++;
+            if (puzzle.PlaceIsEqual(posX, posY - 1, TileStates.Lamp)) lampCnt++;
             if (lampCnt == (int) puzzle.PuzzleMatrix[posX][posY])
                 return true;
             return false;

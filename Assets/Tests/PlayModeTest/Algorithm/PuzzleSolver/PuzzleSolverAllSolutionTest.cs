@@ -17,7 +17,7 @@ namespace Tests.PlayModeTest.Algorithm.PuzzleSolver
         }
 
         [Test]
-        public void EasyPuzzleSingleSolution()
+        public void EasyPlainPuzzleAllSolution()
         {
             var solutions = _puzzleSolver.FindAllSolutionWithEmptyWalls(TestPuzzleEasy.PlainPuzzle);
             foreach (var solution in solutions)
@@ -28,7 +28,7 @@ namespace Tests.PlayModeTest.Algorithm.PuzzleSolver
         }
         
         [Test]
-        public void NormalPuzzleSingleSolution()
+        public void NormalPlainPuzzleAllSolution()
         {
             var solutions = _puzzleSolver.FindAllSolutionWithEmptyWalls(TestPuzzleNormal.PlainPuzzle);
             foreach (var solution in solutions)
@@ -39,7 +39,7 @@ namespace Tests.PlayModeTest.Algorithm.PuzzleSolver
         }
         
         [Test]
-        public void HardPuzzleSingleSolution()
+        public void HardPlainPuzzleAllSolution()
         {
             var solutions = _puzzleSolver.FindSingleSolutionWithNumberedWalls(TestPuzzleHard.PlainPuzzle);
             foreach (var solution in solutions)

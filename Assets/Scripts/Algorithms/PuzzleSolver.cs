@@ -106,23 +106,25 @@ namespace Algorithms
         
         private bool WallsAreUnsatisfiable(Puzzle puzzle, Solution solution)
         {
-            Puzzle litPuzzle = PuzzleUtil.TurnOnLamps(puzzle, solution);
+            puzzle.TurnOnLamps(solution);
             foreach (var wall in _walls)
             {
-                if (_validator.WallIsSatisfied(wall.x, wall.y, litPuzzle)) continue;
-                if (CanBeSatisfied(wall.x, wall.y, litPuzzle)) continue;
+                if (_validator.WallIsSatisfied(wall.x, wall.y, puzzle)) continue;
+                if (CanBeSatisfied(wall.x, wall.y, puzzle)) continue;
+                puzzle.TurnOfLamps();
                 return true;
             }
+            puzzle.TurnOfLamps();
             return false;
         }
 
         private bool CanBeSatisfied(int posX, int posY, Puzzle puzzle)
         {
             int emptyCnt = 0;
-            if (PuzzleUtil.PlaceIsEqual(puzzle, posX + 1, posY, TileStates.Empty)) emptyCnt++;
-            if (PuzzleUtil.PlaceIsEqual(puzzle, posX - 1, posY, TileStates.Empty)) emptyCnt++;
-            if (PuzzleUtil.PlaceIsEqual(puzzle, posX, posY + 1, TileStates.Empty)) emptyCnt++;
-            if (PuzzleUtil.PlaceIsEqual(puzzle, posX, posY - 1, TileStates.Empty)) emptyCnt++;
+            if (puzzle.PlaceIsEqual(posX + 1, posY, TileStates.Empty)) emptyCnt++;
+            if (puzzle.PlaceIsEqual(posX - 1, posY, TileStates.Empty)) emptyCnt++;
+            if (puzzle.PlaceIsEqual(posX, posY + 1, TileStates.Empty)) emptyCnt++;
+            if (puzzle.PlaceIsEqual(posX, posY - 1, TileStates.Empty)) emptyCnt++;
             return emptyCnt > 0;
         }
     }
