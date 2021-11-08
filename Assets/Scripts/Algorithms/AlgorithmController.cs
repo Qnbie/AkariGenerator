@@ -21,7 +21,9 @@ namespace Algorithms
 
         public Puzzle GetPuzzle(Vector2Int size, Difficulty difficulty)
         {
-            Puzzle puzzle = new Puzzle(size);
+            Puzzle puzzle = _generator.GeneratePuzzle(size);
+            _puzzleSolver.FindSolutions(puzzle);
+            
             return puzzle;
         }
     }
