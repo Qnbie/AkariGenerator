@@ -28,11 +28,11 @@ namespace Algorithms
             int baseCandidateNumber = _candidates.Count;
             do
             {
-                for (int i = 0; i < 5; i++)
+                for (int i = 0; i < 3; i++)
                 {
                     PickCandidates(puzzle);
                 }
-            } while (_candidates.Count < (3/4 * baseCandidateNumber));
+            } while (_candidates.Count > (1/4 * baseCandidateNumber));
             
             return puzzle;
         }
@@ -48,6 +48,10 @@ namespace Algorithms
 
         private void PickCandidates(Puzzle puzzle)
         {
+            if (_candidates.Count == 0)
+            {
+                return;
+            }
             Vector2Int target = _candidates[Random.Range(0, _candidates.Count-1)];
             if (Random.Range(0.0f, 1.0f) > 0.5f)
             {
