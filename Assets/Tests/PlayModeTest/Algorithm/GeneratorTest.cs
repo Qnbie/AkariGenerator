@@ -22,10 +22,8 @@ namespace Tests
         [Test]
         public void GeneratePuzzleTest()
         {
-            var generatedPuzzle = _generator.GeneratePuzzle(new Vector2Int(5, 5), Difficulty.Easy);
-            Debug.Log(generatedPuzzle);
-            //Assert.True(_solver.FindSolutions(generatedPuzzle).Count > 0);
-
+            var generatedPuzzle = _generator.GeneratePuzzle(new Vector2Int(5, 5));
+            Debug.Log($"Puzzle Generator is working \n {generatedPuzzle}");
         }
     }
 }
