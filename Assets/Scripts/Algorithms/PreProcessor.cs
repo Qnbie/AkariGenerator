@@ -33,7 +33,7 @@ namespace Algorithms
             // Other wall check
             Boolean optimized = false;
             int optStep = 0;
-            while (!optimized && 5 < optStep)
+            while (!optimized && 5 > optStep)
             {
                 optimized = OtherWallCheck(puzzle,numberedWalls);
                 optStep++;

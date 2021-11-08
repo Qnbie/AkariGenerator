@@ -30,36 +30,61 @@ namespace Algorithms
             Vector2Int[] topSolutions =
                 (from solution in _solutionDictionary
                 orderby solution.Value
-                select solution.Key).Take((int) (solutionCount * MapperUtil.DifToWallNum(difficulty))).ToArray();
+                select solution.Key).ToArray();
 
             foreach (var solution in topSolutions)
             {
                 IncrementWalls(solution);
             }
-            
-            do
-            {
-                StartAddition(puzzle);
-                foreach (var wallElement in 
-                    _wallDictionary.Where(wallElement => wallElement.Value > 0))
-                {
-                    puzzle.PuzzleMatrix[wallElement.Key.x][wallElement.Key.y] = (TileStates) wallElement.Value;
-                }
-                _wallDictionary.Remove(_wallDictionary.Keys.Last());
-            } while (_puzzleSolver.FindSingleSolutionWithNumberedWalls(puzzle).Count == 0 &&
-                     _wallDictionary.Count != 0);
 
+            List<Solution> finalSolution = new List<Solution>();
+            int wallCount = 0;
+            int maxWallCount = (int) (MapperUtil.MaxWallByDifficulty(difficulty) * _wallDictionary.Count());
+            foreach (var wallElement in 
+                _wallDictionary.Where(wallElement => wallElement.Value > 0))
+            {
+                puzzle.PuzzleMatrix[wallElement.Key.x][wallElement.Key.y] = (TileStates) wallElement.Value;
+                finalSolution.AddRange(_puzzleSolver.FindSingleSolutionWithNumberedWalls(puzzle));
+                if (finalSolution.Count == wallCount)
+                {
+                    puzzle.PuzzleMatrix[wallElement.Key.x][wallElement.Key.y] = TileStates.Wall;
+                }
+                else
+                {
+                    wallCount++;
+                    if (wallCount == maxWallCount)
+                    {
+                        break;
+                    }
+                }
+            }
+
+            puzzle.TurnOnLamps(finalSolution.Last());
+            for (int i = wallCount; i < maxWallCount; i++)
+            {
+                foreach (var wallPos in puzzle.GetElementPositions(TileStates.Wall))
+                {
+                    if(CanBeZero(wallPos, puzzle))
+                    {
+                        puzzle.PuzzleMatrix[wallPos.x][wallPos.y] = TileStates.Zero;
+                        break;
+                    }
+                }
+                
+            }
+            puzzle.TurnOfLamps();
+            
             return puzzle;
         }
 
-        private void StartAddition(Puzzle puzzle)
+        private bool CanBeZero(Vector2Int wallPos, Puzzle puzzle)
         {
-            foreach (var wallElement in _wallDictionary)
-            {
-                puzzle.PuzzleMatrix[wallElement.Key.x][wallElement.Key.y] = TileStates.Wall;
-            }
+            return !(puzzle.PlaceIsEqual(wallPos.x + 1, wallPos.y, TileStates.Lamp) ||
+                     puzzle.PlaceIsEqual(wallPos.x - 1, wallPos.y, TileStates.Lamp) ||
+                     puzzle.PlaceIsEqual(wallPos.x, wallPos.y + 1, TileStates.Lamp) ||
+                     puzzle.PlaceIsEqual(wallPos.x, wallPos.y - 1, TileStates.Lamp));
         }
-
+        
         private void IncrementWalls(Vector2Int topSolution)
         {
             IncrementWallIfPossible(new Vector2Int(topSolution.x + 1, topSolution.y));
