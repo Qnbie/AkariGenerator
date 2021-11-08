@@ -1,10 +1,9 @@
 ﻿using NUnit.Framework;
 using UnityEngine;
-using Utils.Enums;
 using Utils.StaticClasses;
 using Utils.TestData;
 
-namespace Tests.PlayModeTest
+namespace Tests.PlayModeTest.Utils
 {
     [TestFixture]
     public class PuzzleUtilTest

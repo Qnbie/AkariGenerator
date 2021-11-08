@@ -2,7 +2,7 @@
 using UnityEngine;
 using Utils.TestData;
 
-namespace Tests.PlayModeTest
+namespace Tests.PlayModeTest.Utils
 {
     [TestFixture]
     public class DataClassTest
