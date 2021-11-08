@@ -29,5 +29,75 @@ namespace Tests.PlayModeTest.Algorithm
             var solution = _puzzleSolver.FindAllSolutionWithEmptyWalls(puzzle);
             _wallNumberApplier.ApplyNumbersOnWalls(puzzle, solution, Difficulty.Easy);
         }
+        
+        [Test]
+        public void LittlePuzzleNormal()
+        {
+            var puzzle = _generator.GeneratePuzzle(new Vector2Int(5, 5));
+            var solution = _puzzleSolver.FindAllSolutionWithEmptyWalls(puzzle);
+            _wallNumberApplier.ApplyNumbersOnWalls(puzzle, solution, Difficulty.Medium);
+        }
+        
+        [Test]
+        public void LittlePuzzleHard()
+        {
+            var puzzle = _generator.GeneratePuzzle(new Vector2Int(5, 5));
+            var solution = _puzzleSolver.FindAllSolutionWithEmptyWalls(puzzle);
+            _wallNumberApplier.ApplyNumbersOnWalls(puzzle, solution, Difficulty.Hard);
+        }
+        
+        [Test]
+        [Ignore("Not implemented")]
+        public void NormalPuzzleEasy()
+        {
+            var puzzle = _generator.GeneratePuzzle(new Vector2Int(7,7));
+            var solution = _puzzleSolver.FindAllSolutionWithEmptyWalls(puzzle);
+            _wallNumberApplier.ApplyNumbersOnWalls(puzzle, solution, Difficulty.Easy);
+        }
+        
+        [Test]
+        [Ignore("Not implemented")]
+        public void NormalPuzzleNormal()
+        {
+            var puzzle = _generator.GeneratePuzzle(new Vector2Int(7,7));
+            var solution = _puzzleSolver.FindAllSolutionWithEmptyWalls(puzzle);
+            _wallNumberApplier.ApplyNumbersOnWalls(puzzle, solution, Difficulty.Medium);
+        }
+        
+        [Test]
+        [Ignore("Not implemented")]
+        public void NormalPuzzleHard()
+        {
+            var puzzle = _generator.GeneratePuzzle(new Vector2Int(7,7));
+            var solution = _puzzleSolver.FindAllSolutionWithEmptyWalls(puzzle);
+            _wallNumberApplier.ApplyNumbersOnWalls(puzzle, solution, Difficulty.Hard);
+        }
+                
+        [Test]
+        [Ignore("Not implemented")]
+        public void BigPuzzleEasy()
+        {
+            var puzzle = _generator.GeneratePuzzle(new Vector2Int(10,10));
+            var solution = _puzzleSolver.FindAllSolutionWithEmptyWalls(puzzle);
+            _wallNumberApplier.ApplyNumbersOnWalls(puzzle, solution, Difficulty.Easy);
+        }
+        
+        [Test]
+        [Ignore("Not implemented")]
+        public void BigPuzzleNormal()
+        {
+            var puzzle = _generator.GeneratePuzzle(new Vector2Int(10,10));
+            var solution = _puzzleSolver.FindAllSolutionWithEmptyWalls(puzzle);
+            _wallNumberApplier.ApplyNumbersOnWalls(puzzle, solution, Difficulty.Medium);
+        }
+        
+        [Test]
+        [Ignore("Not implemented")]
+        public void BigPuzzleHard()
+        {
+            var puzzle = _generator.GeneratePuzzle(new Vector2Int(10,10));
+            var solution = _puzzleSolver.FindAllSolutionWithEmptyWalls(puzzle);
+            _wallNumberApplier.ApplyNumbersOnWalls(puzzle, solution, Difficulty.Hard);
+        }
     }
 }

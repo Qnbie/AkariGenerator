@@ -28,6 +28,7 @@ namespace Tests.PlayModeTest.Algorithm.PuzzleSolver
         }
         
         [Test]
+        [Ignore("Not implemented")]
         public void NormalPuzzleSingleSolution()
         {
             var solutions = _puzzleSolver.FindSingleSolutionWithNumberedWalls(TestPuzzleNormal.Puzzle);
@@ -39,6 +40,7 @@ namespace Tests.PlayModeTest.Algorithm.PuzzleSolver
         }
         
         [Test]
+        [Ignore("Not implemented")]
         public void HardPuzzleSingleSolution()
         {
             var solutions = _puzzleSolver.FindSingleSolutionWithNumberedWalls(TestPuzzleHard.Puzzle);

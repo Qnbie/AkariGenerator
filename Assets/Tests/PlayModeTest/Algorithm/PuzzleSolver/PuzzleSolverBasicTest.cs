@@ -25,7 +25,7 @@ namespace Tests.PlayModeTest.Algorithm.PuzzleSolver
             Debug.Log(solutions.Count);
             foreach (var solution in solutions)
                 Debug.Log(solution);
-            Assert.True(solutions.Count == 6);
+            Assert.True(solutions.Count == 5);
         }
         
         [Test]
@@ -38,7 +38,7 @@ namespace Tests.PlayModeTest.Algorithm.PuzzleSolver
             Debug.Log(solutions.Count);
             foreach (var solution in solutions)
                 Debug.Log(solution);
-            Assert.True(solutions.Count == 7);
+            Assert.True(solutions.Count == 5);
         }
      
         [Test]

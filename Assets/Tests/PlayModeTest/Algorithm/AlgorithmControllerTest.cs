@@ -24,6 +24,7 @@ namespace Tests.PlayModeTest.Algorithm
         }
         
         [Test]
+        [Ignore("Not implemented")]
         public void GetMediumPuzzle()
         {
             var puzzle = _algorithmController.GetPuzzle(new Vector2Int(10,10), Difficulty.Medium);
@@ -31,6 +32,7 @@ namespace Tests.PlayModeTest.Algorithm
         }
         
         [Test]
+        [Ignore("Not implemented")]
         public void GetHardPuzzle()
         {
             var puzzle = _algorithmController.GetPuzzle(new Vector2Int(14,14), Difficulty.Hard);
