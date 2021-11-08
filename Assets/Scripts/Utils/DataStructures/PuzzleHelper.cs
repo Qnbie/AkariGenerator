@@ -29,7 +29,7 @@ namespace Utils.DataStructures
         public void TurnOnLamps(Solution lampPositions)
         {
             AddElements(lampPositions.Positions,TileStates.Lamp);
-            foreach (Vector2Int lampPos in GetElementPositions(TileStates.Lamp))
+            foreach (Vector2Int lampPos in lampPositions.Positions)
             {
                 bool[] isStop = new bool[4];
                 int index = 0;
@@ -83,13 +83,12 @@ namespace Utils.DataStructures
 
         public void TurnOfLamps()
         {
-            foreach (var puzzleRow in PuzzleMatrix)
+            for(int x = 0; x < SizeX(); x++)
             {
-                for (var index = 0; index < puzzleRow.Count; index++)
+                for (int y = 0; y < SizeY(); y++)
                 {
-                    var puzzleElement = puzzleRow[index];
-                    if (puzzleElement == TileStates.Lamp || puzzleElement == TileStates.Lit)
-                        puzzleElement = TileStates.Empty;
+                    if (PuzzleMatrix[x][y] == TileStates.Lamp || PuzzleMatrix[x][y] == TileStates.Lit)
+                        PuzzleMatrix[x][y] = TileStates.Empty;
                 }
             }
         }
