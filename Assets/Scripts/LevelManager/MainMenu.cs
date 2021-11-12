@@ -1,7 +1,4 @@
-﻿using System;
-using UnityEngine;
-using UnityEngine.UI;
-using Utils.Enums;
+﻿using UnityEngine;
 
 namespace LevelManager
 {

@@ -5,11 +5,11 @@ using Utils.Enums;
 
 namespace Utils.TestData
 {
-    public class TestPuzzleHard
+    public static class TestPuzzleHard
     {
         public static readonly RawPuzzle RawPuzzle = new RawPuzzle(
             new Vector2Int(14,14),
-            new List<Element>()
+            new List<Element>
             {
                 new Element(new Vector2Int(0,0),TileStates.Zero),
                 new Element(new Vector2Int(0,1),TileStates.Zero),
@@ -71,106 +71,105 @@ namespace Utils.TestData
                 new Element(new Vector2Int(13,5),TileStates.Wall),
                 new Element(new Vector2Int(13,7),TileStates.One),
                 new Element(new Vector2Int(13,12),TileStates.One),
-                new Element(new Vector2Int(13,13),TileStates.Wall),
+                new Element(new Vector2Int(13,13),TileStates.Wall)
 
             },
-            Difficulty.Hard,
-            "");
+            Difficulty.Hard);
         
-        public static readonly Puzzle Puzzle = new Puzzle(new List<List<TileStates>>()
+        public static readonly Puzzle Puzzle = new Puzzle(new List<List<TileStates>>
         {
-            new List<TileStates>() {
+            new List<TileStates> {
                 TileStates.Zero,TileStates.Zero,TileStates.Empty,TileStates.Empty,TileStates.Empty,TileStates.Empty,TileStates.Zero,
                 TileStates.Empty,TileStates.Wall,TileStates.Empty,TileStates.Empty,TileStates.Empty,TileStates.Empty,TileStates.Wall},
-            new List<TileStates>() {
+            new List<TileStates> {
                 TileStates.Empty,TileStates.Empty,TileStates.Empty,TileStates.Empty,TileStates.Empty,TileStates.Wall,TileStates.Empty,
                 TileStates.Empty,TileStates.Empty,TileStates.Zero,TileStates.Empty,TileStates.Empty,TileStates.Empty,TileStates.Wall},
-            new List<TileStates>() {
+            new List<TileStates> {
                 TileStates.Empty,TileStates.Empty,TileStates.Empty,TileStates.Empty,TileStates.Empty,TileStates.Wall,TileStates.Empty,
                 TileStates.Empty,TileStates.Empty,TileStates.Empty,TileStates.One,TileStates.Empty,TileStates.Empty,TileStates.Empty},
-            new List<TileStates>() {
+            new List<TileStates> {
                 TileStates.Empty,TileStates.Empty,TileStates.One,TileStates.Wall,TileStates.Empty,TileStates.Empty,TileStates.Empty,
                 TileStates.One,TileStates.Two,TileStates.Empty,TileStates.Zero,TileStates.Empty,TileStates.Empty,TileStates.Empty},
-            new List<TileStates>() {
+            new List<TileStates> {
                 TileStates.Empty,TileStates.Wall,TileStates.Empty,TileStates.Empty,TileStates.Empty,TileStates.Empty,TileStates.Empty,
                 TileStates.Empty,TileStates.Empty,TileStates.Empty,TileStates.Empty,TileStates.Empty,TileStates.Empty,TileStates.Empty},
-            new List<TileStates>() {
+            new List<TileStates> {
                 TileStates.One,TileStates.Empty,TileStates.Empty,TileStates.One,TileStates.Empty,TileStates.Empty,TileStates.Empty,
                 TileStates.Wall,TileStates.Empty,TileStates.Empty,TileStates.Empty,TileStates.One,TileStates.Zero,TileStates.Empty},
-            new List<TileStates>() {
+            new List<TileStates> {
                 TileStates.Empty,TileStates.Empty,TileStates.Empty,TileStates.One,TileStates.Empty,TileStates.One,TileStates.Empty,
                 TileStates.Empty,TileStates.Empty,TileStates.Empty,TileStates.Empty,TileStates.Empty,TileStates.Empty,TileStates.One},
-            new List<TileStates>() {
+            new List<TileStates> {
                 TileStates.Wall,TileStates.Empty,TileStates.Empty,TileStates.Empty,TileStates.Empty,TileStates.Empty,TileStates.Empty,
                 TileStates.Empty,TileStates.Zero,TileStates.Empty,TileStates.Wall,TileStates.Empty,TileStates.Empty,TileStates.Empty},
-            new List<TileStates>() {
+            new List<TileStates> {
                 TileStates.Empty,TileStates.Wall,TileStates.One,TileStates.Empty,TileStates.Empty,TileStates.Empty,TileStates.One,
                 TileStates.Empty,TileStates.Empty,TileStates.Empty,TileStates.Zero,TileStates.Empty,TileStates.Empty,TileStates.Wall},
-            new List<TileStates>() {
+            new List<TileStates> {
                 TileStates.Empty,TileStates.Empty,TileStates.Empty,TileStates.Empty,TileStates.Empty,TileStates.Empty,TileStates.Empty,
                 TileStates.Empty,TileStates.Empty,TileStates.Empty,TileStates.Empty,TileStates.Empty,TileStates.Two,TileStates.Empty},
-            new List<TileStates>() {
+            new List<TileStates> {
                 TileStates.Empty,TileStates.Empty,TileStates.Empty,TileStates.One,TileStates.Empty,TileStates.Zero,TileStates.One,
                 TileStates.Empty,TileStates.Empty,TileStates.Empty,TileStates.One,TileStates.One,TileStates.Empty,TileStates.Empty},
-            new List<TileStates>() {
+            new List<TileStates> {
                 TileStates.Empty,TileStates.Empty,TileStates.Empty,TileStates.One,TileStates.Empty,TileStates.Empty,TileStates.Empty,
                 TileStates.Empty,TileStates.One,TileStates.Empty,TileStates.Empty,TileStates.Empty,TileStates.Empty,TileStates.Empty},
-            new List<TileStates>() {
+            new List<TileStates> {
                 TileStates.Zero,TileStates.Empty,TileStates.Empty,TileStates.Empty,TileStates.Wall,TileStates.Empty,TileStates.Empty,
                 TileStates.Empty,TileStates.One,TileStates.Empty,TileStates.Empty,TileStates.Empty,TileStates.Empty,TileStates.Empty},
-            new List<TileStates>() {
+            new List<TileStates> {
                 TileStates.Zero,TileStates.Empty,TileStates.Empty,TileStates.Empty,TileStates.Empty,TileStates.Wall,TileStates.Empty,
                 TileStates.One,TileStates.Empty,TileStates.Empty,TileStates.Empty,TileStates.Empty,TileStates.One,TileStates.Wall}
         }, Difficulty.Hard);
         
-        public static readonly Puzzle PreProcessedPuzzle = new Puzzle(new List<List<TileStates>>()
+        public static readonly Puzzle PreProcessedPuzzle = new Puzzle(new List<List<TileStates>>
         {
-            new List<TileStates>() {
+            new List<TileStates> {
                 TileStates.Zero,TileStates.Zero,TileStates.Implacable,TileStates.Empty,TileStates.Empty,TileStates.Implacable,TileStates.Zero,
                 TileStates.Implacable,TileStates.Wall,TileStates.Implacable,TileStates.Empty,TileStates.Lit,TileStates.Empty,TileStates.Wall},
-            new List<TileStates>() {
+            new List<TileStates> {
                 TileStates.Implacable,TileStates.Implacable,TileStates.Empty,TileStates.Empty,TileStates.Empty,TileStates.Wall,TileStates.Implacable,
                 TileStates.Empty,TileStates.Lit,TileStates.Zero,TileStates.Implacable,TileStates.Lit,TileStates.Empty,TileStates.Wall},
-            new List<TileStates>() {
+            new List<TileStates> {
                 TileStates.Empty,TileStates.Empty,TileStates.Empty,TileStates.Empty,TileStates.Empty,TileStates.Wall,TileStates.Lit,
                 TileStates.Lit,TileStates.Lamp,TileStates.Lit,TileStates.One,TileStates.Lamp,TileStates.Lit,TileStates.Lit},
-            new List<TileStates>() {
+            new List<TileStates> {
                 TileStates.Empty,TileStates.Empty,TileStates.One,TileStates.Wall,TileStates.Empty,TileStates.Empty,TileStates.Empty,
                 TileStates.One,TileStates.Two,TileStates.Implacable,TileStates.Zero,TileStates.Lit,TileStates.Empty,TileStates.Empty},
-            new List<TileStates>() {
+            new List<TileStates> {
                 TileStates.Empty,TileStates.Wall,TileStates.Lit,TileStates.Lit,TileStates.Lit,TileStates.Lit,TileStates.Lit,
                 TileStates.Lit,TileStates.Lamp,TileStates.Lit,TileStates.Lit,TileStates.Lit,TileStates.Lit,TileStates.Lit},
-            new List<TileStates>() {
+            new List<TileStates> {
                 TileStates.One,TileStates.Empty,TileStates.Empty,TileStates.One,TileStates.Empty,TileStates.Empty,TileStates.Empty,
                 TileStates.Wall,TileStates.Lit,TileStates.Empty,TileStates.Empty,TileStates.One,TileStates.Zero,TileStates.Implacable},
-            new List<TileStates>() {
+            new List<TileStates> {
                 TileStates.Empty,TileStates.Empty,TileStates.Empty,TileStates.One,TileStates.Empty,TileStates.One,TileStates.Empty,
                 TileStates.Empty,TileStates.Lit,TileStates.Empty,TileStates.Empty,TileStates.Empty,TileStates.Implacable,TileStates.One},
-            new List<TileStates>() {
+            new List<TileStates> {
                 TileStates.Wall,TileStates.Empty,TileStates.Empty,TileStates.Empty,TileStates.Empty,TileStates.Empty,TileStates.Empty,
                 TileStates.Implacable,TileStates.Zero,TileStates.Implacable,TileStates.Wall,TileStates.Lit,TileStates.Lit,TileStates.Lamp},
-            new List<TileStates>() {
+            new List<TileStates> {
                 TileStates.Empty,TileStates.Wall,TileStates.One,TileStates.Empty,TileStates.Empty,TileStates.Empty,TileStates.One,
                 TileStates.Empty,TileStates.Implacable,TileStates.Implacable,TileStates.Zero,TileStates.Implacable,TileStates.Empty,TileStates.Wall},
-            new List<TileStates>() {
+            new List<TileStates> {
                 TileStates.Empty,TileStates.Empty,TileStates.Empty,TileStates.Empty,TileStates.Empty,TileStates.Implacable,TileStates.Empty,
                 TileStates.Empty,TileStates.Empty,TileStates.Empty,TileStates.Implacable,TileStates.Empty,TileStates.Two,TileStates.Empty},
-            new List<TileStates>() {
+            new List<TileStates> {
                 TileStates.Empty,TileStates.Empty,TileStates.Empty,TileStates.One,TileStates.Implacable,TileStates.Zero,TileStates.One,
                 TileStates.Empty,TileStates.Empty,TileStates.Empty,TileStates.One,TileStates.One,TileStates.Empty,TileStates.Empty},
-            new List<TileStates>() {
+            new List<TileStates> {
                 TileStates.Implacable,TileStates.Empty,TileStates.Empty,TileStates.One,TileStates.Empty,TileStates.Implacable,TileStates.Empty,
                 TileStates.Empty,TileStates.One,TileStates.Empty,TileStates.Empty,TileStates.Empty,TileStates.Empty,TileStates.Empty},
-            new List<TileStates>() {
+            new List<TileStates> {
                 TileStates.Zero,TileStates.Implacable,TileStates.Empty,TileStates.Empty,TileStates.Wall,TileStates.Empty,TileStates.Empty,
                 TileStates.Empty,TileStates.One,TileStates.Empty,TileStates.Empty,TileStates.Empty,TileStates.Empty,TileStates.Empty},
-            new List<TileStates>() {
+            new List<TileStates> {
                 TileStates.Zero,TileStates.Implacable,TileStates.Empty,TileStates.Empty,TileStates.Empty,TileStates.Wall,TileStates.Empty,
                 TileStates.One,TileStates.Empty,TileStates.Empty,TileStates.Empty,TileStates.Empty,TileStates.One,TileStates.Wall}
         }, Difficulty.Hard);
         
         public static readonly Solution Solution = new Solution(
-            new List<Vector2Int>(){
+            new List<Vector2Int>{
                 new Vector2Int(0, 3),
                 new Vector2Int(0, 10),
                 new Vector2Int(1, 2),
@@ -205,51 +204,51 @@ namespace Utils.TestData
                 new Vector2Int(12, 5),
                 new Vector2Int(12, 12),
                 new Vector2Int(13, 4),
-                new Vector2Int(13, 8),
+                new Vector2Int(13, 8)
             });
         
-        public static readonly Puzzle PlainPuzzle = new Puzzle(new List<List<TileStates>>()
+        public static readonly Puzzle PlainPuzzle = new Puzzle(new List<List<TileStates>>
         {
-            new List<TileStates>() {
+            new List<TileStates> {
                 TileStates.Wall,TileStates.Wall,TileStates.Empty,TileStates.Empty,TileStates.Empty,TileStates.Empty,TileStates.Wall,
                 TileStates.Empty,TileStates.Wall,TileStates.Empty,TileStates.Empty,TileStates.Empty,TileStates.Empty,TileStates.Wall},
-            new List<TileStates>() {
+            new List<TileStates> {
                 TileStates.Empty,TileStates.Empty,TileStates.Empty,TileStates.Empty,TileStates.Empty,TileStates.Wall,TileStates.Empty,
                 TileStates.Empty,TileStates.Empty,TileStates.Wall,TileStates.Empty,TileStates.Empty,TileStates.Empty,TileStates.Wall},
-            new List<TileStates>() {
+            new List<TileStates> {
                 TileStates.Empty,TileStates.Empty,TileStates.Empty,TileStates.Empty,TileStates.Empty,TileStates.Wall,TileStates.Empty,
                 TileStates.Empty,TileStates.Empty,TileStates.Empty,TileStates.Wall,TileStates.Empty,TileStates.Empty,TileStates.Empty},
-            new List<TileStates>() {
+            new List<TileStates> {
                 TileStates.Empty,TileStates.Empty,TileStates.Wall,TileStates.Wall,TileStates.Empty,TileStates.Empty,TileStates.Empty,
                 TileStates.Wall,TileStates.Two,TileStates.Empty,TileStates.Wall,TileStates.Empty,TileStates.Empty,TileStates.Empty},
-            new List<TileStates>() {
+            new List<TileStates> {
                 TileStates.Empty,TileStates.Wall,TileStates.Empty,TileStates.Empty,TileStates.Empty,TileStates.Empty,TileStates.Empty,
                 TileStates.Empty,TileStates.Empty,TileStates.Empty,TileStates.Empty,TileStates.Empty,TileStates.Empty,TileStates.Empty},
-            new List<TileStates>() {
+            new List<TileStates> {
                 TileStates.Wall,TileStates.Empty,TileStates.Empty,TileStates.Wall,TileStates.Empty,TileStates.Empty,TileStates.Empty,
                 TileStates.Wall,TileStates.Empty,TileStates.Empty,TileStates.Empty,TileStates.Wall,TileStates.Wall,TileStates.Empty},
-            new List<TileStates>() {
+            new List<TileStates> {
                 TileStates.Empty,TileStates.Empty,TileStates.Empty,TileStates.Wall,TileStates.Empty,TileStates.Wall,TileStates.Empty,
                 TileStates.Empty,TileStates.Empty,TileStates.Empty,TileStates.Empty,TileStates.Empty,TileStates.Empty,TileStates.Wall},
-            new List<TileStates>() {
+            new List<TileStates> {
                 TileStates.Wall,TileStates.Empty,TileStates.Empty,TileStates.Empty,TileStates.Empty,TileStates.Empty,TileStates.Empty,
                 TileStates.Empty,TileStates.Wall,TileStates.Empty,TileStates.Wall,TileStates.Empty,TileStates.Empty,TileStates.Empty},
-            new List<TileStates>() {
+            new List<TileStates> {
                 TileStates.Empty,TileStates.Wall,TileStates.Wall,TileStates.Empty,TileStates.Empty,TileStates.Empty,TileStates.Wall,
                 TileStates.Empty,TileStates.Empty,TileStates.Empty,TileStates.Wall,TileStates.Empty,TileStates.Empty,TileStates.Wall},
-            new List<TileStates>() {
+            new List<TileStates> {
                 TileStates.Empty,TileStates.Empty,TileStates.Empty,TileStates.Empty,TileStates.Empty,TileStates.Empty,TileStates.Empty,
                 TileStates.Empty,TileStates.Empty,TileStates.Empty,TileStates.Empty,TileStates.Empty,TileStates.Wall,TileStates.Empty},
-            new List<TileStates>() {
+            new List<TileStates> {
                 TileStates.Empty,TileStates.Empty,TileStates.Empty,TileStates.Wall,TileStates.Empty,TileStates.Wall,TileStates.Wall,
                 TileStates.Empty,TileStates.Empty,TileStates.Empty,TileStates.Wall,TileStates.Wall,TileStates.Empty,TileStates.Empty},
-            new List<TileStates>() {
+            new List<TileStates> {
                 TileStates.Empty,TileStates.Empty,TileStates.Empty,TileStates.Wall,TileStates.Empty,TileStates.Empty,TileStates.Empty,
                 TileStates.Empty,TileStates.Wall,TileStates.Empty,TileStates.Empty,TileStates.Empty,TileStates.Empty,TileStates.Empty},
-            new List<TileStates>() {
+            new List<TileStates> {
                 TileStates.Wall,TileStates.Empty,TileStates.Empty,TileStates.Empty,TileStates.Wall,TileStates.Empty,TileStates.Empty,
                 TileStates.Empty,TileStates.Wall,TileStates.Empty,TileStates.Empty,TileStates.Empty,TileStates.Empty,TileStates.Empty},
-            new List<TileStates>() {
+            new List<TileStates> {
                 TileStates.Wall,TileStates.Empty,TileStates.Empty,TileStates.Empty,TileStates.Empty,TileStates.Wall,TileStates.Empty,
                 TileStates.Wall,TileStates.Empty,TileStates.Empty,TileStates.Empty,TileStates.Empty,TileStates.Wall,TileStates.Wall}
         }, Difficulty.Hard);

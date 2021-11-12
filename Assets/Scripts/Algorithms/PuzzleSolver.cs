@@ -1,19 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using UnityEngine;
 using Utils.DataStructures;
 using Utils.Enums;
-using Utils.StaticClasses;
 using Random = UnityEngine.Random;
 
 namespace Algorithms
 {
     public class PuzzleSolver
     {
-        private Validator _validator;
-        private PreProcessor _preProcessor;
+        private readonly Validator _validator;
+        private readonly PreProcessor _preProcessor;
 
         private Puzzle _puzzle;
         private List<Solution> _finalSolutions;
@@ -66,26 +63,17 @@ namespace Algorithms
             bool solutionFound,
             bool numberedWall)
         {
-            Debug.Log("run start");
             if (solutionFound)
             {
                 return true;
             }
             if (_validator.PuzzleIsSolved(new Puzzle(_puzzle), new Solution(solution)))
             {
-                Debug.Log($"Add ok Solution \n {solution}");
                 _finalSolutions.Add(new Solution(solution));
-                solutionFound = true;
                 return true;
             }
 
-            List<Vector2Int> candidates = CalculateCandidates(solution);
-
-            Debug.Log($"Solutions \n {solution}");
-            Debug.Log($"Candidates \n {CandidateLog(candidates)}");
-            Debug.Log($"Implacables \n {CandidateLog(_implacable)}");
-            
-            
+            var candidates = CalculateCandidates(solution);
             if (candidates.Count == 0)
             {
                 return false;
@@ -96,12 +84,12 @@ namespace Algorithms
                 return false;
             }
             
-            Vector2Int nextCandidate = candidates[Random.Range(0, candidates.Count-1)];
+            var nextCandidate = candidates[Random.Range(0, candidates.Count-1)];
             _implacable.Add(nextCandidate);
             solution.Positions.Add(nextCandidate);
             solutionFound = BacktrackFunction(
                 solution,
-                solutionFound,
+                false,
                 numberedWall);
             
             solution.Positions.Remove(nextCandidate);
@@ -110,26 +98,15 @@ namespace Algorithms
                 solutionFound,
                 numberedWall);
             _implacable.Remove(nextCandidate);
-            Debug.Log("run end");
             return solutionFound;
         }
 
         private List<Vector2Int> CalculateCandidates(Solution solution)
         {
-            var candidates = new List<Vector2Int>();
             _puzzle.TurnOnLamps(solution);
-            candidates = _puzzle.GetElementPositions(TileStates.Empty).Except(_implacable).ToList();
+            var candidates = _puzzle.GetElementPositions(TileStates.Empty).Except(_implacable).ToList();
             _puzzle.TurnOfLamps();
             return candidates;
-        }
-
-        private string CandidateLog(List<Vector2Int> candidates)
-        {
-            StringBuilder stringBuilder = new StringBuilder();
-            stringBuilder.AppendLine("Candidates:");
-            foreach (var candidate in candidates)
-                stringBuilder.AppendLine($"x : {candidate.x} y : {candidate.y}");
-            return stringBuilder.ToString();
         }
         
         private bool WallsAreUnsatisfiable(Puzzle puzzle, Solution solution)

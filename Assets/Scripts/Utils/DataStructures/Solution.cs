@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using UnityEngine;
 
@@ -7,7 +8,7 @@ namespace Utils.DataStructures
 {
     public class Solution: IEquatable<Solution>
     {
-        public List<Vector2Int> Positions;
+        public readonly List<Vector2Int> Positions;
 
         public int Count => Positions.Count;
 
@@ -27,23 +28,14 @@ namespace Utils.DataStructures
             Positions = positions;
         }
 
-        public Vector2Int this[int i]
-        {
-            get => Positions[i];
-            set => Positions[i] = value;
-        }
-        
+        public Vector2Int this[int i] => Positions[i];
+
         public bool Equals(Solution other)
         {
-            if (Positions.Count != other.Positions.Count)
+            if (other == null)
                 return false;
-            for (int i = 0; i < Positions.Count; i++)
-            {
-                if (!other.Positions.Contains(Positions[i]))
-                    return false;
-            }
-
-            return true;
+            return Positions.Count == other.Positions.Count && 
+                   Positions.All(position => other.Positions.Contains(position));
         }
 
         public override string ToString()

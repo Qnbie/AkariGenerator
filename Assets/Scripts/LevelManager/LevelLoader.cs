@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.SceneManagement;
 using Utils.Enums;
 
@@ -14,14 +12,14 @@ namespace LevelManager
         public static Vector2Int GameSize;
         public static Difficulty GameDifficulty;
 
-        public void LoadNextLevel(String nextScene, Vector2Int size, Difficulty difficulty)
+        public void LoadNextLevel(string nextScene, Vector2Int size, Difficulty difficulty)
         {
             GameSize = size;
             GameDifficulty = difficulty;
             LoadNextLevel(nextScene);
         }
         
-        public void LoadNextLevel(String nextScene)
+        public void LoadNextLevel(string nextScene)
         {
             SceneManager.LoadScene(nextScene);
 

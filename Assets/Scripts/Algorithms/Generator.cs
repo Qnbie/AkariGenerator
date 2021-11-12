@@ -1,9 +1,7 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.PlayerLoop;
 using Utils.DataStructures;
 using Utils.Enums;
-using Utils.StaticClasses;
 
 namespace Algorithms
 {
@@ -14,14 +12,10 @@ namespace Algorithms
         private List<Vector2Int> _candidates;
         private Solution _solution;
 
-        public Generator()
-        {
-        }
-
         public Puzzle GeneratePuzzle(
             Vector2Int size)
         {
-            Puzzle puzzle = new Puzzle(size);
+            var puzzle = new Puzzle(size);
             UpdateCandidates(puzzle);
             int baseCandidateNumber = _candidates.Count;
             do
@@ -30,7 +24,7 @@ namespace Algorithms
                 {
                     PickCandidates(puzzle);
                 }
-            } while (_candidates.Count > (3/4 * baseCandidateNumber));
+            } while (_candidates.Count > 3/4 * baseCandidateNumber);
             
             return puzzle;
         }

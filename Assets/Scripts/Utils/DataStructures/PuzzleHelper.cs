@@ -1,5 +1,4 @@
-﻿using UnityEngine;
-using Utils.Enums;
+﻿using Utils.Enums;
 using Utils.StaticClasses;
 
 namespace Utils.DataStructures
@@ -29,10 +28,11 @@ namespace Utils.DataStructures
         public void TurnOnLamps(Solution lampPositions)
         {
             AddElements(lampPositions.Positions,TileStates.Lamp);
-            foreach (Vector2Int lampPos in lampPositions.Positions)
+            foreach (var lampPos in lampPositions.Positions)
             {
-                bool[] isStop = new bool[4];
-                int index = 0;
+                var isStop = new bool[4];
+                var index = 0;
+                // ReSharper disable once ConditionIsAlwaysTrueOrFalse
                 while (!(isStop[0] & isStop[1] & isStop[2] & isStop[3]))
                 {
                     if (!isStop[0])
@@ -83,9 +83,9 @@ namespace Utils.DataStructures
 
         public void TurnOfLamps()
         {
-            for(int x = 0; x < SizeX(); x++)
+            for(var x = 0; x < SizeX(); x++)
             {
-                for (int y = 0; y < SizeY(); y++)
+                for (var y = 0; y < SizeY(); y++)
                 {
                     if (PuzzleMatrix[x][y] == TileStates.Lamp || PuzzleMatrix[x][y] == TileStates.Lit)
                         PuzzleMatrix[x][y] = TileStates.Empty;

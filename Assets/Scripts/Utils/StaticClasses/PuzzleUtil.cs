@@ -9,11 +9,11 @@ namespace Utils.StaticClasses
     {
         public static List<List<TileStates>> GetEmptyPuzzleMatrix(Vector2Int size)
         {
-            List<List<TileStates>> result = new List<List<TileStates>>();
-            for (int i = 0; i < size.x; i++)
+            var result = new List<List<TileStates>>();
+            for (var i = 0; i < size.x; i++)
             {
                 result.Add(new List<TileStates>());
-                for (int j = 0; j < size.y; j++)
+                for (var j = 0; j < size.y; j++)
                 {
                     result[i].Add(TileStates.Empty);
                 }
@@ -27,12 +27,13 @@ namespace Utils.StaticClasses
 
         public static RawPuzzle ConvertPuzzleToRawPuzzle(Puzzle puzzle)
         {
-            RawPuzzle result = new RawPuzzle();
-            result.Size = new Vector2Int(puzzle.SizeX(),puzzle.SizeY());
-            result.DifficultyLevel = puzzle.DifficultyLevel;
-            for (int x = 0; x < puzzle.SizeX(); x++)
+            var result = new RawPuzzle
             {
-                for (int y = 0; y < puzzle.SizeY(); y++)
+                Size = new Vector2Int(puzzle.SizeX(), puzzle.SizeY()), DifficultyLevel = puzzle.DifficultyLevel
+            };
+            for (var x = 0; x < puzzle.SizeX(); x++)
+            {
+                for (var y = 0; y < puzzle.SizeY(); y++)
                 {
                     if(puzzle.PuzzleMatrix[x][y] != TileStates.Empty)
                         result.Elements.Add(new Element(new Vector2Int(x,y), puzzle.PuzzleMatrix[x][y]));
@@ -43,8 +44,8 @@ namespace Utils.StaticClasses
 
         public static Puzzle ConvertRawPuzzleToPuzzle(RawPuzzle rawPuzzle)
         {
-            Puzzle result = new Puzzle(PuzzleUtil.GetEmptyPuzzleMatrix(rawPuzzle.Size), rawPuzzle.DifficultyLevel);
-            foreach (Element element in rawPuzzle.Elements)
+            var result = new Puzzle(GetEmptyPuzzleMatrix(rawPuzzle.Size), rawPuzzle.DifficultyLevel);
+            foreach (var element in rawPuzzle.Elements)
             {
                 result.PuzzleMatrix[element.Position.x][element.Position.y] = element.ElementState;
             }

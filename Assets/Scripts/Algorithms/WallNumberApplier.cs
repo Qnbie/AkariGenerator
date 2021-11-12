@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.Design;
+﻿using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using Utils.DataStructures;
@@ -11,9 +9,9 @@ namespace Algorithms
 {
     public class WallNumberApplier
     {
-        private Dictionary<Vector2Int, int> _solutionDictionary;
-        private Dictionary<Vector2Int, int> _wallDictionary;
-        private PuzzleSolver _puzzleSolver;
+        private readonly Dictionary<Vector2Int, int> _solutionDictionary;
+        private readonly Dictionary<Vector2Int, int> _wallDictionary;
+        private readonly PuzzleSolver _puzzleSolver;
 
         public WallNumberApplier(PuzzleSolver puzzleSolver)
         {
@@ -22,12 +20,11 @@ namespace Algorithms
             _wallDictionary = new Dictionary<Vector2Int, int>();
         }
 
-        public Puzzle ApplyNumbersOnWalls(Puzzle puzzle, List<Solution> solutions, Difficulty difficulty)
+        public Puzzle ApplyNumbersOnWalls(Puzzle puzzle, IEnumerable<Solution> solutions, Difficulty difficulty)
         {
             SetUpSolutionDictionary(solutions);
             SetUpWallDictionary(puzzle);
-            int solutionCount = _solutionDictionary.Count;
-            Vector2Int[] topSolutions =
+            var topSolutions =
                 (from solution in _solutionDictionary
                 orderby solution.Value
                 select solution.Key).ToArray();
@@ -37,9 +34,9 @@ namespace Algorithms
                 IncrementWalls(solution);
             }
 
-            List<Solution> finalSolution = new List<Solution>();
-            int wallCount = 0;
-            int maxWallCount = (int) (MapperUtil.MaxWallByDifficulty[difficulty] * _wallDictionary.Count());
+            var finalSolution = new List<Solution>();
+            var wallCount = 0;
+            var maxWallCount = (int) (MapperUtil.MaxWallByDifficulty[difficulty] * _wallDictionary.Count);
             foreach (var wallElement in 
                 _wallDictionary.Where(wallElement => wallElement.Value > 0))
             {
@@ -60,15 +57,13 @@ namespace Algorithms
             }
 
             puzzle.TurnOnLamps(finalSolution.Last());
-            for (int i = wallCount; i < maxWallCount; i++)
+            for (var i = wallCount; i < maxWallCount; i++)
             {
                 foreach (var wallPos in puzzle.GetElementPositions(TileStates.Wall))
                 {
-                    if(CanBeZero(wallPos, puzzle))
-                    {
-                        puzzle.PuzzleMatrix[wallPos.x][wallPos.y] = TileStates.Zero;
-                        break;
-                    }
+                    if (!CanBeZero(wallPos, puzzle)) continue;
+                    puzzle.PuzzleMatrix[wallPos.x][wallPos.y] = TileStates.Zero;
+                    break;
                 }
                 
             }
@@ -103,17 +98,17 @@ namespace Algorithms
 
         private void SetUpWallDictionary(Puzzle puzzle)
         {
-            foreach (Vector2Int wallPos in puzzle.GetElementPositions(TileStates.Wall))
+            foreach (var wallPos in puzzle.GetElementPositions(TileStates.Wall))
             {
                 _wallDictionary.Add(wallPos,0);
             }
         }
 
-        private void SetUpSolutionDictionary(List<Solution> solutions)
+        private void SetUpSolutionDictionary(IEnumerable<Solution> solutions)
         {
-            foreach (Solution solution in solutions)
+            foreach (var solution in solutions)
             {
-                foreach (Vector2Int position in solution.Positions)
+                foreach (var position in solution.Positions)
                 {
                     if (_solutionDictionary.ContainsKey(position))
                     {

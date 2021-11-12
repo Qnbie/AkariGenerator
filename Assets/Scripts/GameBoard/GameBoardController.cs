@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using GameBoard.Tile;
 using UnityEngine;
 using Utils.DataStructures;
-using Utils.Enums;
 
 namespace GameBoard
 {
@@ -29,7 +28,7 @@ namespace GameBoard
                     var position = new Vector3(
                         i * calculatedSizeX + i * offset,
                         j * calculatedSizeY + j * offset,
-                        this.transform.position.z);
+                        transform.position.z);
                     
                     if (Puzzle.PuzzleMatrix[i][j] >= 0 && (int)Puzzle.PuzzleMatrix[i][j] <= 5)
                     {
@@ -61,20 +60,20 @@ namespace GameBoard
             for (var j = 0; j < Puzzle.SizeY(); j++)
             {
                 if(i + 1 < Puzzle.SizeX())
-                    TileMatrix[i][j].Neighbours
-                        .Add(TileMatrix[(int) ((i + 1) % Puzzle.SizeX())][(int) (j % Puzzle.SizeY())]);
+                    TileMatrix[i][j].neighbours
+                        .Add(TileMatrix[ (i + 1) % Puzzle.SizeX()][j % Puzzle.SizeY()]);
                 
                 if (j + 1 < Puzzle.SizeY()) 
-                    TileMatrix[i][j].Neighbours
-                        .Add(TileMatrix[(int) (i % Puzzle.SizeX())][(int) ((j + 1) % Puzzle.SizeY())]);
+                    TileMatrix[i][j].neighbours
+                        .Add(TileMatrix[ i % Puzzle.SizeX()][(j + 1) % Puzzle.SizeY()]);
                 
                 if (i-1 >= 0)
-                    TileMatrix[i][j].Neighbours
-                        .Add(TileMatrix[(int) (Math.Abs(i - 1) % Puzzle.SizeX())][(int) (j % Puzzle.SizeY())]);
+                    TileMatrix[i][j].neighbours
+                        .Add(TileMatrix[ Math.Abs(i - 1) % Puzzle.SizeX()][j % Puzzle.SizeY()]);
                 
                 if (j-1 >= 0)
-                    TileMatrix[i][j].Neighbours
-                        .Add(TileMatrix[(int) (i % Puzzle.SizeX())][(int) (Math.Abs(j - 1) % Puzzle.SizeY())]);
+                    TileMatrix[i][j].neighbours
+                        .Add(TileMatrix[ i % Puzzle.SizeX()][Math.Abs(j - 1) % Puzzle.SizeY()]);
             }
         }
 
@@ -119,10 +118,10 @@ namespace GameBoard
         
         public void LightOffAt(Vector2 selectedTilePosition)
         {
-            int baseX = (int) selectedTilePosition.x;
-            int baseY = (int) selectedTilePosition.y;
-            bool[] flags = new bool[4];
-            int index = 0;
+            var baseX = (int) selectedTilePosition.x;
+            var baseY = (int) selectedTilePosition.y;
+            var flags = new bool[4];
+            var index = 0;
             while (!(flags[0] & flags[1] & flags[2] & flags[3]))
             {
                 if (!flags[0] && baseX + 1 + index < Puzzle.SizeX())

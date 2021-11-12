@@ -1,30 +1,26 @@
-﻿using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using Utils.DataStructures;
 using Utils.Enums;
-using Utils.StaticClasses;
 
 namespace Algorithms
 {
     public class AlgorithmController
     {
-        private Validator _validator;
-        private Generator _generator;
-        private PuzzleSolver _puzzleSolver;
-        private WallNumberApplier _wallNumberApplier;
+        private readonly Generator _generator;
+        private readonly PuzzleSolver _puzzleSolver;
+        private readonly WallNumberApplier _wallNumberApplier;
         
         public AlgorithmController()
         {
-            _validator = new Validator();
             _generator = new Generator();
-            _puzzleSolver = new PuzzleSolver(_validator);
+            _puzzleSolver = new PuzzleSolver(new Validator());
             _wallNumberApplier = new WallNumberApplier(_puzzleSolver);
         }
 
         public Puzzle GetPuzzle(Vector2Int size, Difficulty difficulty)
         {
-            Puzzle puzzle = _generator.GeneratePuzzle(size);
-            List<Solution> solutions = _puzzleSolver.FindAllSolutionWithEmptyWalls(puzzle);
+            var puzzle = _generator.GeneratePuzzle(size);
+            var solutions = _puzzleSolver.FindAllSolutionWithEmptyWalls(puzzle);
             return _wallNumberApplier.ApplyNumbersOnWalls(puzzle,solutions,difficulty);
         }
     }

@@ -1,4 +1,6 @@
-﻿namespace GameBoard.Tile
+﻿using System.Linq;
+
+namespace GameBoard.Tile
 {
     public class BadTileController : TileBase
     {
@@ -20,10 +22,7 @@
         public override bool IsValid()
         {
             if (_myNumber >= 5) return true;
-            int selectedNeighbours = 0;
-            foreach (var tile in Neighbours) 
-                if (tile.isSelected)
-                    selectedNeighbours++;
+            var selectedNeighbours = neighbours.Count(tile => tile.isSelected);
             if (selectedNeighbours == _myNumber)
             {
                 MyTileRenderer.Allowed();

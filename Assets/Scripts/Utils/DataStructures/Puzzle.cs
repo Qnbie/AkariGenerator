@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using UnityEngine;
 using Utils.Enums;
@@ -9,22 +10,20 @@ namespace Utils.DataStructures
 {
     public partial class Puzzle : IEquatable<Puzzle>
     {
-        public Difficulty DifficultyLevel;
-        public List<List<TileStates>> PuzzleMatrix;
-        
-        public Puzzle(){}
+        public readonly Difficulty DifficultyLevel;
+        public readonly List<List<TileStates>> PuzzleMatrix;
 
         public Puzzle(Puzzle otherPuzzle)
         {
-            this.DifficultyLevel = otherPuzzle.DifficultyLevel;
-            this.PuzzleMatrix = new List<List<TileStates>>();
-            for (int x = 0; x < otherPuzzle.SizeX(); x++)
+            DifficultyLevel = otherPuzzle.DifficultyLevel;
+            PuzzleMatrix = new List<List<TileStates>>();
+            for (var x = 0; x < otherPuzzle.SizeX(); x++)
             {
-                this.PuzzleMatrix.Add(new List<TileStates>());
-                for (int y = 0; y < otherPuzzle.SizeY(); y++)
+                PuzzleMatrix.Add(new List<TileStates>());
+                for (var y = 0; y < otherPuzzle.SizeY(); y++)
                 {
-                    this.PuzzleMatrix[x].Add(TileStates.Empty);
-                    this.PuzzleMatrix[x][y] = otherPuzzle.PuzzleMatrix[x][y];
+                    PuzzleMatrix[x].Add(TileStates.Empty);
+                    PuzzleMatrix[x][y] = otherPuzzle.PuzzleMatrix[x][y];
                 }
             }
         }
@@ -41,13 +40,6 @@ namespace Utils.DataStructures
             DifficultyLevel = difficulty;
         }
 
-        public Puzzle(RawPuzzle rawPuzzle)
-        {
-            var puzzleTmp = PuzzleUtil.ConvertRawPuzzleToPuzzle(rawPuzzle);
-            this.DifficultyLevel = puzzleTmp.DifficultyLevel;
-            this.PuzzleMatrix = puzzleTmp.PuzzleMatrix;
-        }
-
         public Puzzle(Vector2Int size)
         {
             PuzzleMatrix = PuzzleUtil.GetEmptyPuzzleMatrix(size);
@@ -60,9 +52,9 @@ namespace Utils.DataStructures
         {
             if (other == null) return false;
             if (SizeX() != other.SizeX() || SizeY() != other.SizeY()) return false;
-            for (int i = 0; i < SizeX(); i++)
+            for (var i = 0; i < SizeX(); i++)
             {
-                for (int j = 0; j < SizeY(); j++)
+                for (var j = 0; j < SizeY(); j++)
                 {
                     if (PuzzleMatrix[i][j] != other.PuzzleMatrix[i][j]) return false;
                 }
@@ -73,15 +65,15 @@ namespace Utils.DataStructures
 
         public List<Vector2Int> GetElementPositions(TileStates tileStates)
         {
-            List<Vector2Int> elementPositions = new List<Vector2Int>();
-            for (int x = 0; x < SizeX(); x++)
-                for (int y = 0; y < SizeY(); y++)
+            var elementPositions = new List<Vector2Int>();
+            for (var x = 0; x < SizeX(); x++)
+                for (var y = 0; y < SizeY(); y++)
                     if (PuzzleMatrix[x][y] == tileStates)
                         elementPositions.Add(new Vector2Int(x,y)); 
             return elementPositions;
         }
 
-        public void AddElements(List<Vector2Int> elementsPos, TileStates tileState)
+        public void AddElements(IEnumerable<Vector2Int> elementsPos, TileStates tileState)
         {
             foreach (var lampPos in elementsPos)
                 PuzzleMatrix[lampPos.x][lampPos.y] = tileState;
@@ -92,25 +84,12 @@ namespace Utils.DataStructures
             var stringBuilder = new StringBuilder();
             stringBuilder.AppendLine($"Difficulty: {DifficultyLevel}");
             stringBuilder.AppendLine("PuzzleMatrix");
-            foreach (var puzzleRow in PuzzleMatrix)
+            foreach (var strTmp in PuzzleMatrix.Select(puzzleRow => puzzleRow
+                .Aggregate("", (current, tile) => current + $"{tile}, ")))
             {
-                string strTmp = "";
-                foreach (var tile in puzzleRow)
-                {
-                    strTmp += $"{tile}, ";
-                }
-
                 stringBuilder.AppendLine(strTmp);
             }
             return stringBuilder.ToString();
-        }
-
-        public Puzzle Clone()
-        {
-            Puzzle other = (Puzzle) this.MemberwiseClone();
-            other.DifficultyLevel = DifficultyLevel;
-            other.PuzzleMatrix = new List<List<TileStates>>(PuzzleMatrix);
-            return other;
         }
     }
 }

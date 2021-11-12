@@ -1,8 +1,6 @@
-﻿using System.Collections.Generic;
-using UnityEngine;
+﻿using System.Linq;
 using Utils.DataStructures;
 using Utils.Enums;
-using Utils.StaticClasses;
 
 namespace Algorithms
 {
@@ -21,15 +19,10 @@ namespace Algorithms
 
         private bool PuzzleIsFull(Puzzle puzzle)
         {
-            foreach (List<TileStates> row in puzzle.PuzzleMatrix)
-            {
-                foreach (TileStates tileState in row)
-                {
-                    if (tileState == TileStates.Empty || tileState == TileStates.Implacable)
-                        return false;
-                }
-            }
-            return true;
+            return puzzle.PuzzleMatrix.All(
+                row => !row.Any(
+                    tileState => tileState == TileStates.Empty ||
+                                 tileState == TileStates.Implacable));
         }
         
         private bool CheckRules(Puzzle puzzle)
@@ -40,9 +33,9 @@ namespace Algorithms
             {
                 for (int y = 0; y < puzzle.SizeY(); y++)
                 {
-                    if((int)puzzle.PuzzleMatrix[x][y] < 5)
-                        if (!WallIsSatisfied(x, y, puzzle))
-                            return false;
+                    if ((int) puzzle.PuzzleMatrix[x][y] >= 5) continue;
+                    if (WallIsSatisfied(x, y, puzzle)) continue;
+                    return false;
                 }
             }
             
@@ -51,9 +44,9 @@ namespace Algorithms
 
         public bool LampsCheck(Puzzle puzzle, Solution solution)
         {
-            for (int i = 0; i < solution.Count; i++)
+            for (var i = 0; i < solution.Count; i++)
             {
-                for (int j = i + 1; j < solution.Count; j++)
+                for (var j = i + 1; j < solution.Count; j++)
                 {
                     if (solution[i].x == solution[j].x)
                     {
@@ -104,9 +97,7 @@ namespace Algorithms
             if (puzzle.PlaceIsEqual(posX - 1, posY, TileStates.Lamp)) lampCnt++;
             if (puzzle.PlaceIsEqual(posX, posY + 1, TileStates.Lamp)) lampCnt++;
             if (puzzle.PlaceIsEqual(posX, posY - 1, TileStates.Lamp)) lampCnt++;
-            if (lampCnt == (int) puzzle.PuzzleMatrix[posX][posY])
-                return true;
-            return false;
+            return lampCnt == (int) puzzle.PuzzleMatrix[posX][posY];
         }
     }
 }

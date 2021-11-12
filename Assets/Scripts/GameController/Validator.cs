@@ -1,11 +1,12 @@
-﻿using GameBoard;
+﻿using System.Linq;
+using GameBoard;
 using UnityEngine;
 
 namespace GameController
 {
     public class Validator
     {
-        private GameBoardController _gameBoardController;
+        private readonly GameBoardController _gameBoardController;
 
         public Validator(GameBoardController gameBoardController)
         {
@@ -14,15 +15,14 @@ namespace GameController
 
         public bool BoardIsValid()
         {
-            int count = 0;
-            bool win = true;
+            var count = 0;
+            var win = true;
             var board = _gameBoardController.TileMatrix;
-            foreach (var tileRow in board)
-                foreach (var tile in tileRow)
-                {
-                    win = tile.IsValid() && win;
-                   count++;
-                }
+            foreach (var tile in board.SelectMany(tileRow => tileRow))
+            {
+                win = tile.IsValid() && win;
+                count++;
+            }
 
             Debug.Log(count);
             return win;

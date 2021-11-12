@@ -21,16 +21,12 @@ namespace LevelManager
         {
             _currentIndex = (_currentIndex + 1) % MapperUtil.DifficultyValues.Count;
             _difficultyText.text = MapperUtil.DifficultyValues[_currentIndex].Item1.ToString();
-            if (IsValid())
-                _difficultyText.color = Color.black;
-            else
-                _difficultyText.color = Color.red;
+            _difficultyText.color = IsValid() ? Color.black : Color.red;
         }
         
         public bool IsValid()
         {
-            if (_currentIndex == -1) return false;
-            return MapperUtil.DifficultyValues[_currentIndex].Item2;
+            return _currentIndex != -1 && MapperUtil.DifficultyValues[_currentIndex].Item2;
         }
         
         public Difficulty GetValue()

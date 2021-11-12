@@ -1,6 +1,4 @@
-﻿using System;
-using System.Linq;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 using Utils.StaticClasses;
 
@@ -22,10 +20,7 @@ namespace LevelManager
             _currentIndex = (_currentIndex + 1) % MapperUtil.SizeValues.Count;
             var currentItem = MapperUtil.SizeValues[_currentIndex].Item1;
             _sizeText.text = $"{currentItem.x} x {currentItem.y}";
-            if (IsValid())
-                _sizeText.color = Color.black;
-            else
-                _sizeText.color = Color.red;
+            _sizeText.color = IsValid() ? Color.black : Color.red;
         }
 
         public bool IsValid()
