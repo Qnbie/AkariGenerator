@@ -5,6 +5,7 @@ using Utils.Enums;
 
 namespace LevelManager
 {
+    [RequireComponent(typeof(LevelLoader))]
     public class MainMenu : MonoBehaviour
     {
         private DifficultyButton _difficulty;

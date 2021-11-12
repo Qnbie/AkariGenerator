@@ -2,6 +2,7 @@
 using Algorithms;
 using GameBoard;
 using GameBoard.Tile;
+using LevelManager;
 using UnityEngine;
 using Utils.Enums;
 using Utils.TestData;
@@ -64,7 +65,7 @@ namespace GameController
 
         private void GameOver()
         {
-            Debug.Log("YouWin!!!!!!!!!!");
+            GetComponent<LevelLoader>().LoadNextLevel("WinScene");
         }
     }
 }
