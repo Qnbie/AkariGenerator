@@ -1,4 +1,5 @@
 ﻿using System;
+using Algorithms;
 using GameBoard;
 using GameBoard.Tile;
 using UnityEngine;
@@ -14,11 +15,12 @@ namespace GameController
         private GameBoardController _gameBoardController;
         private GameStateMachine _gameStateMachine;
         private Validator _validator;
+        private AlgorithmController _algorithmController;
 
         private void Awake()
         {
+            _algorithmController = new AlgorithmController();
             _gameBoardController = GetComponent<GameBoardController>();
-            _gameBoardController.puzzle = TestPuzzleHard.Puzzle;
             _gameStateMachine = new GameStateMachine();
             _validator = new Validator(_gameBoardController);
         }
@@ -56,6 +58,7 @@ namespace GameController
 
         private void SetUpGame()
         {
+            _gameBoardController.Puzzle = _algorithmController.GetPuzzle(new Vector2Int(5,5), Difficulty.Easy);
             _gameBoardController.Populate(OnSelection);
         }
 
