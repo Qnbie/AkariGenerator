@@ -39,7 +39,7 @@ namespace Algorithms
 
             List<Solution> finalSolution = new List<Solution>();
             int wallCount = 0;
-            int maxWallCount = (int) (MapperUtil.MaxWallByDifficulty(difficulty) * _wallDictionary.Count());
+            int maxWallCount = (int) (MapperUtil.MaxWallByDifficulty[difficulty] * _wallDictionary.Count());
             foreach (var wallElement in 
                 _wallDictionary.Where(wallElement => wallElement.Value > 0))
             {

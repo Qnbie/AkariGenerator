@@ -8,8 +8,8 @@ namespace LevelManager
 {
     public class LevelLoader : MonoBehaviour
     {
-        public Animator transition;
-        public float transitionTime = 1f;
+        //public Animator transition;
+        //public float transitionTime = 1f;
 
         public static Vector2Int GameSize;
         public static Difficulty GameDifficulty;
@@ -23,23 +23,25 @@ namespace LevelManager
         
         public void LoadNextLevel(String nextScene)
         {
-            StartCoroutine(
-                LoadLevel(SceneManager.GetActiveScene().buildIndex + 1)
-                );
+            SceneManager.LoadScene(nextScene);
+
+            /*StartCoroutine(
+                LoadLevel(nextScene)
+                );*/
         }
 
-        IEnumerator LoadLevel(int levelIndex)
+        /*IEnumerator LoadLevel(String nextScene)
         {
             // Play animation
             
-            transition.SetTrigger("Start");
+            //transition.SetTrigger("Start");
             
             // Wait
 
-            yield return new WaitForSeconds(transitionTime);
+            //yield return new WaitForSeconds(transitionTime);
 
             //Load Sceen
-            SceneManager.LoadScene(levelIndex);
-        }
+            SceneManager.LoadScene(nextScene);
+        }*/
     }
 }

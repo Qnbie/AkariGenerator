@@ -1,25 +1,28 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
+using UnityEngine.UI;
+using Utils.Enums;
 
 namespace LevelManager
 {
     public class MainMenu : MonoBehaviour
     {
-
-        public void DifficultyOnClick()
+        private DifficultyButton _difficulty;
+        private SizeButton _size;
+        
+        private void Awake()
         {
-            Debug.Log("difficulty");
+            _difficulty = GetComponentInChildren<DifficultyButton>();
+            _size = GetComponentInChildren<SizeButton>();
         }
-
-        public void SizeOnClick()
-        {
-            Debug.Log("size");
-            
-        }
-
+        
         public void StartGameOnClick()
         {
-            Debug.Log("start");
-            
+            if (_difficulty.IsValid() && _size.IsValid())
+                GetComponent<LevelLoader>().LoadNextLevel(
+                    "GameScene",
+                    _size.GetValue(),
+                    _difficulty.GetValue());
         }
     }
 }
