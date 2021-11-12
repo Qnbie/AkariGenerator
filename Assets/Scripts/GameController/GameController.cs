@@ -16,6 +16,7 @@ namespace GameController
         private GameStateMachine _gameStateMachine;
         private Validator _validator;
         private AlgorithmController _algorithmController;
+        private LevelLoader _levelLoader;
 
         private void Awake()
         {
@@ -23,6 +24,7 @@ namespace GameController
             _gameBoardController = GetComponent<GameBoardController>();
             _gameStateMachine = new GameStateMachine();
             _validator = new Validator(_gameBoardController);
+            _levelLoader = GetComponent<LevelLoader>();
         }
 
         private void Update()
@@ -58,13 +60,13 @@ namespace GameController
 
         private void SetUpGame()
         {
-            _gameBoardController.Puzzle = _algorithmController.GetPuzzle(new Vector2Int(5,5), Difficulty.Easy);
+            _gameBoardController.Puzzle = _algorithmController.GetPuzzle(LevelLoader.GameSize, LevelLoader.GameDifficulty);
             _gameBoardController.Populate(OnSelection);
         }
 
         private void GameOver()
         {
-            GetComponent<LevelLoader>().LoadNextLevel("WinScene");
+            _levelLoader.LoadNextLevel("WinScene");
         }
     }
 }
