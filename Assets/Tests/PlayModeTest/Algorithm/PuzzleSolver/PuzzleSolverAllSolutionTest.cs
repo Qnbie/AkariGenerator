@@ -19,7 +19,7 @@ namespace Tests.PlayModeTest.Algorithm.PuzzleSolver
         [Test]
         public void EasyPlainPuzzleAllSolution()
         {
-            var solutions = _puzzleSolver.FindAllSolutionWithEmptyWalls(TestPuzzleEasy.PlainPuzzle);
+            var solutions = _puzzleSolver.FindSolutionsWithEmptyWalls(TestPuzzleEasy.PlainPuzzle, 5);
             foreach (var solution in solutions)
             {
                 Debug.Log(solution);
@@ -31,7 +31,7 @@ namespace Tests.PlayModeTest.Algorithm.PuzzleSolver
         [Ignore("Not implemented")]
         public void NormalPlainPuzzleAllSolution()
         {
-            var solutions = _puzzleSolver.FindAllSolutionWithEmptyWalls(TestPuzzleNormal.PlainPuzzle);
+            var solutions = _puzzleSolver.FindSolutionsWithEmptyWalls(TestPuzzleNormal.PlainPuzzle, 5);
             foreach (var solution in solutions)
             {
                 Debug.Log(solution);

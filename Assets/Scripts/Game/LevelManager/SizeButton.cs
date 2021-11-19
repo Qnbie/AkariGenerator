@@ -2,7 +2,7 @@
 using UnityEngine.UI;
 using Utils.StaticClasses;
 
-namespace LevelManager
+namespace Game.LevelManager
 {
     public class SizeButton : MonoBehaviour
     {

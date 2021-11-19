@@ -1,6 +1,6 @@
 ﻿using System.Linq;
 
-namespace GameBoard.Tile
+namespace Game.GameBoard.Tile
 {
     public class BadTileController : TileBase
     {

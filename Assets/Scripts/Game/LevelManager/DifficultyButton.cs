@@ -3,7 +3,7 @@ using UnityEngine.UI;
 using Utils.Enums;
 using Utils.StaticClasses;
 
-namespace LevelManager
+namespace Game.LevelManager
 {
     public class DifficultyButton : MonoBehaviour
     {

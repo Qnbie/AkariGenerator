@@ -2,7 +2,7 @@
 using UnityEngine.SceneManagement;
 using Utils.Enums;
 
-namespace LevelManager
+namespace Game.LevelManager
 {
     public class LevelLoader : MonoBehaviour
     {

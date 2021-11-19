@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using GameBoard.Tile;
+using Game.GameBoard.Tile;
 using UnityEngine;
 using Utils.DataStructures;
 
-namespace GameBoard
+namespace Game.GameBoard
 {
     public class GameBoardController : MonoBehaviour
     {

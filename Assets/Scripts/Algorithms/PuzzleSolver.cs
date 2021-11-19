@@ -24,17 +24,16 @@ namespace Algorithms
             _preProcessor = new PreProcessor(validator);
         }
 
-        public List<Solution> FindAllSolutionWithEmptyWalls(Puzzle puzzle)
+        public List<Solution> FindSolutionsWithEmptyWalls(Puzzle puzzle, int numberOfSolution)
         {
             _puzzle = puzzle;
             _finalSolutions = new List<Solution>();
             _implacable = new List<Vector2Int>();
-            for (int i = 0; i < 5; i++)
+            for (int i = 0; i < numberOfSolution; i++)
             {
                 BacktrackFunction(
                     new Solution(),
-                    solutionFound: false,
-                    numberedWall: false);
+                     false);
             }
             return _finalSolutions;
         }
@@ -53,20 +52,14 @@ namespace Algorithms
             _implacable = preProcessedPuzzle.GetElementPositions(TileStates.Implacable);
             BacktrackFunction(
                 new Solution(preProcessedPuzzle.GetElementPositions(TileStates.Lamp)),
-                solutionFound: false, 
                 numberedWall: true);
             return _finalSolutions;
         }
 
         private bool BacktrackFunction(
             Solution solution, 
-            bool solutionFound,
             bool numberedWall)
         {
-            if (solutionFound)
-            {
-                return true;
-            }
             if (_validator.PuzzleIsSolved(new Puzzle(_puzzle), new Solution(solution)))
             {
                 _finalSolutions.Add(new Solution(solution));
@@ -87,15 +80,14 @@ namespace Algorithms
             var nextCandidate = candidates[Random.Range(0, candidates.Count-1)];
             _implacable.Add(nextCandidate);
             solution.Positions.Add(nextCandidate);
-            solutionFound = BacktrackFunction(
+            var solutionFound = BacktrackFunction(
                 solution,
-                false,
                 numberedWall);
-            
+            if (solutionFound)
+                return true;
             solution.Positions.Remove(nextCandidate);
             solutionFound = BacktrackFunction(
                 solution,
-                solutionFound,
                 numberedWall);
             _implacable.Remove(nextCandidate);
             return solutionFound;

@@ -1,12 +1,12 @@
 ﻿using System;
 using Algorithms;
-using GameBoard;
-using GameBoard.Tile;
-using LevelManager;
+using Game.GameBoard;
+using Game.GameBoard.Tile;
+using Game.LevelManager;
 using UnityEngine;
 using Utils.Enums;
 
-namespace GameController
+namespace Game.GameController
 {
     [RequireComponent(typeof(GameBoardController))]
     public class GameController : MonoBehaviour

@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace LevelManager
+namespace Game.LevelManager
 {
     [RequireComponent(typeof(LevelLoader))]
     public class WinSceneManager : MonoBehaviour

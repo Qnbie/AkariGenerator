@@ -26,7 +26,7 @@ namespace Tests.PlayModeTest.Algorithm
         public void LittlePuzzleEasy()
         {
             var puzzle = _generator.GeneratePuzzle(new Vector2Int(5, 5));
-            var solution = _puzzleSolver.FindAllSolutionWithEmptyWalls(puzzle);
+            var solution = _puzzleSolver.FindSolutionsWithEmptyWalls(puzzle,5);
             _wallNumberApplier.ApplyNumbersOnWalls(puzzle, solution, Difficulty.Easy);
         }
         
@@ -34,7 +34,7 @@ namespace Tests.PlayModeTest.Algorithm
         public void LittlePuzzleNormal()
         {
             var puzzle = _generator.GeneratePuzzle(new Vector2Int(5, 5));
-            var solution = _puzzleSolver.FindAllSolutionWithEmptyWalls(puzzle);
+            var solution = _puzzleSolver.FindSolutionsWithEmptyWalls(puzzle,5);
             _wallNumberApplier.ApplyNumbersOnWalls(puzzle, solution, Difficulty.Medium);
         }
         
@@ -42,7 +42,7 @@ namespace Tests.PlayModeTest.Algorithm
         public void LittlePuzzleHard()
         {
             var puzzle = _generator.GeneratePuzzle(new Vector2Int(5, 5));
-            var solution = _puzzleSolver.FindAllSolutionWithEmptyWalls(puzzle);
+            var solution = _puzzleSolver.FindSolutionsWithEmptyWalls(puzzle,5);
             _wallNumberApplier.ApplyNumbersOnWalls(puzzle, solution, Difficulty.Hard);
         }
         
@@ -51,7 +51,7 @@ namespace Tests.PlayModeTest.Algorithm
         public void NormalPuzzleEasy()
         {
             var puzzle = _generator.GeneratePuzzle(new Vector2Int(7,7));
-            var solution = _puzzleSolver.FindAllSolutionWithEmptyWalls(puzzle);
+            var solution = _puzzleSolver.FindSolutionsWithEmptyWalls(puzzle,5);
             _wallNumberApplier.ApplyNumbersOnWalls(puzzle, solution, Difficulty.Easy);
         }
         
@@ -60,7 +60,7 @@ namespace Tests.PlayModeTest.Algorithm
         public void NormalPuzzleNormal()
         {
             var puzzle = _generator.GeneratePuzzle(new Vector2Int(7,7));
-            var solution = _puzzleSolver.FindAllSolutionWithEmptyWalls(puzzle);
+            var solution = _puzzleSolver.FindSolutionsWithEmptyWalls(puzzle,5);
             _wallNumberApplier.ApplyNumbersOnWalls(puzzle, solution, Difficulty.Medium);
         }
         
@@ -69,7 +69,7 @@ namespace Tests.PlayModeTest.Algorithm
         public void NormalPuzzleHard()
         {
             var puzzle = _generator.GeneratePuzzle(new Vector2Int(7,7));
-            var solution = _puzzleSolver.FindAllSolutionWithEmptyWalls(puzzle);
+            var solution = _puzzleSolver.FindSolutionsWithEmptyWalls(puzzle, 5);
             _wallNumberApplier.ApplyNumbersOnWalls(puzzle, solution, Difficulty.Hard);
         }
                 
@@ -78,7 +78,7 @@ namespace Tests.PlayModeTest.Algorithm
         public void BigPuzzleEasy()
         {
             var puzzle = _generator.GeneratePuzzle(new Vector2Int(10,10));
-            var solution = _puzzleSolver.FindAllSolutionWithEmptyWalls(puzzle);
+            var solution = _puzzleSolver.FindSolutionsWithEmptyWalls(puzzle, 5);
             _wallNumberApplier.ApplyNumbersOnWalls(puzzle, solution, Difficulty.Easy);
         }
         
@@ -87,7 +87,7 @@ namespace Tests.PlayModeTest.Algorithm
         public void BigPuzzleNormal()
         {
             var puzzle = _generator.GeneratePuzzle(new Vector2Int(10,10));
-            var solution = _puzzleSolver.FindAllSolutionWithEmptyWalls(puzzle);
+            var solution = _puzzleSolver.FindSolutionsWithEmptyWalls(puzzle, 5);
             _wallNumberApplier.ApplyNumbersOnWalls(puzzle, solution, Difficulty.Medium);
         }
         
@@ -96,7 +96,7 @@ namespace Tests.PlayModeTest.Algorithm
         public void BigPuzzleHard()
         {
             var puzzle = _generator.GeneratePuzzle(new Vector2Int(10,10));
-            var solution = _puzzleSolver.FindAllSolutionWithEmptyWalls(puzzle);
+            var solution = _puzzleSolver.FindSolutionsWithEmptyWalls(puzzle, 5);
             _wallNumberApplier.ApplyNumbersOnWalls(puzzle, solution, Difficulty.Hard);
         }
     }

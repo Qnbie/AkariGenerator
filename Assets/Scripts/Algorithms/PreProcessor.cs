@@ -8,6 +8,8 @@ namespace Algorithms
 {
     public class PreProcessor
     {
+        private const int MaxOptimizationLevel = 5;
+        
         private readonly Validator _validator;
 
         public PreProcessor(Validator validator)
@@ -40,7 +42,7 @@ namespace Algorithms
             // Other wall check
             Boolean optimized = false;
             int optStep = 0;
-            while (!optimized && 5 > optStep)
+            while (!optimized && MaxOptimizationLevel > optStep)
             {
                 optimized = OtherWallCheck(puzzle,numberedWalls);
                 optStep++;

@@ -1,7 +1,7 @@
 ﻿using System;
 using Utils.Enums;
 
-namespace GameController
+namespace Game.GameController
 {
     public class GameStateMachine
     {

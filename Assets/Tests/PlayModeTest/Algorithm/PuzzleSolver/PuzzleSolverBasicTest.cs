@@ -20,7 +20,7 @@ namespace Tests.PlayModeTest.Algorithm.PuzzleSolver
         [Test] public void EmptyPuzzle()
         {
             var tmpPuzzle = new Puzzle(new Vector2Int(3, 3));
-            var solutions = _puzzleSolver.FindAllSolutionWithEmptyWalls(tmpPuzzle);
+            var solutions = _puzzleSolver.FindSolutionsWithEmptyWalls(tmpPuzzle, 5);
             Debug.Log($"\n3x3 middle wall test is done\n{tmpPuzzle}");
             Debug.Log(solutions.Count);
             foreach (var solution in solutions)
@@ -33,7 +33,7 @@ namespace Tests.PlayModeTest.Algorithm.PuzzleSolver
         {
             var tmpPuzzle = new Puzzle(new Vector2Int(3, 3));
             tmpPuzzle.PuzzleMatrix[1][1] = TileStates.Wall;
-            var solutions = _puzzleSolver.FindAllSolutionWithEmptyWalls(tmpPuzzle);
+            var solutions = _puzzleSolver.FindSolutionsWithEmptyWalls(tmpPuzzle, 5);
             Debug.Log($"\n3x3 middle wall test is done\n{tmpPuzzle}");
             Debug.Log(solutions.Count);
             foreach (var solution in solutions)

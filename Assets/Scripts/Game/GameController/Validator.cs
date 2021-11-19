@@ -1,8 +1,8 @@
 ﻿using System.Linq;
-using GameBoard;
+using Game.GameBoard;
 using UnityEngine;
 
-namespace GameController
+namespace Game.GameController
 {
     public class Validator
     {

@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace GameBoard.Tile
+namespace Game.GameBoard.Tile
 {
     [RequireComponent(typeof(TileRenderer), typeof(Collider))]
     public class GoodTileController : TileBase
