@@ -7,37 +7,6 @@ namespace Utils.TestData
 {
     public static class TestPuzzleNormal
     {
-        public static readonly RawPuzzle RawPuzzle = new RawPuzzle(
-            new Vector2Int(10,10),
-            new List<Element>
-            {
-                new Element(new Vector2Int(0,5),TileStates.Wall),
-                new Element(new Vector2Int(1,3),TileStates.Three),
-                new Element(new Vector2Int(1,5),TileStates.Wall),
-                new Element(new Vector2Int(1,7),TileStates.Four),
-                new Element(new Vector2Int(2,1),TileStates.Wall),
-                new Element(new Vector2Int(2,3),TileStates.Wall),
-                new Element(new Vector2Int(2,6),TileStates.Wall),
-                new Element(new Vector2Int(3,2),TileStates.Wall),
-                new Element(new Vector2Int(3,7),TileStates.Three),
-                new Element(new Vector2Int(3,8),TileStates.Wall),
-                new Element(new Vector2Int(4,0),TileStates.Wall),
-                new Element(new Vector2Int(4,1),TileStates.Zero),
-                new Element(new Vector2Int(5,8),TileStates.Wall),
-                new Element(new Vector2Int(5,9),TileStates.Wall),
-                new Element(new Vector2Int(6,1),TileStates.Wall),
-                new Element(new Vector2Int(6,2),TileStates.Wall),
-                new Element(new Vector2Int(6,7),TileStates.Two),
-                new Element(new Vector2Int(7,3),TileStates.One),
-                new Element(new Vector2Int(7,6),TileStates.Two),
-                new Element(new Vector2Int(7,8),TileStates.Two),
-                new Element(new Vector2Int(8,2),TileStates.Two),
-                new Element(new Vector2Int(8,4),TileStates.Zero),
-                new Element(new Vector2Int(8,6),TileStates.Zero),
-                new Element(new Vector2Int(9,4),TileStates.Wall)
-            },
-            Difficulty.Medium);
-        
         public static readonly Puzzle Puzzle = new Puzzle(new List<List<TileStates>>
         {
             new List<TileStates> {TileStates.Empty,TileStates.Empty,TileStates.Empty,TileStates.Empty,TileStates.Empty,TileStates.Wall,TileStates.Empty,TileStates.Empty,TileStates.Empty,TileStates.Empty},

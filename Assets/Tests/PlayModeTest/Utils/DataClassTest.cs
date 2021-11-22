@@ -8,16 +8,6 @@ namespace Tests.PlayModeTest.Utils
     public class DataClassTest
     {
         [Test]
-        public void RawPuzzleTest()
-        {
-            var puzzleA = TestPuzzleEasy.RawPuzzle;
-            var puzzleB = TestPuzzleEasy.RawPuzzle;
-            
-            Assert.True(puzzleA.Equals(puzzleB));
-            Debug.Log("Test case is passed");
-        }
-        
-        [Test]
         public void PuzzleTest()
         {
             var puzzleA = TestPuzzleEasy.Puzzle;

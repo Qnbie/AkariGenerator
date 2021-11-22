@@ -7,25 +7,6 @@ namespace Utils.TestData
 {
     public static class TestPuzzleEasy
     {
-        public static readonly RawPuzzle RawPuzzle = new RawPuzzle(
-            new Vector2Int(7,7),
-            new List<Element>
-            {
-                new Element(new Vector2Int(1,1),TileStates.Wall),
-                new Element(new Vector2Int(1,4),TileStates.Two),
-                new Element(new Vector2Int(1,5),TileStates.Zero),
-                new Element(new Vector2Int(2,1),TileStates.One),
-                new Element(new Vector2Int(2,3),TileStates.Four),
-                new Element(new Vector2Int(3,2),TileStates.Wall),
-                new Element(new Vector2Int(3,4),TileStates.Three),
-                new Element(new Vector2Int(4,3),TileStates.Four),
-                new Element(new Vector2Int(4,5),TileStates.Wall),
-                new Element(new Vector2Int(5,1),TileStates.One),
-                new Element(new Vector2Int(5,2),TileStates.Wall),
-                new Element(new Vector2Int(5,5),TileStates.Wall)
-            },
-            Difficulty.Easy);
-        
         public static readonly Puzzle Puzzle = new Puzzle(new List<List<TileStates>>
         {
             new List<TileStates> {TileStates.Empty,TileStates.Empty,TileStates.Empty,TileStates.Empty,TileStates.Empty,TileStates.Empty,TileStates.Empty},

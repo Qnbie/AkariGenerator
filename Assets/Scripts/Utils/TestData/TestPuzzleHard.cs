@@ -7,76 +7,7 @@ namespace Utils.TestData
 {
     public static class TestPuzzleHard
     {
-        public static readonly RawPuzzle RawPuzzle = new RawPuzzle(
-            new Vector2Int(14,14),
-            new List<Element>
-            {
-                new Element(new Vector2Int(0,0),TileStates.Zero),
-                new Element(new Vector2Int(0,1),TileStates.Zero),
-                new Element(new Vector2Int(0,6),TileStates.Zero),
-                new Element(new Vector2Int(0,8),TileStates.Wall),
-                new Element(new Vector2Int(0,13),TileStates.Wall),
-                
-                new Element(new Vector2Int(1,5),TileStates.Wall),
-                new Element(new Vector2Int(1,9),TileStates.Zero),
-                new Element(new Vector2Int(1,13),TileStates.Wall),
-                
-                new Element(new Vector2Int(2,5),TileStates.Wall),
-                new Element(new Vector2Int(2,10),TileStates.One),
-
-                new Element(new Vector2Int(3,2),TileStates.One),
-                new Element(new Vector2Int(3,3),TileStates.Wall),
-                new Element(new Vector2Int(3,7),TileStates.One),
-                new Element(new Vector2Int(3,8),TileStates.Two),
-                new Element(new Vector2Int(3,10),TileStates.Zero),
-
-                new Element(new Vector2Int(4,1),TileStates.Wall),
-
-                new Element(new Vector2Int(5,0),TileStates.One),
-                new Element(new Vector2Int(5,3),TileStates.One),
-                new Element(new Vector2Int(5,7),TileStates.Wall),
-                new Element(new Vector2Int(5,11),TileStates.One),
-                new Element(new Vector2Int(5,12),TileStates.Zero),
-
-                new Element(new Vector2Int(6,3),TileStates.One),
-                new Element(new Vector2Int(6,5),TileStates.One),
-                new Element(new Vector2Int(6,13),TileStates.One),
-
-                new Element(new Vector2Int(7,0),TileStates.Wall),
-                new Element(new Vector2Int(7,8),TileStates.Zero),
-                new Element(new Vector2Int(7,10),TileStates.Wall),
-
-                new Element(new Vector2Int(8,1),TileStates.Wall),
-                new Element(new Vector2Int(8,2),TileStates.One),
-                new Element(new Vector2Int(8,6),TileStates.One),
-                new Element(new Vector2Int(8,10),TileStates.Zero),
-                new Element(new Vector2Int(8,13),TileStates.Wall),
-
-                new Element(new Vector2Int(9,12),TileStates.Two),
-
-                new Element(new Vector2Int(10,3),TileStates.One),
-                new Element(new Vector2Int(10,5),TileStates.Zero),
-                new Element(new Vector2Int(10,6),TileStates.One),
-                new Element(new Vector2Int(10,10),TileStates.One),
-                new Element(new Vector2Int(10,11),TileStates.One),
-
-                new Element(new Vector2Int(11,3),TileStates.One),
-                new Element(new Vector2Int(11,8),TileStates.One),
-
-                new Element(new Vector2Int(12,0),TileStates.Zero),
-                new Element(new Vector2Int(12,4),TileStates.Wall),
-                new Element(new Vector2Int(12,8),TileStates.One),
-
-                new Element(new Vector2Int(13,0),TileStates.Zero),
-                new Element(new Vector2Int(13,5),TileStates.Wall),
-                new Element(new Vector2Int(13,7),TileStates.One),
-                new Element(new Vector2Int(13,12),TileStates.One),
-                new Element(new Vector2Int(13,13),TileStates.Wall)
-
-            },
-            Difficulty.Hard);
-        
-        public static readonly Puzzle Puzzle = new Puzzle(new List<List<TileStates>>
+       public static readonly Puzzle Puzzle = new Puzzle(new List<List<TileStates>>
         {
             new List<TileStates> {
                 TileStates.Zero,TileStates.Zero,TileStates.Empty,TileStates.Empty,TileStates.Empty,TileStates.Empty,TileStates.Zero,
