@@ -18,10 +18,10 @@ namespace Algorithms
         private List<Vector2Int> _implacable;
 
         
-        public PuzzleSolver(Validator validator)
+        public PuzzleSolver()
         {
-            _validator = validator;
-            _preProcessor = new PreProcessor(validator);
+            _validator = new Validator();
+            _preProcessor = new PreProcessor(_validator);
         }
 
         public List<Solution> FindSolutionsWithEmptyWalls(Puzzle puzzle, int numberOfSolution)

@@ -16,9 +16,8 @@ namespace Tests.PlayModeTest.Algorithm
         [SetUp]
         public void SetUpTest()
         {
-            Validator validator = new Validator();
             _generator = new Generator();
-            _puzzleSolver = new Algorithms.PuzzleSolver(validator);
+            _puzzleSolver = new Algorithms.PuzzleSolver();
             _wallNumberApplier = new WallNumberApplier(_puzzleSolver);
         }
 

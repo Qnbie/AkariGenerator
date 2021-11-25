@@ -13,7 +13,7 @@ namespace Algorithms
         public AlgorithmController()
         {
             _generator = new Generator();
-            _puzzleSolver = new PuzzleSolver(new Validator());
+            _puzzleSolver = new PuzzleSolver();
             _wallNumberApplier = new WallNumberApplier(_puzzleSolver);
         }
 

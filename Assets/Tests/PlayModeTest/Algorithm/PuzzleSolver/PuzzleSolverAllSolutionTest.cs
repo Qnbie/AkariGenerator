@@ -13,7 +13,7 @@ namespace Tests.PlayModeTest.Algorithm.PuzzleSolver
         [SetUp]
         public void StepUpTest()
         {
-            _puzzleSolver = new Algorithms.PuzzleSolver(new Validator());
+            _puzzleSolver = new Algorithms.PuzzleSolver();
         }
 
         [Test]
