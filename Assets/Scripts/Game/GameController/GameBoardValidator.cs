@@ -4,11 +4,11 @@ using UnityEngine;
 
 namespace Game.GameController
 {
-    public class Validator
+    public class GameBoardValidator
     {
         private readonly GameBoardController _gameBoardController;
 
-        public Validator(GameBoardController gameBoardController)
+        public GameBoardValidator(GameBoardController gameBoardController)
         {
             _gameBoardController = gameBoardController;
         }

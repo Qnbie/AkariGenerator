@@ -14,7 +14,7 @@ namespace Game.GameController
 
         private GameBoardController _gameBoardController;
         private GameStateMachine _gameStateMachine;
-        private Validator _validator;
+        private GameBoardValidator _gameBoardValidator;
         private AlgorithmController _algorithmController;
         private LevelLoader _levelLoader;
 
@@ -23,7 +23,7 @@ namespace Game.GameController
             _algorithmController = new AlgorithmController();
             _gameBoardController = GetComponent<GameBoardController>();
             _gameStateMachine = new GameStateMachine();
-            _validator = new Validator(_gameBoardController);
+            _gameBoardValidator = new GameBoardValidator(_gameBoardController);
             _levelLoader = GetComponent<LevelLoader>();
         }
 
@@ -40,7 +40,7 @@ namespace Game.GameController
                 case GameState.ActionPhase:
                     break;
                 case GameState.EndTurnPhase:
-                    if (_validator.BoardIsValid()) GameOver();
+                    if (_gameBoardValidator.BoardIsValid()) GameOver();
                     else _gameStateMachine.NextPhase();
                     break;
                 default:
