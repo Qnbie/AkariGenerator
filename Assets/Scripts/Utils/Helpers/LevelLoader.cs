@@ -12,14 +12,14 @@ namespace Utils.Helpers
         public static Vector2Int GameSize;
         public static Difficulty GameDifficulty;
 
-        public void LoadNextLevel(string nextScene, Vector2Int size, Difficulty difficulty)
+        protected void LoadNextLevel(string nextScene, Vector2Int size, Difficulty difficulty)
         {
             GameSize = size;
             GameDifficulty = difficulty;
             LoadNextLevel(nextScene);
         }
         
-        public void LoadNextLevel(string nextScene)
+        protected void LoadNextLevel(string nextScene)
         {
             SceneManager.LoadScene(nextScene);
 

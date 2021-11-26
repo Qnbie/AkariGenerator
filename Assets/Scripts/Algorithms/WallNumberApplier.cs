@@ -20,7 +20,7 @@ namespace Algorithms
             _wallDictionary = new Dictionary<Vector2Int, int>();
         }
 
-        public Puzzle ApplyNumbersOnWalls(Puzzle puzzle, IEnumerable<Solution> solutions, Difficulty difficulty)
+        public Puzzle ApplyNumbersOnWalls(Puzzle puzzle, List<Solution> solutions, Difficulty difficulty)
         {
             SetUpSolutionDictionary(solutions);
             SetUpWallDictionary(puzzle);
@@ -104,7 +104,7 @@ namespace Algorithms
             }
         }
 
-        private void SetUpSolutionDictionary(IEnumerable<Solution> solutions)
+        private void SetUpSolutionDictionary(List<Solution> solutions)
         {
             foreach (var solution in solutions)
             {

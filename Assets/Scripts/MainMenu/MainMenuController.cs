@@ -1,10 +1,11 @@
-﻿using UnityEngine;
+﻿using MainMenu.Buttons;
+using UnityEngine;
 using Utils.Helpers;
 
-namespace Menu
+namespace MainMenu
 {
     [RequireComponent(typeof(LevelLoader))]
-    public class MainMenu : MonoBehaviour
+    public class MainMenuController : LevelLoader
     {
         private DifficultyButton _difficulty;
         private SizeButton _size;
@@ -18,7 +19,7 @@ namespace Menu
         public void StartGameOnClick()
         {
             if (_difficulty.IsValid() && _size.IsValid())
-                GetComponent<LevelLoader>().LoadNextLevel(
+                LoadNextLevel(
                     "GameScene",
                     _size.GetValue(),
                     _difficulty.GetValue());

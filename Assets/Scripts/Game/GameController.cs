@@ -2,21 +2,21 @@
 using Algorithms;
 using Game.GameBoard;
 using Game.GameBoard.Tile;
+using Game.GameHelpers;
 using UnityEngine;
 using Utils.Enums;
 using Utils.Helpers;
 
-namespace Game.GameController
+namespace Game
 {
     [RequireComponent(typeof(GameBoardController))]
-    public class GameController : MonoBehaviour
+    public class GameController : LevelLoader
     {
 
         private GameBoardController _gameBoardController;
         private GameStateMachine _gameStateMachine;
         private GameBoardValidator _gameBoardValidator;
         private AlgorithmController _algorithmController;
-        private LevelLoader _levelLoader;
 
         private void Awake()
         {
@@ -24,7 +24,6 @@ namespace Game.GameController
             _gameBoardController = GetComponent<GameBoardController>();
             _gameStateMachine = new GameStateMachine();
             _gameBoardValidator = new GameBoardValidator(_gameBoardController);
-            _levelLoader = GetComponent<LevelLoader>();
         }
 
         private void Update()
@@ -66,7 +65,7 @@ namespace Game.GameController
 
         private void GameOver()
         {
-            _levelLoader.LoadNextLevel("WinScene");
+            LoadNextLevel("WinScene");
         }
     }
 }

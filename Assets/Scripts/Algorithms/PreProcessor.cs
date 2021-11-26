@@ -52,7 +52,7 @@ namespace Algorithms
             return puzzle;
         }
 
-        private bool OtherWallCheck(Puzzle puzzle, IEnumerable<Vector2Int> numberedWalls)
+        private bool OtherWallCheck(Puzzle puzzle, List<Vector2Int> numberedWalls)
         {
             var otherWallsAreCorrect = true;
             foreach (var wall in numberedWalls)
@@ -64,13 +64,13 @@ namespace Algorithms
                     }
                     else
                     {
-                        otherWallsAreCorrect = SatisfyWallIfItCan(wall.x, wall.y, puzzle);
+                        otherWallsAreCorrect = SatisfyWallIfPossible(wall.x, wall.y, puzzle);
                     }
 
             return otherWallsAreCorrect;
         }
         
-        private bool SatisfyWallIfItCan(int posX, int posY, Puzzle puzzle)
+        private bool SatisfyWallIfPossible(int posX, int posY, Puzzle puzzle)
         {
             var emptyCnt = 0;
             if (posX + 1 < puzzle.SizeX() &&

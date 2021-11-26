@@ -65,13 +65,13 @@ namespace Tests.PlayModeTest.Algorithm
             {
                 for (int j = 0; j < 2; j++)
                 {
-                    Assert.True(_validator.LampsCheck(TestLamp.GoodYPuzzles[i], TestLamp.YSolutions[j]));
+                    Assert.True(_validator.CheckLamps(TestLamp.GoodYPuzzles[i], TestLamp.YSolutions[j]));
                     Debug.Log($"{i} GoodYPuzzle {j} YSolution is passed");
                 }
             }
             for (int j = 0; j < 2; j++)
             {
-                Assert.False(_validator.LampsCheck(TestLamp.BadYPuzzles, TestLamp.YSolutions[j]));
+                Assert.False(_validator.CheckLamps(TestLamp.BadYPuzzles, TestLamp.YSolutions[j]));
                 Debug.Log($"BadYPuzzle {j} YSolution is passed");
             }
             
@@ -80,14 +80,14 @@ namespace Tests.PlayModeTest.Algorithm
             {
                 for (int j = 0; j < 2; j++)
                 {
-                    Assert.True(_validator.LampsCheck(TestLamp.GoodXPuzzles[i], TestLamp.XSolutions[j]));
+                    Assert.True(_validator.CheckLamps(TestLamp.GoodXPuzzles[i], TestLamp.XSolutions[j]));
                     Debug.Log($"{i} GoodXPuzzle {j} XSolution is passed");
 
                 }
             }
             for (int j = 0; j < 2; j++)
             {
-                Assert.False(_validator.LampsCheck(TestLamp.BadXPuzzles, TestLamp.XSolutions[j]));
+                Assert.False(_validator.CheckLamps(TestLamp.BadXPuzzles, TestLamp.XSolutions[j]));
                 Debug.Log($"BadXPuzzle {j} XSolution is passed");
             }
         }

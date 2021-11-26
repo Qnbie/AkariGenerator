@@ -3,7 +3,7 @@ using UnityEngine.UI;
 using Utils.Enums;
 using Utils.Helpers;
 
-namespace Menu
+namespace MainMenu.Buttons
 {
     public class DifficultyButton : MonoBehaviour
     {

@@ -27,7 +27,7 @@ namespace Algorithms
         
         private bool CheckRules(Puzzle puzzle)
         {
-            if (!LampsCheck(puzzle, new Solution(puzzle.GetElementPositions(TileStates.Lamp))))
+            if (!CheckLamps(puzzle, new Solution(puzzle.GetElementPositions(TileStates.Lamp))))
                 return false;
             for (int x = 0; x < puzzle.SizeX(); x++)
             {
@@ -42,7 +42,7 @@ namespace Algorithms
             return true;
         }
 
-        public bool LampsCheck(Puzzle puzzle, Solution solution)
+        public bool CheckLamps(Puzzle puzzle, Solution solution)
         {
             for (var i = 0; i < solution.Count; i++)
             {

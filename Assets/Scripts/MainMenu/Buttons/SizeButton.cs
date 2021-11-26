@@ -2,7 +2,7 @@
 using UnityEngine.UI;
 using Utils.Helpers;
 
-namespace Menu
+namespace MainMenu.Buttons
 {
     public class SizeButton : MonoBehaviour
     {

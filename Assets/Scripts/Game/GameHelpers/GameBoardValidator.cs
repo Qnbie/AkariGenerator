@@ -2,7 +2,7 @@
 using Game.GameBoard;
 using UnityEngine;
 
-namespace Game.GameController
+namespace Game.GameHelpers
 {
     public class GameBoardValidator
     {
