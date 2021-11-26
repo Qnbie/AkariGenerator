@@ -8,7 +8,7 @@ namespace Game.GameBoard.Tile
     {
         public bool isSelected;
         public List<TileBase> neighbours;
-        public Vector2 Position { get; set; }
+        public Vector2 position;
         protected TileRenderer MyTileRenderer;
 
         private void Awake()

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Utils.Enums;
 
-namespace Utils.StaticClasses
+namespace Utils.Helpers
 {
     public static class MapperUtil
     {

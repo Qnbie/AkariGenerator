@@ -3,7 +3,7 @@ using System.Linq;
 using UnityEngine;
 using Utils.DataStructures;
 using Utils.Enums;
-using Utils.StaticClasses;
+using Utils.Helpers;
 
 namespace Algorithms
 {

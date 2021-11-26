@@ -1,9 +1,9 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 using Utils.Enums;
-using Utils.StaticClasses;
+using Utils.Helpers;
 
-namespace Game.LevelManager
+namespace Menu
 {
     public class DifficultyButton : MonoBehaviour
     {

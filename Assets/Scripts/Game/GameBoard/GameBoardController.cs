@@ -36,7 +36,7 @@ namespace Game.GameBoard
                         tile.MyNumber = (int) Puzzle.PuzzleMatrix[i][j];
                         tile.transform.position = position;
                         tile.name = "Tile " + i + " " + j;
-                        tile.Position = new Vector2(i, j);
+                        tile.position = new Vector2(i, j);
                         TileMatrix[i].Add(tile);
                     }
                     else
@@ -45,7 +45,7 @@ namespace Game.GameBoard
                         tile.OnSelect += onSelection;
                         tile.transform.position = position;
                         tile.name = "Tile " + i + " " + j;
-                        tile.Position = new Vector2(i, j);
+                        tile.position = new Vector2(i, j);
                         TileMatrix[i].Add(tile);
                     }
                 }

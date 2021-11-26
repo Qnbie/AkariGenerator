@@ -48,6 +48,5 @@ namespace Game.GameBoard.Tile
             OnSelect?.Invoke(this);
         }
     }
-
     public delegate void IsSelectedDelegate(GoodTileController selectedTile);
 }

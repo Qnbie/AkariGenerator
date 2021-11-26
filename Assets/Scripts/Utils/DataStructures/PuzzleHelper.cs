@@ -1,5 +1,5 @@
 ﻿using Utils.Enums;
-using Utils.StaticClasses;
+using Utils.Helpers;
 
 namespace Utils.DataStructures
 {

@@ -2,9 +2,9 @@
 using Algorithms;
 using Game.GameBoard;
 using Game.GameBoard.Tile;
-using Game.LevelManager;
 using UnityEngine;
 using Utils.Enums;
+using Utils.Helpers;
 
 namespace Game.GameController
 {
@@ -51,9 +51,9 @@ namespace Game.GameController
         private void OnSelection(GoodTileController selectedTile)
         {
             if(selectedTile.isSelected)
-                _gameBoardController.LightOnAt(selectedTile.Position);
+                _gameBoardController.LightOnAt(selectedTile.position);
             else
-                _gameBoardController.LightOffAt(selectedTile.Position);
+                _gameBoardController.LightOffAt(selectedTile.position);
             
             _gameStateMachine.NextPhase();
         }        

@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
+using Utils.Helpers;
 
-namespace Game.LevelManager
+namespace Menu
 {
     [RequireComponent(typeof(LevelLoader))]
     public class MainMenu : MonoBehaviour

@@ -1,9 +1,8 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
-using Utils.DataStructures;
 using Utils.Enums;
 
-namespace Utils.StaticClasses
+namespace Utils.Helpers
 {
     public static class PuzzleUtil
     {

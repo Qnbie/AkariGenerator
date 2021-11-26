@@ -8,12 +8,9 @@ namespace Algorithms
     public class Generator
     {
         private List<Vector2Int> _walls;
-        private List<Vector2Int> _lamps;
         private List<Vector2Int> _candidates;
-        private Solution _solution;
 
-        public Puzzle GeneratePuzzle(
-            Vector2Int size)
+        public Puzzle GeneratePuzzle(Vector2Int size)
         {
             var puzzle = new Puzzle(size);
             UpdateCandidates(puzzle);

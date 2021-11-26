@@ -1,6 +1,6 @@
 ﻿using NUnit.Framework;
 using UnityEngine;
-using Utils.StaticClasses;
+using Utils.Helpers;
 using Utils.TestData;
 
 namespace Tests.PlayModeTest.Utils

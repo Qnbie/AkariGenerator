@@ -1,8 +1,8 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
-using Utils.StaticClasses;
+using Utils.Helpers;
 
-namespace Game.LevelManager
+namespace Menu
 {
     public class SizeButton : MonoBehaviour
     {

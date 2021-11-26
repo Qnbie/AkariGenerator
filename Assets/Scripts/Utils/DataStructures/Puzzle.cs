@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using UnityEngine;
 using Utils.Enums;
-using Utils.StaticClasses;
+using Utils.Helpers;
 
 namespace Utils.DataStructures
 {
