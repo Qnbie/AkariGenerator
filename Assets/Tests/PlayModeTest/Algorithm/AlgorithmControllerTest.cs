@@ -24,18 +24,16 @@ namespace Tests.PlayModeTest.Algorithm
         }
         
         [Test]
-        [Ignore("Not implemented")]
         public void GetMediumPuzzle()
         {
-            var puzzle = _algorithmController.GetPuzzle(new Vector2Int(10,10), Difficulty.Medium);
+            var puzzle = _algorithmController.GetPuzzle(new Vector2Int(7,7), Difficulty.Medium);
             Debug.Log($"Generation is done \n {puzzle}");
         }
         
         [Test]
-        [Ignore("Not implemented")]
         public void GetHardPuzzle()
         {
-            var puzzle = _algorithmController.GetPuzzle(new Vector2Int(14,14), Difficulty.Hard);
+            var puzzle = _algorithmController.GetPuzzle(new Vector2Int(9,9), Difficulty.Hard);
             Debug.Log($"Generation is done \n {puzzle}");
         }
     }
