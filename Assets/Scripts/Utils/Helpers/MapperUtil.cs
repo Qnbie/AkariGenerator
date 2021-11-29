@@ -27,8 +27,8 @@ namespace Utils.Helpers
             new List<Tuple<Vector2Int, bool>>
             {
                 new Tuple<Vector2Int, bool>(new Vector2Int(5, 5), true),
-                new Tuple<Vector2Int, bool>(new Vector2Int(10, 10), false),
-                new Tuple<Vector2Int, bool>(new Vector2Int(14, 14), false)
+                new Tuple<Vector2Int, bool>(new Vector2Int(7, 7), true),
+                new Tuple<Vector2Int, bool>(new Vector2Int(9, 9), true)
             };
     }
 }

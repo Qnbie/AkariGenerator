@@ -68,7 +68,7 @@ namespace Algorithms
                 
             }
             puzzle.TurnOfLamps();
-            
+            puzzle.DifficultyLevel = difficulty;
             return puzzle;
         }
 
@@ -98,6 +98,7 @@ namespace Algorithms
 
         private void SetUpWallDictionary(Puzzle puzzle)
         {
+            _wallDictionary.Clear();
             foreach (var wallPos in puzzle.GetElementPositions(TileStates.Wall))
             {
                 _wallDictionary.Add(wallPos,0);
@@ -106,6 +107,7 @@ namespace Algorithms
 
         private void SetUpSolutionDictionary(List<Solution> solutions)
         {
+            _solutionDictionary.Clear();
             foreach (var solution in solutions)
             {
                 foreach (var position in solution.Positions)

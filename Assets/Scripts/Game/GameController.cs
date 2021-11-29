@@ -59,8 +59,9 @@ namespace Game
 
         private void SetUpGame()
         {
-            _gameBoardController.Puzzle = _algorithmController.GetPuzzle(LevelLoader.GameSize, LevelLoader.GameDifficulty);
-            _gameBoardController.Populate(OnSelection);
+            _gameBoardController.Populate(
+                _algorithmController.GetPuzzle(LevelLoader.GameSize, LevelLoader.GameDifficulty),
+                OnSelection);
         }
 
         private void GameOver()

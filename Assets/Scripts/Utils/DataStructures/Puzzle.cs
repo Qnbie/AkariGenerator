@@ -10,7 +10,7 @@ namespace Utils.DataStructures
 {
     public partial class Puzzle : IEquatable<Puzzle>
     {
-        public readonly Difficulty DifficultyLevel;
+        public Difficulty DifficultyLevel;
         public readonly List<List<TileStates>> PuzzleMatrix;
 
         public Puzzle(Puzzle otherPuzzle)

@@ -11,29 +11,30 @@ namespace Game.GameBoard
         public GoodTileController goodTilePrefab;
         public BadTileController badTilePrefab;
         public float offset = 1f;
-        public Puzzle Puzzle;
+        public Puzzle MyPuzzle;
         public Vector2 baseSize = new Vector2(10, 10);
 
         public readonly List<List<TileBase>> TileMatrix = new List<List<TileBase>>();
 
-        public void Populate(IsSelectedDelegate onSelection)
+        public void Populate(Puzzle puzzle, IsSelectedDelegate onSelection)
         {
-            float calculatedSizeX = (baseSize.x - (Puzzle.SizeX() - 1) * offset) / Puzzle.SizeX();
-            float calculatedSizeY = (baseSize.y - (Puzzle.SizeY() - 1) * offset) / Puzzle.SizeY();
-            for (var i = 0; i < Puzzle.SizeX(); i++)
+            
+            float calculatedSizeX = (baseSize.x - (MyPuzzle.SizeX() - 1) * offset) / MyPuzzle.SizeX();
+            float calculatedSizeY = (baseSize.y - (MyPuzzle.SizeY() - 1) * offset) / MyPuzzle.SizeY();
+            for (var i = 0; i < MyPuzzle.SizeX(); i++)
             {
                 TileMatrix.Add(new List<TileBase>());
-                for (var j = 0; j < Puzzle.SizeY(); j++)
+                for (var j = 0; j < MyPuzzle.SizeY(); j++)
                 {
                     var position = new Vector3(
                         i * calculatedSizeX + i * offset,
                         j * calculatedSizeY + j * offset,
                         transform.position.z);
                     
-                    if (Puzzle.PuzzleMatrix[i][j] >= 0 && (int)Puzzle.PuzzleMatrix[i][j] <= 5)
+                    if (MyPuzzle.PuzzleMatrix[i][j] >= 0 && (int)MyPuzzle.PuzzleMatrix[i][j] <= 5)
                     {
                         BadTileController tile = Instantiate(badTilePrefab, Vector3.zero, Quaternion.identity);
-                        tile.MyNumber = (int) Puzzle.PuzzleMatrix[i][j];
+                        tile.MyNumber = (int) MyPuzzle.PuzzleMatrix[i][j];
                         tile.transform.position = position;
                         tile.name = "Tile " + i + " " + j;
                         tile.position = new Vector2(i, j);
@@ -56,24 +57,24 @@ namespace Game.GameBoard
 
         private void CalculateNeighbours()
         {
-            for (var i = 0; i < Puzzle.SizeX(); i++)
-            for (var j = 0; j < Puzzle.SizeY(); j++)
+            for (var i = 0; i < MyPuzzle.SizeX(); i++)
+            for (var j = 0; j < MyPuzzle.SizeY(); j++)
             {
-                if(i + 1 < Puzzle.SizeX())
+                if(i + 1 < MyPuzzle.SizeX())
                     TileMatrix[i][j].neighbours
-                        .Add(TileMatrix[ (i + 1) % Puzzle.SizeX()][j % Puzzle.SizeY()]);
+                        .Add(TileMatrix[ (i + 1) % MyPuzzle.SizeX()][j % MyPuzzle.SizeY()]);
                 
-                if (j + 1 < Puzzle.SizeY()) 
+                if (j + 1 < MyPuzzle.SizeY()) 
                     TileMatrix[i][j].neighbours
-                        .Add(TileMatrix[ i % Puzzle.SizeX()][(j + 1) % Puzzle.SizeY()]);
+                        .Add(TileMatrix[ i % MyPuzzle.SizeX()][(j + 1) % MyPuzzle.SizeY()]);
                 
                 if (i-1 >= 0)
                     TileMatrix[i][j].neighbours
-                        .Add(TileMatrix[ Math.Abs(i - 1) % Puzzle.SizeX()][j % Puzzle.SizeY()]);
+                        .Add(TileMatrix[ Math.Abs(i - 1) % MyPuzzle.SizeX()][j % MyPuzzle.SizeY()]);
                 
                 if (j-1 >= 0)
                     TileMatrix[i][j].neighbours
-                        .Add(TileMatrix[ i % Puzzle.SizeX()][Math.Abs(j - 1) % Puzzle.SizeY()]);
+                        .Add(TileMatrix[ i % MyPuzzle.SizeX()][Math.Abs(j - 1) % MyPuzzle.SizeY()]);
             }
         }
 
@@ -85,14 +86,14 @@ namespace Game.GameBoard
             int index = 0;
             while (!(isStop[0] & isStop[1] & isStop[2] & isStop[3]))
             {
-                if (!isStop[0] && baseX + 1 + index < Puzzle.SizeX())
+                if (!isStop[0] && baseX + 1 + index < MyPuzzle.SizeX())
                 {
                     if (!TileMatrix[baseX + 1 + index][baseY].LightOn())
                         isStop[0] = true;
                 }
                 else isStop[0] = true;
 
-                if (!isStop[1] && baseY + 1 + index < Puzzle.SizeY())
+                if (!isStop[1] && baseY + 1 + index < MyPuzzle.SizeY())
                 {
                     if (!TileMatrix[baseX][baseY + 1 + index].LightOn()) 
                         isStop[1] = true;
@@ -124,13 +125,13 @@ namespace Game.GameBoard
             var index = 0;
             while (!(flags[0] & flags[1] & flags[2] & flags[3]))
             {
-                if (!flags[0] && baseX + 1 + index < Puzzle.SizeX())
+                if (!flags[0] && baseX + 1 + index < MyPuzzle.SizeX())
                 {
                     if (!TileMatrix[baseX + 1 + index][baseY].LightOff()) flags[0] = true;
                 }
                 else flags[0] = true;
 
-                if (!flags[1] && baseY + 1 + index < Puzzle.SizeY())
+                if (!flags[1] && baseY + 1 + index < MyPuzzle.SizeY())
                 {
                     if (!TileMatrix[baseX][baseY + 1 + index].LightOff()) flags[1] = true;
                 }
