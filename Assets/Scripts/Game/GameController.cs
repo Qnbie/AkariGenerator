@@ -49,7 +49,7 @@ namespace Game
         
         private void OnSelection(GoodTileController selectedTile)
         {
-            if(selectedTile.isSelected)
+            if(selectedTile.lampPlaced)
                 _gameBoardController.LightOnAt(selectedTile.position);
             else
                 _gameBoardController.LightOffAt(selectedTile.position);

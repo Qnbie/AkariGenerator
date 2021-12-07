@@ -27,56 +27,62 @@ namespace Utils.DataStructures
 
         public void TurnOnLamps(Solution lampPositions)
         {
-            AddElements(lampPositions.Positions,TileStates.Lamp);
-            foreach (var lampPos in lampPositions.Positions)
+            if (lampPositions.Positions != null)
             {
-                var isStop = new bool[4];
-                var index = 0;
-                // ReSharper disable once ConditionIsAlwaysTrueOrFalse
-                while (!(isStop[0] & isStop[1] & isStop[2] & isStop[3]))
+                AddElements(lampPositions.Positions, TileStates.Lamp);
+                foreach (var lampPos in lampPositions.Positions)
                 {
-                    if (!isStop[0])
-                        if( lampPos.x + 1 + index < SizeX())
-                        {
-                            if ((int)PuzzleMatrix[lampPos.x + 1 + index][lampPos.y] < 6)
-                                isStop[0] = true;
-                            else if (PuzzleMatrix[lampPos.x + 1 + index][lampPos.y] == TileStates.Empty ||
-                                     PuzzleMatrix[lampPos.x + 1 + index][lampPos.y] == TileStates.Implacable)
-                                PuzzleMatrix[lampPos.x + 1 + index][lampPos.y] = TileStates.Lit;
-                        }
-                        else isStop[0] = true;
-                    if (!isStop[1])
-                        if( lampPos.x - 1 - index >= 0)
-                        {
-                            if ((int)PuzzleMatrix[lampPos.x - 1 - index][lampPos.y] < 6)
-                                isStop[1] = true;
-                            else if (PuzzleMatrix[lampPos.x - 1 - index][lampPos.y] == TileStates.Empty ||
-                                     PuzzleMatrix[lampPos.x - 1 - index][lampPos.y] == TileStates.Implacable)
-                                PuzzleMatrix[lampPos.x - 1 - index][lampPos.y] = TileStates.Lit;
-                        }
-                        else isStop[1] = true;
-                    if (!isStop[2])
-                        if( lampPos.y + 1 + index < SizeY())
-                        {
-                            if ((int)PuzzleMatrix[lampPos.x][lampPos.y + 1 + index] < 6)
-                                isStop[2] = true;
-                            else if (PuzzleMatrix[lampPos.x][lampPos.y + 1 + index] == TileStates.Empty ||
-                                     PuzzleMatrix[lampPos.x][lampPos.y + 1 + index] == TileStates.Implacable)
-                                PuzzleMatrix[lampPos.x][lampPos.y + 1 + index] = TileStates.Lit;
-                        }
-                        else isStop[2] = true;
-                    if (!isStop[3])
-                        if( lampPos.y - 1 - index >= 0)
-                        {
-                            if ((int)PuzzleMatrix[lampPos.x][lampPos.y - 1 - index] < 6)
-                                isStop[3] = true;
-                            else if (PuzzleMatrix[lampPos.x][lampPos.y - 1 - index] == TileStates.Empty ||
-                                     PuzzleMatrix[lampPos.x][lampPos.y - 1 - index] == TileStates.Implacable)
-                                PuzzleMatrix[lampPos.x][lampPos.y - 1 - index] = TileStates.Lit;
-                        }
-                        else isStop[3] = true;
+                    var isStop = new bool[4];
+                    var index = 0;
+                    // ReSharper disable once ConditionIsAlwaysTrueOrFalse
+                    while (!(isStop[0] & isStop[1] & isStop[2] & isStop[3]))
+                    {
+                        if (!isStop[0])
+                            if (lampPos.x + 1 + index < SizeX())
+                            {
+                                if ((int) PuzzleMatrix[lampPos.x + 1 + index][lampPos.y] < 6)
+                                    isStop[0] = true;
+                                else if (PuzzleMatrix[lampPos.x + 1 + index][lampPos.y] == TileStates.Empty ||
+                                         PuzzleMatrix[lampPos.x + 1 + index][lampPos.y] == TileStates.Implacable)
+                                    PuzzleMatrix[lampPos.x + 1 + index][lampPos.y] = TileStates.Lit;
+                            }
+                            else isStop[0] = true;
 
-                    index++;
+                        if (!isStop[1])
+                            if (lampPos.x - 1 - index >= 0)
+                            {
+                                if ((int) PuzzleMatrix[lampPos.x - 1 - index][lampPos.y] < 6)
+                                    isStop[1] = true;
+                                else if (PuzzleMatrix[lampPos.x - 1 - index][lampPos.y] == TileStates.Empty ||
+                                         PuzzleMatrix[lampPos.x - 1 - index][lampPos.y] == TileStates.Implacable)
+                                    PuzzleMatrix[lampPos.x - 1 - index][lampPos.y] = TileStates.Lit;
+                            }
+                            else isStop[1] = true;
+
+                        if (!isStop[2])
+                            if (lampPos.y + 1 + index < SizeY())
+                            {
+                                if ((int) PuzzleMatrix[lampPos.x][lampPos.y + 1 + index] < 6)
+                                    isStop[2] = true;
+                                else if (PuzzleMatrix[lampPos.x][lampPos.y + 1 + index] == TileStates.Empty ||
+                                         PuzzleMatrix[lampPos.x][lampPos.y + 1 + index] == TileStates.Implacable)
+                                    PuzzleMatrix[lampPos.x][lampPos.y + 1 + index] = TileStates.Lit;
+                            }
+                            else isStop[2] = true;
+
+                        if (!isStop[3])
+                            if (lampPos.y - 1 - index >= 0)
+                            {
+                                if ((int) PuzzleMatrix[lampPos.x][lampPos.y - 1 - index] < 6)
+                                    isStop[3] = true;
+                                else if (PuzzleMatrix[lampPos.x][lampPos.y - 1 - index] == TileStates.Empty ||
+                                         PuzzleMatrix[lampPos.x][lampPos.y - 1 - index] == TileStates.Implacable)
+                                    PuzzleMatrix[lampPos.x][lampPos.y - 1 - index] = TileStates.Lit;
+                            }
+                            else isStop[3] = true;
+
+                        index++;
+                    }
                 }
             }
         }

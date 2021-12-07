@@ -24,7 +24,7 @@ namespace Algorithms
             _preProcessor = new PreProcessor(_validator);
         }
 
-        public List<Solution> FindSolutionsWithEmptyWalls(Puzzle puzzle, int numberOfSolution)
+        public List<Solution> FindSolutionsWithEmptyWalls(Puzzle puzzle, int numberOfSolution = 5)
         {
             _puzzle = puzzle;
             _finalSolutions = new List<Solution>();

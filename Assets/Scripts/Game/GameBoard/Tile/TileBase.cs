@@ -6,7 +6,7 @@ namespace Game.GameBoard.Tile
     [RequireComponent(typeof(TileRenderer))]
     public abstract class TileBase : MonoBehaviour
     {
-        public bool isSelected;
+        public bool lampPlaced;
         public List<TileBase> neighbours;
         public Vector2 position;
         protected TileRenderer MyTileRenderer;
@@ -16,7 +16,7 @@ namespace Game.GameBoard.Tile
             MyTileRenderer = GetComponent<TileRenderer>();
             MyTileRenderer.SetUp();
             neighbours = new List<TileBase>();
-            isSelected = false;
+            lampPlaced = false;
         }
 
         public abstract bool LightOn();

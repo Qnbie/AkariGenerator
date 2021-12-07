@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
+using System.Threading;
 using Algorithms;
 using NUnit.Framework;
 using UnityEngine;
@@ -15,7 +16,7 @@ namespace Tests.PlayModeTest
         private AlgorithmController _algorithmController;
         private Stopwatch _stopwatch;
 
-        private const int TestCount = 100;
+        private const int TestCount = 10;
 
         [SetUp]
         public void SetUpTest()
@@ -24,6 +25,12 @@ namespace Tests.PlayModeTest
             _stopwatch = new Stopwatch();
         }
 
+        [Test]
+        public void PuzzleEasy3X3()
+        {
+            Measure(3, 3, Difficulty.Easy);
+        }
+        
         [Test]
         public void PuzzleEasy()
         {

@@ -1,0 +1,288 @@
+﻿@startuml
+'https://plantuml.com/class-diagram
+!theme cerulean
+
+hide circle
+
+namespace Algorithms{
+    class AlgorithmController{
+      + Puzzle GetPuzzle(Vector2Int size, Difficulty difficulty)
+    }
+    
+    class Generator{
+      - List<Vector2Int> _walls
+      - List<Vector2Int> _candidates
+    
+      + Puzzle GeneratePuzzle(Vector2Int size)
+      - void UpdateCandidates(Puzzle puzzle)
+      - void PickCandidates(Puzzle puzzle)
+    }
+    
+    class PreProcessor{
+      - const int MaxOptimizationLevel
+    
+      + PreProcessor(Validator validator)
+      + Puzzle Process(Puzzle puzzle)
+      - bool OtherWallCheck(Puzzle puzzle, IEnumerable<Vector2Int> numberedWalls)
+      - bool SatisfyWallIfItCan(int posX, int posY, Puzzle puzzle)
+    }
+    
+    class PuzzleSolver{
+      - Puzzle _puzzle 
+      - List<Solution> _finalSolutions
+      - List<Vector2Int> _walls
+      - List<Vector2Int> _implacable 
+     
+      + List<Solution> FindSolutionsWithEmptyWalls(Puzzle puzzle, int numberOfSolution)
+      + List<Solution> FindSingleSolutionWithNumberedWalls(Puzzle puzzle)
+      - bool BacktrackFunction(Solution solution, bool numberedWall)
+      - List<Vector2Int> CalculateCandidates(Solution solution)
+      - bool WallsAreUnsatisfiable(Puzzle puzzle, Solution solution)
+      - bool CanBeSatisfied(int posX, int posY, Puzzle puzzle)
+    }
+    
+    class Validator{
+      + bool PuzzleIsSolved(Puzzle puzzle, Solution solution)
+      - bool PuzzleIsFull(Puzzle puzzle)
+      - bool CheckRules(Puzzle puzzle)
+      + bool LampsCheck(Puzzle puzzle, Solution solution)
+      - bool LampsAreCorrectY(int x, int minY, int maxY, Puzzle puzzle)
+      - bool LampsAreCorrectX(int y, int minX, int maxX, Puzzle puzzle)
+      + bool WallIsSatisfied(int posX, int posY, Puzzle puzzle)
+    }
+    
+    class WallNumberApplier{
+      + WallNumberApplier(PuzzleSolver puzzleSolver)
+      + Puzzle ApplyNumbersOnWalls(Puzzle puzzle, IEnumerable<Solution> solutions, Difficulty difficulty)
+      - bool CanBeZero(Vector2Int wallPos, Puzzle puzzle)
+      - void IncrementWalls(Vector2Int topSolution)
+      - void IncrementWallIfPossible(Vector2Int position)
+      - void SetUpWallDictionary(Puzzle puzzle)
+      - void SetUpSolutionDictionary(IEnumerable<Solution> solutions)
+    }
+}
+Algorithms.AlgorithmController <-- Algorithms.WallNumberApplier
+Algorithms.AlgorithmController <--- Algorithms.PuzzleSolver
+Algorithms.AlgorithmController <-- Algorithms.Generator
+
+Algorithms.PuzzleSolver <-- Algorithms.PreProcessor
+Algorithms.PuzzleSolver <-- Algorithms.Validator
+
+Algorithms.PreProcessor <- Algorithms.Validator
+
+namespace Game{
+
+    class GameController <MonoBehaviour>{
+        - void Awake()
+        - void Update()
+        - void OnSelection(GoodTileController selectedTile)
+        - void SetUpGame()
+        - void GameOver()
+    }
+
+    namespace GameHelpers{
+        class GameBoardValidator{
+          + GameBoardValidator(GameBoardController gameBoardController)
+          + bool BoardIsValid()
+        }
+        
+        class GameStateMachine{
+          + void NextPhase()
+        }
+    }
+    namespace Board{
+        class GameBoardController <MonoBehaviour>{
+          + Puzzle Puzzle
+          + Vector2 baseSize
+          + void Populate(IsSelectedDelegate onSelection)
+          - void CalculateNeighbours()
+          + void LightOnAt(Vector2 selectedTilePosition)
+          + void LightOffAt(Vector2 selectedTilePosition)
+        }
+        
+        namespace Tile{
+            abstract class TileBase <MonoBehaviour>{
+              + bool isSelected 
+              + List<TileBase> neighbours 
+              + Vector2 position 
+            
+              - void Awake()
+              + abstract bool LightOn() 
+              + abstract bool LightOff() 
+              + abstract bool IsValid() 
+            }
+            
+            class TileRenderer <MonoBehaviour>{
+              + void SetUp()
+              + void NotAllowed()
+              + void Allowed()
+              + void AddSelection()
+              + void RemoveSelection()
+              + void TurnOn()
+              + void TurnOff()
+              + void SetNumber(int value)
+            }
+            
+            class GoodTileController <TileBase>{
+              + event IsSelectedDelegate OnSelect 
+              - int lightCounter 
+              - bool IsLighted
+                
+              + override bool LightOn()
+              + override bool LightOff()
+              + override bool IsValid()
+              - void OnMouseDown()
+            
+            }
+            
+            class BadTileController <TileBase>{
+              - int _myNumber
+              + override bool LightOn()
+              + override bool LightOff()
+              + override bool IsValid()
+            }
+        }
+    }
+}
+Game.GameController <- Algorithms.AlgorithmController
+Game.GameController <--- Game.Board.GameBoardController
+Game.GameController <-- Game.GameHelpers.GameBoardValidator
+Game.GameController <-- Game.GameHelpers.GameStateMachine
+
+Game.Board.GameBoardController <--- Game.Board.Tile.GoodTileController
+Game.Board.GameBoardController <--- Game.Board.Tile.BadTileController
+
+Game.Board.Tile.TileBase <-- Game.Board.Tile.GoodTileController
+Game.Board.Tile.TileBase <-- Game.Board.Tile.BadTileController
+Game.Board.Tile.TileBase <--- Game.Board.Tile.TileRenderer
+    
+namespace Menu{
+    
+    class MainMenuController <MonoBehaviour>{
+        - DifficultyButton _difficulty 
+        - SizeButton _size 
+        - void Awake()
+        + void StartGameOnClick()
+    }
+    
+    namespace Buttons{
+        class DifficultyButton <MonoBehaviour>{
+            - Text _difficultyText 
+            - int _currentIndex 
+                    
+            - void Awake()
+            + void DifficultyOnClick()
+            + bool IsValid()
+            + Difficulty GetValue()
+        }
+    
+        class SizeButton <MonoBehaviour>{
+            - Text _sizeText 
+            - int _currentIndex 
+                      
+            - void Awake()
+            + void SizeOnClick()
+            + bool IsValid()
+            + Vector2Int GetValue()
+        }
+    }
+}
+    
+ namespace Win{   
+    class WinController <MonoBehaviour>{
+      - void Update()
+    }
+}
+
+Utils.Helpers.LevelLoader <-- Game.GameController
+Utils.Helpers.LevelLoader <-- Menu.MainMenuController
+Utils.Helpers.LevelLoader <-- Win.WinController
+
+Menu.MainMenuController <-- Menu.Buttons.SizeButton
+Menu.MainMenuController <-- Menu.Buttons.DifficultyButton
+
+namespace Utils{
+    namespace Helpers{
+        class LevelLoader <MonoBehaviour>{
+            + static Vector2Int GameSize 
+            + static Difficulty GameDifficulty 
+            
+            + void LoadNextLevel(string nextScene, Vector2Int size, Difficulty difficulty)
+            + void LoadNextLevel(string nextScene)
+        }
+        
+        class MapperUtil<<static>>{
+            + static  Dictionary<Difficulty, float> MaxWallByDifficulty
+            + static  List<Tuple<Difficulty, bool>> DifficultyValues
+            + static  List<Tuple<Vector2Int, bool>> SizeValues
+        }
+        
+        class PuzzleUtil<<static>>{
+            + static List<List<TileStates>> GetEmptyPuzzleMatrix(Vector2Int size)
+            + static bool IsInTheBoard(int posX, int posY, int sizeX, int sizeY)
+        }
+    }
+
+    namespace Enums{
+        enum Difficulty{
+            Easy, Medium, Hard
+        }
+        
+        enum GameState{
+            GameStart, ActionPhase, EndTurnPhase
+        }
+        
+        enum TileStates{
+            Zero = 0, One = 1, Two = 2, Three = 3, Four = 4,
+            Wall = 5,
+            Empty,
+            Implacable,
+            Lamp,
+            Lit
+        }
+    }
+    
+    namespace DataStructures{
+        class Element <IEquatable<Element>>{
+            + Vector2Int Position
+            + TileStates ElementState
+                
+            + Element(Vector2Int position, TileStates elementState)
+            + bool Equals(Element other)
+            + override string ToString()
+        }
+        
+        class Puzzle <IEquatable<Element>>{
+            + Difficulty DifficultyLevel
+            + List<List<TileStates>> PuzzleMatrix
+            
+            + Puzzle(Puzzle otherPuzzle)
+            + Puzzle(List<List<TileStates>> puzzleMatrix)
+            + Puzzle(List<List<TileStates>> puzzleMatrix, Difficulty difficulty)
+            + Puzzle(Vector2Int size)
+            + int SizeX()
+            + int SizeY()
+            + bool Equals(Puzzle other)
+            + List<Vector2Int> GetElementPositions(TileStates tileStates)
+            + void AddElements(IEnumerable<Vector2Int> elementsPos, TileStates tileState)
+            + override string ToString()
+            + bool PlaceIsEqual(int x, int y, TileStates expectedTile)
+            + void SetNeighbour(int posX, int posY, TileStates value)
+            + void TurnOnLamps(Solution lampPositions)
+            + void TurnOfLamps()
+        }
+        
+        class Solution <IEquatable<Element>>{
+            + List<Vector2Int> Positions
+            + int Count
+             
+            + Solution()
+            + Solution(Solution solution)
+            + Solution(List<Vector2Int> positions)
+            + bool Equals(Solution other)
+            + override string ToString()
+        }
+    }
+}
+
+@enduml

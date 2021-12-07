@@ -29,21 +29,21 @@ namespace Game.GameBoard.Tile
 
         public override bool IsValid()
         {
-            if (IsLighted && isSelected)
+            if (IsLighted && lampPlaced)
             {
                 Debug.Log(name + " is wrong");
                 MyTileRenderer.NotAllowed();
             }
 
-            if (!(IsLighted ^ isSelected)) return false;
+            if (!(IsLighted ^ lampPlaced)) return false;
             MyTileRenderer.Allowed();
             return true;
         }
 
         private void OnMouseDown()
         {
-            isSelected = !isSelected;
-            if(isSelected) MyTileRenderer.AddSelection();
+            lampPlaced = !lampPlaced;
+            if(lampPlaced) MyTileRenderer.AddSelection();
             else MyTileRenderer.RemoveSelection();
             OnSelect?.Invoke(this);
         }

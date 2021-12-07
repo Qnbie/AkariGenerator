@@ -10,99 +10,95 @@ namespace Algorithms
     public class WallNumberApplier
     {
         private readonly Dictionary<Vector2Int, int> _solutionDictionary;
-        private readonly Dictionary<Vector2Int, int> _wallDictionary;
+        private List<Vector2Int> _wallList;
         private readonly PuzzleSolver _puzzleSolver;
 
         public WallNumberApplier(PuzzleSolver puzzleSolver)
         {
             _puzzleSolver = puzzleSolver;
             _solutionDictionary = new Dictionary<Vector2Int, int>();
-            _wallDictionary = new Dictionary<Vector2Int, int>();
         }
 
         public Puzzle ApplyNumbersOnWalls(Puzzle puzzle, List<Solution> solutions, Difficulty difficulty)
         {
             SetUpSolutionDictionary(solutions);
-            SetUpWallDictionary(puzzle);
-            var topSolutions =
-                (from solution in _solutionDictionary
+            _wallList = puzzle.GetElementPositions(TileStates.Wall);
+            var maxWallCount = (int) (MapperUtil.MaxWallByDifficulty[difficulty] *
+                                      puzzle.GetElementPositions(TileStates.Wall).Count);
+            Vector2Int lastPlace = new Vector2Int();
+            int wallCount = 0;
+            foreach (var position in 
+                from solution in _solutionDictionary
                 orderby solution.Value
-                select solution.Key).ToArray();
-
-            foreach (var solution in topSolutions)
+                select solution.Key)
             {
-                IncrementWalls(solution);
+                IncrementWalls(puzzle, position);
+                lastPlace = position;
+                wallCount++;
+                if(_puzzleSolver.FindSingleSolutionWithNumberedWalls(puzzle).Count == 0 ||
+                wallCount == maxWallCount) break;
             }
 
-            var finalSolution = new List<Solution>();
-            var wallCount = 0;
-            var maxWallCount = (int) (MapperUtil.MaxWallByDifficulty[difficulty] * _wallDictionary.Count);
-            foreach (var wallElement in 
-                _wallDictionary.Where(wallElement => wallElement.Value > 0))
+            if (wallCount < maxWallCount)
             {
-                puzzle.PuzzleMatrix[wallElement.Key.x][wallElement.Key.y] = (TileStates) wallElement.Value;
-                finalSolution.AddRange(_puzzleSolver.FindSingleSolutionWithNumberedWalls(puzzle));
-                if (finalSolution.Count == wallCount)
-                {
-                    puzzle.PuzzleMatrix[wallElement.Key.x][wallElement.Key.y] = TileStates.Wall;
-                }
-                else
-                {
-                    wallCount++;
-                    if (wallCount == maxWallCount)
-                    {
-                        break;
-                    }
-                }
+                DecrementWalls(puzzle, lastPlace);
+                AddZeroes(puzzle, _puzzleSolver.FindSingleSolutionWithNumberedWalls(puzzle)[0],
+                    maxWallCount - wallCount - 1);
             }
-
-            puzzle.TurnOnLamps(finalSolution.Last());
-            for (var i = wallCount; i < maxWallCount; i++)
-            {
-                foreach (var wallPos in puzzle.GetElementPositions(TileStates.Wall))
-                {
-                    if (!CanBeZero(wallPos, puzzle)) continue;
-                    puzzle.PuzzleMatrix[wallPos.x][wallPos.y] = TileStates.Zero;
-                    break;
-                }
-                
-            }
-            puzzle.TurnOfLamps();
-            puzzle.DifficultyLevel = difficulty;
+            
             return puzzle;
         }
 
-        private bool CanBeZero(Vector2Int wallPos, Puzzle puzzle)
+        private void AddZeroes(Puzzle puzzle, Solution solution, int zeroMax)
         {
-            return !(puzzle.PlaceIsEqual(wallPos.x + 1, wallPos.y, TileStates.Lamp) ||
-                     puzzle.PlaceIsEqual(wallPos.x - 1, wallPos.y, TileStates.Lamp) ||
-                     puzzle.PlaceIsEqual(wallPos.x, wallPos.y + 1, TileStates.Lamp) ||
-                     puzzle.PlaceIsEqual(wallPos.x, wallPos.y - 1, TileStates.Lamp));
-        }
-        
-        private void IncrementWalls(Vector2Int topSolution)
-        {
-            IncrementWallIfPossible(new Vector2Int(topSolution.x + 1, topSolution.y));
-            IncrementWallIfPossible(new Vector2Int(topSolution.x - 1, topSolution.y));
-            IncrementWallIfPossible(new Vector2Int(topSolution.x, topSolution.y + 1));
-            IncrementWallIfPossible(new Vector2Int(topSolution.x, topSolution.y - 1));
-        }
-
-        private void IncrementWallIfPossible(Vector2Int position)
-        {
-            if (_wallDictionary.ContainsKey(position))
+            var list = puzzle.GetElementPositions(TileStates.Wall);
+            int zeroCount = 0;
+            foreach (var wallPos in list)
             {
-                _wallDictionary[position]++;
+                if (solution.Positions.Contains(new Vector2Int(wallPos.x, wallPos.y)) ||
+                    solution.Positions.Contains(new Vector2Int(wallPos.x, wallPos.y)) ||
+                    solution.Positions.Contains(new Vector2Int(wallPos.x, wallPos.y)) ||
+                    solution.Positions.Contains(new Vector2Int(wallPos.x, wallPos.y)))
+                    continue;
+                puzzle.PuzzleMatrix[wallPos.x][wallPos.y] = TileStates.Zero;
+                zeroCount++;
+                if (zeroCount == zeroMax)
+                    break;
             }
         }
 
-        private void SetUpWallDictionary(Puzzle puzzle)
+        private void IncrementWalls(Puzzle puzzle, Vector2Int pos)
         {
-            _wallDictionary.Clear();
-            foreach (var wallPos in puzzle.GetElementPositions(TileStates.Wall))
-            {
-                _wallDictionary.Add(wallPos,0);
-            }
+            IncrementWallIfPossible(puzzle, new Vector2Int(pos.x+1,pos.y));
+            IncrementWallIfPossible(puzzle, new Vector2Int(pos.x-1,pos.y));
+            IncrementWallIfPossible(puzzle, new Vector2Int(pos.x,pos.y+1));
+            IncrementWallIfPossible(puzzle, new Vector2Int(pos.x,pos.y-1));
+        }
+
+        private void IncrementWallIfPossible(Puzzle puzzle, Vector2Int pos)
+        {
+            if (!_wallList.Contains(pos)) return;
+            if (puzzle.PuzzleMatrix[pos.x][pos.y] < (TileStates) 4)
+                puzzle.PuzzleMatrix[pos.x][pos.y] += 1;
+            if (puzzle.PuzzleMatrix[pos.x][pos.y] == TileStates.Wall)
+                puzzle.PuzzleMatrix[pos.x][pos.y] = TileStates.One;
+        }
+
+        private void DecrementWalls(Puzzle puzzle, Vector2Int pos)
+        {
+            DecrementWallIfPossible(puzzle, new Vector2Int(pos.x+1,pos.y));
+            DecrementWallIfPossible(puzzle, new Vector2Int(pos.x-1,pos.y));
+            DecrementWallIfPossible(puzzle, new Vector2Int(pos.x,pos.y+1));
+            DecrementWallIfPossible(puzzle, new Vector2Int(pos.x,pos.y-1));
+        }
+
+        private void DecrementWallIfPossible(Puzzle puzzle, Vector2Int pos)
+        {
+            if (!_wallList.Contains(pos)) return;
+            if (puzzle.PuzzleMatrix[pos.x][pos.y] == TileStates.One)
+                puzzle.PuzzleMatrix[pos.x][pos.y] = TileStates.Wall;
+            if ((int)puzzle.PuzzleMatrix[pos.x][pos.y] <= 4)
+                puzzle.PuzzleMatrix[pos.x][pos.y] -= 1;
         }
 
         private void SetUpSolutionDictionary(List<Solution> solutions)

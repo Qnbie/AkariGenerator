@@ -22,7 +22,7 @@ namespace Game.GameBoard.Tile
         public override bool IsValid()
         {
             if (_myNumber >= 5) return true;
-            var selectedNeighbours = neighbours.Count(tile => tile.isSelected);
+            var selectedNeighbours = neighbours.Count(tile => tile.lampPlaced);
             if (selectedNeighbours == _myNumber)
             {
                 MyTileRenderer.Allowed();

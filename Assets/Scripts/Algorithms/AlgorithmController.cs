@@ -20,7 +20,7 @@ namespace Algorithms
         public Puzzle GetPuzzle(Vector2Int size, Difficulty difficulty)
         {
             var puzzle = _generator.GeneratePuzzle(size);
-            var solutions = _puzzleSolver.FindSolutionsWithEmptyWalls(puzzle, 5);
+            var solutions = _puzzleSolver.FindSolutionsWithEmptyWalls(puzzle);
             return _wallNumberApplier.ApplyNumbersOnWalls(puzzle,solutions,difficulty);
         }
     }
